@@ -1,0 +1,43 @@
+---
+import { CLOUDINARY_CONFIG } from '../config/cloudinary';
+---
+<section class="hero relative h-screen w-full overflow-hidden">
+  <!-- Video di sfondo -->
+  <video
+    class="absolute inset-0 w-full h-full object-cover z-0"
+    autoplay
+    loop
+    muted
+    playsinline
+  >
+    <source src={CLOUDINARY_CONFIG.videoUrl} type="video/mp4">
+  </video>
+  <!-- Overlay scuro per migliorare la leggibilità -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+  <!-- Altri contenuti hero qui, con z-20 o superiore -->
+</section>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 1s ease-out 0.6s both;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style> 

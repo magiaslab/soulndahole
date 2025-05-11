@@ -1,0 +1,72 @@
+<header id="main-header" class="fixed w-full z-50 py-4 transition-all duration-300">
+  <div class="container mx-auto px-4 relative flex items-center justify-between">
+    <div class="logo-container">
+      <a href="/" class="block">
+        <img 
+          src="/images/logo.svg" 
+          alt="SoulNDahole Logo" 
+          class="h-8 md:h-12 w-auto logo-image"
+        />
+      </a>
+    </div>
+    <div class="hidden md:flex space-x-8">
+      <a href="/" class="nav-link transition-colors duration-300 text-white">Home</a>
+      <a href="/about" class="nav-link transition-colors duration-300 text-white">Chi Siamo</a>
+      <a href="/services" class="nav-link transition-colors duration-300 text-white">Servizi</a>
+      <a href="/contact" class="nav-link transition-colors duration-300 text-white">Contatti</a>
+    </div>
+    <button class="md:hidden transition-colors duration-300 text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</header>
+<div id="header-spacer" style="height:0;"></div>
+
+<style>
+  /* Header sempre fixed */
+  #main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.3s ease;
+  }
+  
+  #main-header.sticky {
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 4px 24px -4px rgba(0,0,0,0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  #main-header.sticky .nav-link,
+  #main-header.sticky button {
+    color: #374151;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #4f46e5;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  .logo-image {
+    filter: drop-shadow(0 0 0 rgba(79, 70, 229, 0));
+    transition: all 0.3s ease;
+  }
+  .logo-image:hover {
+    filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.5));
+    transform: scale(1.05);
+  }
+</style> 

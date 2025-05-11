@@ -1,22 +1,65 @@
-<!doctype html>
-<html lang="en">
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="it">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<div id="smooth-wrapper">
+			<div id="smooth-content">
+				<slot />
+			</div>
+		</div>
+		<script type="module" src="/src/scripts/initHeader.js"></script>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	html {
+		scroll-behavior: smooth;
+	}
+
 	body {
 		margin: 0;
-		width: 100%;
-		height: 100%;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	#smooth-wrapper {
+		overflow: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	#smooth-content {
+		min-height: 100vh;
+		will-change: transform;
+	}
+
+	/* Rimuovo gli stili dell'header per evitare conflitti */
+	footer {
+		position: relative;
+		z-index: 40;
+	}
+
+	main {
+		position: relative;
+		z-index: 30;
 	}
 </style>
