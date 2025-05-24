@@ -2,133 +2,165 @@
 const initGSAP = async () => {
   const { gsap } = await import('gsap');
   const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+  const { ScrollSmoother } = await import('gsap/ScrollSmoother');
   
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+  // Configura ScrollTrigger per lavorare con ScrollSmoother
+  ScrollTrigger.config({
+    ignoreMobileResize: true
+  });
+
+  // Crea ScrollSmoother
+  ScrollSmoother.create({
+    wrapper: "#smooth-wrapper",
+    content: "#smooth-content",
+    smooth: 1.5,
+    effects: true
+  });
+
+  // Configura ScrollTrigger per usare il proxy di ScrollSmoother
+  ScrollTrigger.scrollerProxy("#smooth-wrapper", {
+    scrollTop(value) {
+      if (arguments.length) {
+        ScrollSmoother.get().scrollTop(value);
+      }
+      return ScrollSmoother.get().scrollTop();
+    },
+    getBoundingClientRect() {
+      return {
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+    }
+  });
+
+  // Aggiorna ScrollTrigger quando ScrollSmoother aggiorna
+  ScrollSmoother.get().on("scroll", ScrollTrigger.update);
+
   return gsap;
 };
 
-// Animazioni dell'header
-export const initHeaderAnimations = async () => {
-  const gsap = await initGSAP();
-
-  // Animazione del logo
-  gsap.from('.logo-container', {
-    duration: 1,
-    y: -50,
-    opacity: 0,
-    ease: 'power3.out'
-  });
-
-  // Animazione dei link di navigazione
-  gsap.from('.nav-link', {
-    duration: 0.8,
-    y: -20,
-    opacity: 0,
-    stagger: 0.1,
-    ease: 'power2.out',
-    delay: 0.3
-  });
-};
-
 // Animazioni del footer
-export const initFooterAnimations = async () => {
-  const gsap = await initGSAP();
-
-  // Animazione delle sezioni del footer
+export const initFooterAnimations = () => {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.error('GSAP or ScrollTrigger not available for footer animations.');
+    return;
+  }
   gsap.from('.footer-section', {
-    duration: 1,
+    scrollTrigger: {
+      trigger: 'footer', 
+      scroller: "#smooth-wrapper", 
+      start: 'top bottom-=100',
+      toggleActions: 'play none none reverse',
+      // markers: {startColor: "orange", endColor: "purple"} 
+    },
     y: 50,
     opacity: 0,
     stagger: 0.2,
+    duration: 1,
     ease: 'power3.out',
-    scrollTrigger: {
-      trigger: 'footer',
-      start: 'top bottom-=100',
-      toggleActions: 'play none none reverse'
-    }
   });
-
-  // Animazione dei social link
-  gsap.from('.social-link', {
-    duration: 0.5,
-    scale: 0,
-    opacity: 0,
-    stagger: 0.1,
-    ease: 'back.out(1.7)',
-    delay: 0.5
-  });
+   console.log('Footer animations initialized.');
 };
 
-export const animateHeaderOnScroll = (headerSelector = '#main-header', heroSelector = '.hero') => {
-  import('gsap').then(({ gsap }) => {
-    const header = document.querySelector(headerSelector);
-    const navLinks = header ? header.querySelectorAll('.nav-link') : [];
-    const menuButton = header ? header.querySelector('button') : null;
-    const smoothContent = document.getElementById('smooth-content');
-    const hero = document.querySelector(heroSelector);
-    const spacer = document.getElementById('header-spacer');
+// Funzione per sticky header (ora non inizializza più GSAP/ScrollTrigger)
+export const setupStickyHeaderScrollTrigger = (headerSelector = '#main-header', heroSelector = '.hero') => {
+  const header = document.querySelector(headerSelector);
+  const hero = document.querySelector(heroSelector);
 
-    console.log('Header:', header, 'Hero:', hero);
-    if (!header || !hero) return;
+  if (!header || !hero) {
+    console.warn('Header or Hero element not found for sticky ScrollTrigger. Header:', header, 'Hero:', hero, 'Selectors:', headerSelector, heroSelector);
+    return;
+  }
 
-    // Stato iniziale
-    gsap.set(header, {
-      backgroundColor: 'rgba(255,255,255,0)',
-      boxShadow: '0 0 0 0 rgba(0,0,0,0)',
-      backdropFilter: 'blur(0px)'
-    });
-    navLinks.forEach(link => gsap.set(link, { color: '#fff' }));
-    if (menuButton) gsap.set(menuButton, { color: '#fff' });
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.error('GSAP or ScrollTrigger not available when setupStickyHeaderScrollTrigger is called. Ensure initSmoothScroll() has completed.');
+    return;
+  }
 
-    let isActive = false;
-    function animateHeader(active) {
-      console.log('animateHeader chiamata, active:', active);
-      if (active === isActive) return;
-      isActive = active;
-      
-      if (active) {
-        header.classList.add('sticky');
-      } else {
-        header.classList.remove('sticky');
-      }
+  ScrollTrigger.create({
+    trigger: hero,
+    start: () => `bottom ${header.offsetHeight}px`, 
+    end: "max",
+    toggleClass: { targets: header, className: "sticky" },
+    markers: true, 
+    scroller: "#smooth-wrapper", 
+    onEnter: () => console.log('STICKY HEADER: Entered sticky state'),
+    onLeaveBack: () => console.log('STICKY HEADER: Left sticky state (scrolled to top)'),
+    onUpdate: self => {
+      // console.log('STICKY HEADER: ScrollTrigger update, progress:', self.progress.toFixed(3), 'isActive:', self.isActive);
     }
-
-    function getHeroBottom() {
-      if (!hero) return 0;
-      const rect = hero.getBoundingClientRect();
-      // Se ScrollSmoother è attivo, somma smoother.scrollTop()
-      if (window.ScrollSmoother && typeof window.ScrollSmoother.get === 'function' && window.ScrollSmoother.get()) {
-        return rect.top + window.ScrollSmoother.get().scrollTop() + rect.height;
-      }
-      return rect.top + window.scrollY + rect.height;
-    }
-
-    function getScrollY() {
-      if (window.ScrollSmoother && typeof window.ScrollSmoother.get === 'function' && window.ScrollSmoother.get()) {
-        return window.ScrollSmoother.get().scrollTop();
-      }
-      if (smoothContent && smoothContent.scrollTop > 0) {
-        return smoothContent.scrollTop;
-      }
-      return window.scrollY;
-    }
-
-    function onScroll() {
-      const scrollY = getScrollY();
-      const heroBottom = getHeroBottom();
-      console.log('onScroll - scrollY:', scrollY, 'heroBottom:', heroBottom, 'headerHeight:', header.offsetHeight);
-      animateHeader(scrollY >= heroBottom - header.offsetHeight);
-    }
-
-    if (smoothContent) {
-      smoothContent.addEventListener('scroll', onScroll);
-    }
-    window.addEventListener('scroll', onScroll);
-
-    setInterval(() => {
-      onScroll();
-    }, 50);
-
-    onScroll();
   });
-}; 
+  console.log('Sticky header ScrollTrigger initialized for scroller #smooth-wrapper.');
+};
+
+// Funzione per animare la header
+export function animateHeaderOnScroll(headerSelector = '#main-header', heroSelector = '#hero') {
+  const header = document.querySelector(headerSelector);
+  const navLinks = header?.querySelectorAll('.nav-link');
+  const menuButton = header?.querySelector('button');
+  const smoothContent = document.getElementById('smooth-content');
+  const hero = document.querySelector(heroSelector);
+  const spacer = document.getElementById('header-spacer');
+  
+  if (!header || !smoothContent || !hero) {
+    console.error('Elementi necessari non trovati');
+    return;
+  }
+
+  let isActive = false;
+
+  function animateHeader(active) {
+    if (active === isActive) return;
+    isActive = active;
+    
+    if (active) {
+      gsap.to(header, {
+        backgroundColor: 'rgba(255,255,255,1)',
+        boxShadow: '0 4px 24px -4px rgba(0,0,0,0.12)',
+        backdropFilter: 'blur(8px)',
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+      navLinks.forEach(link => gsap.to(link, { color: '#374151', duration: 0.3 }));
+      if (menuButton) gsap.to(menuButton, { color: '#374151', duration: 0.3 });
+      if (spacer) gsap.to(spacer, { height: header.offsetHeight, duration: 0.5 });
+    } else {
+      gsap.to(header, {
+        backgroundColor: 'rgba(255,255,255,0)',
+        boxShadow: '0 0 0 0 rgba(0,0,0,0)',
+        backdropFilter: 'blur(0px)',
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+      navLinks.forEach(link => gsap.to(link, { color: '#fff', duration: 0.3 }));
+      if (menuButton) gsap.to(menuButton, { color: '#fff', duration: 0.3 });
+      if (spacer) gsap.to(spacer, { height: 0, duration: 0.5 });
+    }
+  }
+
+  // Crea ScrollTrigger per la header
+  ScrollTrigger.create({
+    trigger: hero,
+    start: 'top top',
+    end: 'bottom top',
+    scroller: '#smooth-wrapper',
+    onEnter: () => animateHeader(true),
+    onLeaveBack: () => animateHeader(false),
+    onUpdate: (self) => {
+      if (self.progress > 0) {
+        animateHeader(true);
+      } else {
+        animateHeader(false);
+      }
+    }
+  });
+
+  // Aggiorna ScrollTrigger quando la finestra viene ridimensionata
+  window.addEventListener('resize', () => {
+    ScrollTrigger.refresh();
+  });
+} 

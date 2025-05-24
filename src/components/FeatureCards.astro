@@ -1,0 +1,73 @@
+---
+const features = [
+  {
+    title: "Date & Orari",
+    description: "3-4-5-6 Luglio 2025\nDalle 19 alle 24",
+    icon: "calendar"
+  },
+  {
+    title: "Luogo",
+    description: "Via Aurelia Sud, San Vincenzo (LI)",
+    icon: "map-pin"
+  },
+  {
+    title: "Torneo Streetball 5x5",
+    description: "Il risveglio della bestia\nCategoria: Open, Under, Celebrity Game",
+    icon: "award"
+  }
+];
+---
+
+<section class="feature-cards py-20 bg-gradient-to-b from-gray-900 to-gray-800">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {features.map((feature, index) => (
+        <div class="feature-card bg-gray-800/50 backdrop-blur-lg rounded-xl p-8 transform hover:scale-105 transition-all duration-300">
+          <div class="icon-wrapper mb-6 text-indigo-500">
+            <i class="icon-{feature.icon} text-4xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+          <p class="text-gray-300 whitespace-pre-line">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-card:hover {
+    border-color: rgba(79, 70, 229, 0.3);
+    box-shadow: 0 8px 32px -4px rgba(79, 70, 229, 0.2);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.feature-card');
+    
+    cards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom-=100",
+          toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: "power3.out"
+      });
+    });
+  });
+</script> 

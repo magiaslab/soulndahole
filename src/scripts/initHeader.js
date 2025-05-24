@@ -1,7 +1,11 @@
-import { animateHeaderOnScroll } from './animations.js';
+import { setupStickyHeaderScrollTrigger } from './animations.js';
 
-window.addEventListener('DOMContentLoaded', () => {
-  animateHeaderOnScroll('#main-header', '.hero');
+// Chiama setupStickyHeaderScrollTrigger dopo che il DOM è pronto
+// e GSAP/ScrollSmoother sono inizializzati da index.astro o smoothScroll.js
+document.addEventListener('DOMContentLoaded', () => {
+  // Ora setupStickyHeaderScrollTrigger viene chiamato dopo che initSmoothScroll è completato (da index.astro)
+  // Quindi GSAP e ScrollTrigger dovrebbero essere pronti.
+  setupStickyHeaderScrollTrigger('#main-header', '.hero');
 
   // Logica menu mobile
   const header = document.getElementById('main-header');
