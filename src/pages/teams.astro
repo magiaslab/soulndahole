@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+const teams = [
+  { name: "Chimera", slug: "chimera", image: "Chimera.png" },
+  { name: "Fenice", slug: "fenice", image: "Fenice.png" },
+  { name: "Grifone", slug: "grifone", image: "Grifone.png" },
+  { name: "Idra", slug: "idra", image: "Idra.png" },
+  { name: "Kraken", slug: "kraken", image: "Kraken.png" },
+  { name: "Minotauro", slug: "minotauro", image: "Minotauro.png" },
+  { name: "Unicorno", slug: "unicorno", image: "Unicorno.png" },
+];
+
+const teamImages = await Astro.glob('../assets/images/*.png');
+
+const teamsWithImages = teams.map(team => {
+  const teamImage = teamImages.find(img => img.default.src.endsWith(team.image));
+  return {
+    ...team,
+    image: teamImage ? teamImage.default : null,
+  };
+});
+---
+<Layout title="Squadre - Soul 'n Da Hole">
+  <Header />
+
+  <main class="teams-page py-24 bg-black text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+          Le Squadre
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          Scopri le 7 squadre mitologiche che si daranno battaglia sul campo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {teamsWithImages.map((team, index) => (
+          <a href={`/teams/${team.slug}`} class="group block" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div class="card relative overflow-hidden rounded-lg shadow-lg border-2 border-gray-800 hover:border-red-600 transition-all duration-300 transform hover:-translate-y-2 flex flex-col items-center justify-center p-8 h-64">
+              {team.image && (
+                <Image src={team.image} alt={`Logo ${team.name}`} class="w-32 h-32 object-contain mb-4" />
+              )}
+              <h2 class="text-2xl font-black text-white font-display uppercase">{team.name}</h2>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import AOS from 'aos';
+  AOS.init({ once: true, duration: 800 });
+</script>
+
+<style>
+  .font-display { font-family: 'Teko', sans-serif; }
+</style> 

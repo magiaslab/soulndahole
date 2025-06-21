@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Gallery from '../../components/Gallery.tsx';
+
+export async function getStaticPaths() {
+  const editions = [
+    { name: "I EDIZIONE - 2018", slug: "i-edizione-2018", dir: "I EDIZIONE - 2018 " },
+    { name: "II EDIZIONE - 2019", slug: "ii-edizione-2019", dir: "II EDIZIONE- 2019" },
+    { name: "III EDIZIONE - 2021", slug: "iii-edizione-2021", dir: "III EDIZIONE - 2021 " },
+    { name: "IV EDIZIONE - 2022 - Welcome to Hell", slug: "iv-edizione-2022-welcome-to-hell", dir: "IV EDIZIONE - 2022 - Welcome to Hell" },
+    { name: "V EDIZIONE - 2023 - Olympus Has Fallen", slug: "v-edizione-2023-olympus-has-fallen", dir: "V Edizione - 2023 - Olympus Has Fallen" },
+    { name: "VI EDIZIONE - 2024 - Folklore giapponese", slug: "vi-edizione-2024-folklore-giapponese", dir: "VI edizione - 2024 - Folklore giapponese " },
+  ];
+  return editions.map(edition => ({
+    params: { slug: edition.slug },
+    props: { edition },
+  }));
+}
+
+const { edition } = Astro.props;
+const folderName = edition.dir;
+
+const allImageModules = import.meta.glob('../../assets/images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}');
+const galleryImages = [];
+for (const path in allImageModules) {
+  if (path.includes(`/${folderName}/`)) {
+    const module: any = await allImageModules[path]();
+    galleryImages.push({
+      src: module.default.src,
+      width: module.default.width,
+      height: module.default.height,
+      alt: `Foto dall'edizione ${edition.name}`
+    });
+  }
+}
+---
+<Layout title={`Albo d'oro: ${edition.name} - Soul 'n Da Hole`}>
+  <Header />
+
+  <main class="gallery-page py-24 bg-black text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">{edition.name}</h1>
+        <a href="/albo-doro" class="text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-2">
+          &larr; Torna all'Albo d'oro
+        </a>
+      </div>
+
+      <div class="text-center mb-12">
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          Esplora i momenti più belli dell'edizione {edition.name}.
+        </p>
+      </div>
+
+      {galleryImages.length > 0 ? (
+        <Gallery client:load images={galleryImages} />
+      ) : (
+        <p class="text-center text-gray-500">Nessuna immagine trovata per questa edizione.</p>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .font-display {
+    font-family: 'Teko', sans-serif;
+  }
+</style> 

@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import Sfondo2 from '../assets/images/Sfondo2.png';
+
+const editions = [
+    { name: "I EDIZIONE - 2018", slug: "i-edizione-2018", dir: "I EDIZIONE - 2018 " },
+    { name: "II EDIZIONE - 2019", slug: "ii-edizione-2019", dir: "II EDIZIONE- 2019" },
+    { name: "III EDIZIONE - 2021", slug: "iii-edizione-2021", dir: "III EDIZIONE - 2021 " },
+    { name: "IV EDIZIONE - 2022 - Welcome to Hell", slug: "iv-edizione-2022-welcome-to-hell", dir: "IV EDIZIONE - 2022 - Welcome to Hell" },
+    { name: "V EDIZIONE - 2023 - Olympus Has Fallen", slug: "v-edizione-2023-olympus-has-fallen", dir: "V Edizione - 2023 - Olympus Has Fallen" },
+    { name: "VI EDIZIONE - 2024 - Folklore giapponese", slug: "vi-edizione-2024-folklore-giapponese", dir: "VI edizione - 2024 - Folklore giapponese " },
+];
+
+const allImageModules = import.meta.glob('../assets/images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+
+const editionsWithCovers = editions.map(edition => {
+    const imagePath = Object.keys(allImageModules).find(path => path.includes(`/${edition.dir}/`));
+    const coverImageModule = imagePath ? allImageModules[imagePath] : null;
+    return {
+        ...edition,
+        cover: coverImageModule ? (coverImageModule as any).default : Sfondo2
+    };
+});
+---
+
+<Layout title="Albo d'oro - Soul 'n Da Hole">
+  <Header />
+
+  <main class="albo-doro-page py-24 bg-black text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+          Albo d'Oro
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          Rivivi le emozioni delle edizioni passate. Seleziona un'edizione per esplorare la galleria.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {editionsWithCovers.map((edition, index) => (
+          <a href={`/albo-doro/${edition.slug}`} class="group block" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div class="card relative overflow-hidden rounded-lg shadow-lg border-2 border-gray-800 hover:border-red-600 transition-all duration-300 transform hover:-translate-y-2">
+              <Image src={edition.cover} alt={`Copertina per l'edizione ${edition.name}`} class="absolute inset-0 w-full h-full object-cover" />
+              <div class="card-overlay absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
+              <div class="relative p-8 flex flex-col items-center justify-center h-48 text-center">
+                <h2 class="text-2xl font-black text-white font-display uppercase">{edition.name}</h2>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import AOS from 'aos';
+  AOS.init({
+    once: true,
+    duration: 800,
+  });
+</script>
+
+<style>
+  .font-display {
+    font-family: 'Teko', sans-serif;
+  }
+  .card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+</style> 

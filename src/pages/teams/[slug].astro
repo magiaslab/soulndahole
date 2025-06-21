@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+    const teams = [
+        { name: "Chimera", slug: "chimera", image: "Chimera.png" },
+        { name: "Fenice", slug: "fenice", image: "Fenice.png" },
+        { name: "Grifone", slug: "grifone", image: "Grifone.png" },
+        { name: "Idra", slug: "idra", image: "Idra.png" },
+        { name: "Kraken", slug: "kraken", image: "Kraken.png" },
+        { name: "Minotauro", slug: "minotauro", image: "Minotauro.png" },
+        { name: "Unicorno", slug: "unicorno", image: "Unicorno.png" },
+    ];
+    return teams.map(team => ({
+        params: { slug: team.slug },
+        props: { team },
+    }));
+}
+
+const { team } = Astro.props;
+
+// Placeholder per i giocatori
+const players = Array.from({ length: 8 }, (_, i) => ({
+  name: `Giocatore ${i + 1}`,
+  role: 'Ruolo',
+  club: 'Campionato di appartenenza',
+}));
+
+const coach = {
+  name: 'Nome Coach',
+  role: 'Allenatore',
+  club: 'Campionato di appartenenza',
+};
+
+const teamImage = (await Astro.glob('../../assets/images/*.png')).find(img => img.default.src.endsWith(team.image))?.default;
+---
+<Layout title={`${team.name} - Soul 'n Da Hole`}>
+  <Header />
+  <main class="team-detail-page py-24 bg-black text-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        {teamImage && (
+          <Image src={teamImage} alt={`Logo ${team.name}`} class="w-48 h-48 object-contain mx-auto mb-4" />
+        )}
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">{team.name}</h1>
+        <a href="/teams" class="text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-2">
+          &larr; Torna alle Squadre
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Coach -->
+        <div class="player-card bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center" data-aos="fade-up">
+          <h3 class="text-2xl font-bold font-display uppercase">{coach.name}</h3>
+          <p class="text-red-500 font-semibold">{coach.role}</p>
+          <p class="text-gray-400 mt-2">{coach.club}</p>
+        </div>
+        
+        <!-- Giocatori -->
+        {players.map((player, index) => (
+          <div class="player-card bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center" data-aos="fade-up" data-aos-delay={(index + 1) * 100}>
+            <h3 class="text-2xl font-bold font-display uppercase">{player.name}</h3>
+            <p class="text-red-500 font-semibold">{player.role}</p>
+            <p class="text-gray-400 mt-2">{player.club}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import AOS from 'aos';
+  document.addEventListener('astro:page-load', () => AOS.init({ once: true, duration: 800 }));
+</script>
+
+<style>
+  .font-display { font-family: 'Teko', sans-serif; }
+</style> 

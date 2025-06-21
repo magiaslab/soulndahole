@@ -20,20 +20,27 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<slot />
-		<script src="/src/scripts/initHeader.js"></script>
 	</body>
 </html>
 
 <style is:global>
+	:root {
+		--font-sans: 'Open Sans', sans-serif;
+		--font-display: 'Teko', sans-serif;
+	}
+
 	html {
+		font-family: system-ui, sans-serif;
 		scroll-behavior: smooth;
 	}
 
 	body {
 		margin: 0;
 		padding: 0;
-		overflow-x: hidden;
 		background-color: #000;
+		color: #fff;
+		position: relative;
+		overflow-x: hidden;
 	}
 
 	footer {
@@ -42,5 +49,20 @@ const { title } = Astro.props;
 
 	main {
 		position: relative;
+	}
+
+	/* Stile per la scrollbar */
+	body::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	body::-webkit-scrollbar-track {
+		background: #000;
+	}
+
+	body::-webkit-scrollbar-thumb {
+		background-color: #fff;
+		border-radius: 20px;
+		border: 3px solid #000;
 	}
 </style>
