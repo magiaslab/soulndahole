@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import 'aos/dist/aos.css';
 
 interface Props {
 	title: string;
@@ -18,12 +19,8 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<div id="smooth-wrapper">
-			<div id="smooth-content">
-				<slot />
-			</div>
-		</div>
-		<script type="module" src="/src/scripts/initHeader.js"></script>
+		<slot />
+		<script src="/src/scripts/initHeader.js"></script>
 	</body>
 </html>
 
@@ -35,31 +32,15 @@ const { title } = Astro.props;
 	body {
 		margin: 0;
 		padding: 0;
-		overflow: hidden;
+		overflow-x: hidden;
+		background-color: #000;
 	}
 
-	#smooth-wrapper {
-		overflow: hidden;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-
-	#smooth-content {
-		min-height: 100vh;
-		will-change: transform;
-	}
-
-	/* Rimuovo gli stili dell'header per evitare conflitti */
 	footer {
 		position: relative;
-		z-index: 40;
 	}
 
 	main {
 		position: relative;
-		z-index: 30;
 	}
 </style>

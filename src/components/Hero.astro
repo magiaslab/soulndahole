@@ -1,43 +1,47 @@
 ---
 import { CLOUDINARY_CONFIG } from '../config/cloudinary';
 ---
-<section class="hero relative h-screen w-full overflow-hidden">
-  <!-- Video di sfondo -->
-  <video
-    class="absolute inset-0 w-full h-full object-cover z-0"
-    autoplay
-    loop
-    muted
-    playsinline
-  >
-    <source src={CLOUDINARY_CONFIG.videoUrl} type="video/mp4">
-  </video>
-  <!-- Overlay scuro per migliorare la leggibilità -->
-  <div class="absolute inset-0 bg-black/50 z-10"></div>
-  <!-- Altri contenuti hero qui, con z-20 o superiore -->
+<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+  <!-- Sfondo Video -->
+  <div class="absolute inset-0 z-0">
+    <video
+      class="w-full h-full object-cover"
+      autoplay
+      loop
+      muted
+      playsinline
+    >
+      <source src={CLOUDINARY_CONFIG.videoUrl} type="video/mp4">
+    </video>
+    <!-- Overlay scuro -->
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+  </div>
+
+  <!-- Contenuto -->
+  <div class="relative z-10 p-4 text-white" data-aos="fade-up">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-wider mb-4 font-display" style="text-shadow: 0 0 20px rgba(255,107,0,0.7);">
+      SOUL
+    </h1>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-200" style="text-shadow: 0 0 15px rgba(0,0,0,0.5);">
+      Il Risveglio della Bestia
+    </h2>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-gray-300">
+      Torneo Streetball 5v5 — 3-4-5-6 Luglio 2025
+    </p>
+    <div class="space-x-4">
+      <a href="#teams" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+        Scopri le Squadre
+      </a>
+      <a href="/iscrizioni" class="border-2 border-white hover:bg-white hover:text-black text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">
+        Iscriviti Ora
+      </a>
+    </div>
+  </div>
 </section>
 
 <style>
-  .animate-fade-in {
-    animation: fadeIn 1s ease-out;
-  }
-
-  .animate-fade-in-delay {
-    animation: fadeIn 1s ease-out 0.3s both;
-  }
-
-  .animate-fade-in-delay-2 {
-    animation: fadeIn 1s ease-out 0.6s both;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  @import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+  .font-display {
+    font-family: 'Teko', sans-serif;
   }
 </style> 

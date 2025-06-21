@@ -1,0 +1,59 @@
+<section 
+  class="presentation-section relative py-16 md:py-24 bg-black text-white"
+  style="background-image: url(/images/Sfondo1.png); background-size: cover; background-position: center; background-attachment: fixed;"
+>
+  <div class="absolute inset-0 bg-black/80"></div>
+  <div class="container relative mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+      <!-- Image Column -->
+      <div class="w-full md:w-1/2" data-aos="fade-right">
+        <img 
+          src="/images/Presentazione.jpeg" 
+          alt="Locandina Presentazione Soul 'N Da Hole"
+          class="rounded-lg shadow-2xl border-2 border-gray-700 hover:border-red-600 transition-all duration-300"
+        />
+      </div>
+
+      <!-- Text Column -->
+      <div class="w-full md:w-1/2 text-center md:text-left" data-aos="fade-left">
+        <h2 class="text-sm uppercase text-red-500 font-semibold tracking-widest">L'EVENTO DI LANCIO</h2>
+        <h3 class="text-4xl md:text-5xl font-black text-white mt-2 mb-6 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+          PRESENTAZIONE UFFICIALE
+        </h3>
+        <p class="text-lg text-gray-300 mb-8">
+          Unisciti a noi per la presentazione ufficiale del torneo Soul 'N Da Hole.
+          Scopri in anteprima le squadre, il programma e tutte le sorprese che abbiamo in serbo.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h4 class="font-bold text-xl text-white">29.06.2025</h4>
+            <p class="text-gray-400">Data</p>
+          </div>
+          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h4 class="font-bold text-xl text-white">19:00</h4>
+            <p class="text-gray-400">Ora</p>
+          </div>
+          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+            <h4 class="font-bold text-xl text-white">'La Torre'</h4>
+            <p class="text-gray-400">San Vincenzo (LI)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+  .font-display {
+    font-family: 'Teko', sans-serif;
+  }
+  .info-box {
+    transition: all 0.3s ease;
+  }
+  .info-box:hover {
+    border-color: #dc2626; /* red-600 */
+    transform: translateY(-5px);
+  }
+</style> 

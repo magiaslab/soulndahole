@@ -10,12 +10,12 @@
       </a>
     </div>
     <div class="hidden md:flex space-x-8">
-      <a href="/" class="nav-link transition-colors duration-300 text-white">Home</a>
-      <a href="/about" class="nav-link transition-colors duration-300 text-white">Chi Siamo</a>
-      <a href="/services" class="nav-link transition-colors duration-300 text-white">Servizi</a>
-      <a href="/contact" class="nav-link transition-colors duration-300 text-white">Contatti</a>
+      <a href="/" class="nav-link text-white">Home</a>
+      <a href="/about" class="nav-link text-white">Chi Siamo</a>
+      <a href="/services" class="nav-link text-white">Servizi</a>
+      <a href="/contact" class="nav-link text-white">Contatti</a>
     </div>
-    <button class="md:hidden transition-colors duration-300 text-white">
+    <button class="md:hidden text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
@@ -31,22 +31,33 @@
     top: 0;
     left: 0;
     right: 0;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
   }
   
+  /* Stato sticky: sfondo nero, testo bianco */
   #main-header.sticky {
-    background-color: rgba(255,255,255,1);
-    box-shadow: 0 4px 24px -4px rgba(0,0,0,0.12);
+    background-color: rgba(17, 24, 39, 0.85); /* bg-gray-900 con opacità */
+    box-shadow: 0 4px 24px -4px rgba(0,0,0,0.2);
     backdrop-filter: blur(8px);
   }
 
+  /* I link e il bottone del menu sono già text-white di default.
+     Non serve cambiarli quando .sticky viene aggiunto se lo sfondo è scuro.
+     Se lo sfondo sticky fosse chiaro, qui cambieremmo il colore del testo in scuro.
+  */
+  /* 
   #main-header.sticky .nav-link,
   #main-header.sticky button {
-    color: #374151;
+    color: #FFFFFF; 
   }
+  */
 
   .nav-link {
     position: relative;
+    transition: color 0.3s ease; /* Transizione colore per hover */
+  }
+  .nav-link:hover {
+    color: #6366f1; /* Esempio: indigo-500 su hover */
   }
   .nav-link::after {
     content: '';
@@ -55,7 +66,7 @@
     height: 2px;
     bottom: -4px;
     left: 0;
-    background-color: #4f46e5;
+    background-color: #6366f1; /* Indigo-500 */
     transition: width 0.3s ease;
   }
   .nav-link:hover::after {

@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import FeatureCards from '../components/FeatureCards.astro';
+import Teams from '../components/Teams.astro';
+import Presentation from '../components/Presentation.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -14,56 +16,35 @@ import FeatureCards from '../components/FeatureCards.astro';
 	<div class="content-wrapper">
 		<Hero />
 		<FeatureCards />
-		<main>
-			<div class="min-h-screen">
-				<!-- Qui andranno gli altri componenti della home -->
-			</div>
-		</main>
+		<Teams />
+		<Presentation />
 		<Footer />
 	</div>
 </Layout>
 
-<!-- In src/pages/index.astro o il tuo layout principale -->
 <script>
-  import { initSmoothScroll } from '../scripts/smoothScroll'; // Assicurati che il percorso sia corretto
-  // Importa le funzioni necessarie da animations.js
-  // Nota: usiamo l'importazione dinamica qui perché le funzioni in animations.js sono async
-  // e usano a loro volta importazioni dinamiche per GSAP.
+  import AOS from 'aos';
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      // 1. Inizializza lo smooth scroll (Lenis)
-      // Questa funzione dovrebbe anche configurare ScrollTrigger.scrollerProxy
-      // e assicurarsi che ScrollTrigger.update() sia chiamato nel loop di Lenis.
-      await initSmoothScroll(); 
-      console.log('Smooth scroll initialized.');
+  // Estendi l'interfaccia Window per includere la nostra proprietà custom (opzionale se non più usata)
+  // declare global {
+  //   interface Window {
+  //     initHeaderDone?: boolean;
+  //   }
+  // }
 
-      // 2. Importa e inizializza le animazioni GSAP
-      const animations = await import('../scripts/animations.js');
-      
-      console.log('Initializing GSAP animations...');
-      // Animazioni di entrata per l'header (logo, nav links)
-      await animations.initHeaderAnimations();
-      
-      // Configura l'effetto "sticky" (cambio stile) per l'header
-      // Puoi passare selettori custom se quelli di default non vanno bene
-      // es: await animations.setupStickyHeaderScrollTrigger('#my-custom-header', '.my-hero-section');
-      await animations.setupStickyHeaderScrollTrigger(); 
-      
-      // Animazioni di entrata per il footer
-      await animations.initFooterAnimations();
+  document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({
+      duration: 800, 
+      once: false, 
+      offset: 50, 
+    });
+    console.log('AOS initialized.');
 
-      console.log('All page animations should be set up.');
-
-    } catch (error) {
-      console.error("Error during page initialization sequence:", error);
-    }
+    // initHeader.js è ora caricato globalmente da Layout.astro, non serve più qui.
+    // console.log('initHeader.js handling is now in Layout.astro');
   });
 </script>
 
-
 <style>
-	main {
-		padding-top: 80px; /* Altezza dell'header */
-	}
+	/* Stile per main rimosso */
 </style>

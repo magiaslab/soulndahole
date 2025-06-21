@@ -1,18 +1,50 @@
-import { setupStickyHeaderScrollTrigger } from './animations.js';
+// src/scripts/initHeader.js
 
-// Chiama setupStickyHeaderScrollTrigger dopo che il DOM è pronto
-// e GSAP/ScrollSmoother sono inizializzati da index.astro o smoothScroll.js
 document.addEventListener('DOMContentLoaded', () => {
-  // Ora setupStickyHeaderScrollTrigger viene chiamato dopo che initSmoothScroll è completato (da index.astro)
-  // Quindi GSAP e ScrollTrigger dovrebbero essere pronti.
-  setupStickyHeaderScrollTrigger('#main-header', '.hero');
-
-  // Logica menu mobile
   const header = document.getElementById('main-header');
-  const menuBtn = header?.querySelector('button.md\\:hidden');
-  let mobileNav = header?.querySelector('.mobile-nav');
+  const hero = document.querySelector('.hero'); // Assicurati che la hero abbia la classe .hero
+  const spacer = document.getElementById('header-spacer');
 
-  // Se il markup mobile-nav non esiste, lo creo dinamicamente
+  if (!header) {
+    console.warn('Header element (#main-header) not found.');
+    return;
+  }
+
+  const headerHeight = header.offsetHeight;
+
+  function updateHeaderStickyState() {
+    if (!hero) { // Se non c'è hero, rendi sticky dopo un po' di scroll
+      if (window.scrollY > 200) {
+        header.classList.add('sticky');
+        if (spacer) spacer.style.height = `${headerHeight}px`;
+      } else {
+        header.classList.remove('sticky');
+        if (spacer) spacer.style.height = '0px';
+      }
+      return;
+    }
+
+    const heroBottom = hero.getBoundingClientRect().bottom + window.scrollY;
+    
+    // Diventa sticky quando il fondo della hero esce dalla viewport MENO l'altezza della header
+    // O più semplicemente, quando la cima della finestra supera il fondo della hero meno l'altezza dell'header.
+    // Per far sì che la header diventi sticky APPENA la hero esce:
+    if (window.scrollY > hero.offsetHeight - headerHeight) {
+      header.classList.add('sticky');
+      if (spacer) spacer.style.height = `${headerHeight}px`;
+    } else {
+      header.classList.remove('sticky');
+      if (spacer) spacer.style.height = '0px';
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderStickyState);
+  updateHeaderStickyState(); // Esegui al caricamento per stato iniziale corretto
+
+  // --- Logica menu mobile (invariata) ---
+  const menuBtn = header.querySelector('button.md\\:hidden');
+  let mobileNav = document.querySelector('.mobile-nav'); // Cerca nel body se creato prima
+
   if (!mobileNav) {
     mobileNav = document.createElement('nav');
     mobileNav.className = 'mobile-nav fixed top-0 left-0 w-full h-full bg-white z-40 flex flex-col items-center justify-center space-y-8 transition-transform duration-300 translate-x-full md:hidden';
@@ -27,19 +59,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openMobileNav() {
-    mobileNav.classList.remove('translate-x-full');
-    mobileNav.classList.add('translate-x-0');
-    document.body.style.overflow = 'hidden';
+    if(mobileNav) {
+      mobileNav.classList.remove('translate-x-full');
+      mobileNav.classList.add('translate-x-0');
+      document.body.style.overflow = 'hidden';
+    }
   }
   function closeMobileNav() {
-    mobileNav.classList.remove('translate-x-0');
-    mobileNav.classList.add('translate-x-full');
-    document.body.style.overflow = '';
+    if(mobileNav) {
+      mobileNav.classList.remove('translate-x-0');
+      mobileNav.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+    }
   }
 
   menuBtn?.addEventListener('click', openMobileNav);
   mobileNav?.addEventListener('click', (e) => {
-    if (e.target.classList.contains('close-mobile-nav') || e.target.classList.contains('nav-link')) {
+    const target = e.target;
+    if (target instanceof HTMLElement && (target.classList.contains('close-mobile-nav') || target.classList.contains('nav-link'))) {
       closeMobileNav();
     }
   });
