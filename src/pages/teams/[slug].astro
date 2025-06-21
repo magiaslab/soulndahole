@@ -3,21 +3,46 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
+import Chimera from "../../assets/images/Chimera.png";
+import Fenice from "../../assets/images/Fenice.png";
+import Grifone from "../../assets/images/Grifone.png";
+import Idra from "../../assets/images/Idra.png";
+import Kraken from "../../assets/images/Kraken.png";
+import Minotauro from "../../assets/images/Minotauro.png";
+import Unicorno from "../../assets/images/Unicorno.png";
+import type { ImageMetadata } from "astro";
 
 export async function getStaticPaths() {
-    const teams = [
-        { name: "Chimera", slug: "chimera", image: "Chimera.png" },
-        { name: "Fenice", slug: "fenice", image: "Fenice.png" },
-        { name: "Grifone", slug: "grifone", image: "Grifone.png" },
-        { name: "Idra", slug: "idra", image: "Idra.png" },
-        { name: "Kraken", slug: "kraken", image: "Kraken.png" },
-        { name: "Minotauro", slug: "minotauro", image: "Minotauro.png" },
-        { name: "Unicorno", slug: "unicorno", image: "Unicorno.png" },
+    const images = import.meta.glob<{ default: ImageMetadata }>(
+        "../../assets/images/*.png"
+    );
+
+    const teamsData = [
+        { name: "Chimera", slug: "chimera", imageName: "Chimera.png" },
+        { name: "Fenice", slug: "fenice", imageName: "Fenice.png" },
+        { name: "Grifone", slug: "grifone", imageName: "Grifone.png" },
+        { name: "Idra", slug: "idra", imageName: "Idra.png" },
+        { name: "Kraken", slug: "kraken", imageName: "Kraken.png" },
+        { name: "Minotauro", slug: "minotauro", imageName: "Minotauro.png" },
+        { name: "Unicorno", slug: "unicorno", imageName: "Unicorno.png" },
     ];
-    return teams.map(team => ({
-        params: { slug: team.slug },
-        props: { team },
-    }));
+
+    const paths = await Promise.all(
+        teamsData.map(async (team) => {
+            const imagePath = `../../assets/images/${team.imageName}`;
+            const imageImport = await images[imagePath]();
+            return {
+                params: { slug: team.slug },
+                props: {
+                    team: {
+                        name: team.name,
+                        image: imageImport.default,
+                    },
+                },
+            };
+        })
+    );
+    return paths;
 }
 
 const { team } = Astro.props;
@@ -39,35 +64,208 @@ const teamImage = (await Astro.glob('../../assets/images/*.png')).find(img => im
 ---
 <Layout title={`${team.name} - Soul 'n Da Hole`}>
   <Header />
-  <main class="team-detail-page py-24 bg-black text-white">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        {teamImage && (
-          <Image src={teamImage} alt={`Logo ${team.name}`} class="w-48 h-48 object-contain mx-auto mb-4" />
-        )}
-        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">{team.name}</h1>
-        <a href="/teams" class="text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-2">
-          &larr; Torna alle Squadre
-        </a>
+  <main class="relative isolate min-h-screen">
+    <div
+      class="absolute inset-0 -z-10 h-full w-full bg-black bg-cover bg-center"
+      style={`background-image: url(${team.image.src})`}
+    >
+      <div
+        class="absolute inset-0 -z-10 h-full w-full bg-black/80 backdrop-blur-sm"
+      >
       </div>
+    </div>
+    <div class="container mx-auto px-4 py-16 text-center">
+      <h1 class="mb-8 text-6xl font-bold uppercase tracking-widest text-white">
+        {team.name}
+      </h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Coach -->
-        <div class="player-card bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center" data-aos="fade-up">
-          <h3 class="text-2xl font-bold font-display uppercase">{coach.name}</h3>
-          <p class="text-red-500 font-semibold">{coach.role}</p>
-          <p class="text-gray-400 mt-2">{coach.club}</p>
-        </div>
-        
-        <!-- Giocatori -->
-        {players.map((player, index) => (
-          <div class="player-card bg-gray-900/50 p-6 rounded-lg border border-gray-800 text-center" data-aos="fade-up" data-aos-delay={(index + 1) * 100}>
-            <h3 class="text-2xl font-bold font-display uppercase">{player.name}</h3>
-            <p class="text-red-500 font-semibold">{player.role}</p>
-            <p class="text-gray-400 mt-2">{player.club}</p>
+      <section class="mb-16">
+        <h2
+          class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
+        >
+          Il Coach
+        </h2>
+        <div class="grid place-items-center">
+          <div
+            class="w-full max-w-sm overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=coach"
+              alt="Foto Coach"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Coach
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+
+      <section>
+        <h2
+          class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
+        >
+          I Giocatori
+        </h2>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Player Card 1 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player1"
+              alt="Foto Giocatore 1"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 1
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 2 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player2"
+              alt="Foto Giocatore 2"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 2
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 3 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player3"
+              alt="Foto Giocatore 3"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 3
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 4 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player4"
+              alt="Foto Giocatore 4"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 4
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 5 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player5"
+              alt="Foto Giocatore 5"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 5
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 6 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player6"
+              alt="Foto Giocatore 6"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 6
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 7 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player7"
+              alt="Foto Giocatore 7"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 7
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+          <!-- Player Card 8 -->
+          <div
+            class="overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md"
+          >
+            <img
+              src="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=player8"
+              alt="Foto Giocatore 8"
+              class="h-64 w-full object-cover object-center"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-white">
+                Nome Giocatore 8
+              </h3>
+              <p class="text-soul-red-300">
+                Campionato di appartenenza
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <a
+        href="/teams"
+        class="mt-16 inline-block text-xl text-soul-red-400 transition-colors hover:text-white"
+      >
+        &larr; Torna alle Squadre
+      </a>
     </div>
   </main>
   <Footer />
@@ -75,7 +273,7 @@ const teamImage = (await Astro.glob('../../assets/images/*.png')).find(img => im
 
 <script>
   import AOS from 'aos';
-  document.addEventListener('astro:page-load', () => AOS.init({ once: true, duration: 800 }));
+  AOS.init({ once: true, duration: 800 });
 </script>
 
 <style>

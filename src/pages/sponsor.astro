@@ -1,0 +1,161 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const mainSponsor = {
+    name: "Main Sponsor",
+    logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=main-sponsor",
+};
+
+const titleSponsors = [
+    {
+        name: "Title Sponsor 1",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=title-sponsor-1",
+    },
+    {
+        name: "Title Sponsor 2",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=title-sponsor-2",
+    },
+];
+
+const otherSponsors = [
+    {
+        name: "Sponsor 1",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-1",
+    },
+    {
+        name: "Sponsor 2",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-2",
+    },
+    {
+        name: "Sponsor 3",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-3",
+    },
+    {
+        name: "Sponsor 4",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-4",
+    },
+    {
+        name: "Sponsor 5",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-5",
+    },
+    {
+        name: "Sponsor 6",
+        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-6",
+    },
+];
+---
+
+<Layout title="Sponsor - Soul 'n Da Hole">
+    <Header />
+    <main class="min-h-screen bg-black py-24 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1
+                class="mb-12 text-5xl font-black uppercase text-white md:text-7xl"
+                style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
+                data-aos="fade-down"
+            >
+                I Nostri Sponsor
+            </h1>
+
+            <!-- Main Sponsor -->
+            <section class="mb-20">
+                <h2
+                    class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
+                    data-aos="fade-up"
+                >
+                    Main Sponsor
+                </h2>
+                <div
+                    class="flex justify-center"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+                    <div
+                        class="rounded-lg p-8 transition-transform hover:scale-105"
+                        style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
+                    >
+                        <img
+                            src={mainSponsor.logoUrl}
+                            alt={mainSponsor.name}
+                            class="h-32"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Title Sponsors -->
+            <section class="mb-20">
+                <h2
+                    class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+                    Title Sponsor
+                </h2>
+                <div class="flex flex-wrap justify-center gap-8">
+                    {
+                        titleSponsors.map((sponsor, index) => (
+                            <div
+                                class="rounded-lg p-6 transition-transform hover:scale-105"
+                                style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
+                                data-aos="fade-up"
+                                data-aos-delay={300 + index * 100}
+                            >
+                                <img
+                                    src={sponsor.logoUrl}
+                                    alt={sponsor.name}
+                                    class="h-24"
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- Other Sponsors -->
+            <section>
+                <h2
+                    class="mb-8 text-3xl font-bold uppercase tracking-wider text-soul-red-500"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+                    Tutti gli Sponsor
+                </h2>
+                <div
+                    class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4"
+                >
+                    {
+                        otherSponsors.map((sponsor, index) => (
+                            <div
+                                class="flex items-center justify-center rounded-lg p-4 transition-transform hover:scale-105"
+                                style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
+                                data-aos="fade-up"
+                                data-aos-delay={500 + index * 50}
+                            >
+                                <img
+                                    src={sponsor.logoUrl}
+                                    alt={sponsor.name}
+                                    class="h-16"
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
+        </div>
+    </main>
+    <Footer />
+</Layout>
+
+<script>
+    import AOS from "aos";
+    document.addEventListener("astro:page-load", () => {
+        AOS.init({ once: true, duration: 800 });
+    });
+</script>
+
+<style>
+    /* Filtro non più necessario */
+</style> 

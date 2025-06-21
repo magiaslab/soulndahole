@@ -19,7 +19,7 @@ import logo from '../assets/images/logo.svg';
       <a href="/#programma" class="nav-link text-white">Programma</a>
       <a href="/teams" class="nav-link text-white">Squadre</a>
       <a href="/albo-doro" class="nav-link text-white">Albo d'oro</a>
-      <a href="/#sponsor" class="nav-link text-white">Sponsor</a>
+      <a href="/sponsor" class="nav-link text-white">Sponsor</a>
       <a href="/#trovaci" class="nav-link text-white">Trovaci</a>
     </div>
     <button id="mobile-menu-button" class="md:hidden text-white z-50">
@@ -37,7 +37,7 @@ import logo from '../assets/images/logo.svg';
   <a href="/#programma" class="nav-link text-white text-3xl font-bold">Programma</a>
   <a href="/teams" class="nav-link text-white text-3xl font-bold">Squadre</a>
   <a href="/albo-doro" class="nav-link text-white text-3xl font-bold">Albo d'oro</a>
-  <a href="/#sponsor" class="nav-link text-white text-3xl font-bold">Sponsor</a>
+  <a href="/sponsor" class="nav-link text-white text-3xl font-bold">Sponsor</a>
   <a href="/#trovaci" class="nav-link text-white text-3xl font-bold">Trovaci</a>
 </nav>
 
@@ -51,15 +51,15 @@ import logo from '../assets/images/logo.svg';
         mobileNav.classList.toggle('mobile-nav-hidden');
         mobileNav.classList.toggle('mobile-nav-visible');
       });
-    }
 
-    const navLinks = mobileNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.add('mobile-nav-hidden');
-        mobileNav.classList.remove('mobile-nav-visible');
+      const navLinks = mobileNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.add('mobile-nav-hidden');
+          mobileNav.classList.remove('mobile-nav-visible');
+        });
       });
-    });
+    }
   });
 </script>
 

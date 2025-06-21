@@ -10,7 +10,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="lenis lenis-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -20,6 +20,7 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<script src="../scripts/lenis-init.js"></script>
 	</body>
 </html>
 
@@ -31,7 +32,7 @@ const { title } = Astro.props;
 
 	html {
 		font-family: system-ui, sans-serif;
-		scroll-behavior: smooth;
+		/* scroll-behavior: smooth; Rimosso, ora gestito da JS (Lenis) */
 	}
 
 	body {
@@ -40,7 +41,6 @@ const { title } = Astro.props;
 		background-color: #000;
 		color: #fff;
 		position: relative;
-		overflow-x: hidden;
 	}
 
 	footer {
