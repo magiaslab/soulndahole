@@ -1,16 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import presentationImg from '../assets/images/Presentazione.jpeg';
+import Sfondo1 from '../assets/images/Sfondo1.png';
+---
+
 <section 
   class="presentation-section relative py-16 md:py-24 bg-black text-white"
-  style="background-image: url(/images/Sfondo1.png); background-size: cover; background-position: center; background-attachment: fixed;"
+  style={`background-image: url(${Sfondo1.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
 >
   <div class="absolute inset-0 bg-black/80"></div>
   <div class="container relative mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
       <!-- Image Column -->
       <div class="w-full md:w-1/2" data-aos="fade-right">
-        <img 
-          src="/images/Presentazione.jpeg" 
+        <Image 
+          src={presentationImg} 
           alt="Locandina Presentazione Soul 'N Da Hole"
           class="rounded-lg shadow-2xl border-2 border-gray-700 hover:border-red-600 transition-all duration-300"
+          width={720}
         />
       </div>
 
@@ -56,4 +63,4 @@
     border-color: #dc2626; /* red-600 */
     transform: translateY(-5px);
   }
-</style> 
+</style>

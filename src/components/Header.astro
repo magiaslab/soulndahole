@@ -1,19 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.svg';
+---
 <header id="main-header" class="fixed w-full z-50 py-4 transition-all duration-300">
   <div class="container mx-auto px-4 relative flex items-center justify-between">
     <div class="logo-container">
       <a href="/" class="block">
-        <img 
-          src="/images/logo.svg" 
+        <Image 
+          src={logo}
           alt="SoulNDahole Logo" 
           class="h-8 md:h-12 w-auto logo-image"
+          width="150"
         />
       </a>
     </div>
     <div class="hidden md:flex space-x-8">
       <a href="/" class="nav-link text-white">Home</a>
-      <a href="/about" class="nav-link text-white">Chi Siamo</a>
-      <a href="/services" class="nav-link text-white">Servizi</a>
-      <a href="/contact" class="nav-link text-white">Contatti</a>
+      <a href="#programma" class="nav-link text-white">Programma</a>
+      <a href="#teams" class="nav-link text-white">Squadre</a>
+      <a href="#sponsor" class="nav-link text-white">Sponsor</a>
+      <a href="#trovaci" class="nav-link text-white">Trovaci</a>
     </div>
     <button class="md:hidden text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

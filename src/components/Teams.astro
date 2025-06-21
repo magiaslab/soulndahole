@@ -1,18 +1,31 @@
 ---
-// Componente per mostrare le 7 squadre del torneo
+import { Image } from 'astro:assets';
+import unicornoImg from '../assets/images/Unicorno.png';
+import idraImg from '../assets/images/Idra.png';
+import feniceImg from '../assets/images/Fenice.png';
+import krakenImg from '../assets/images/Kraken.png';
+import grifoneImg from '../assets/images/Grifone.png';
+import chimeraImg from '../assets/images/Chimera.png';
+import minotauroImg from '../assets/images/Minotauro.png';
+import Sfondo2 from '../assets/images/Sfondo2.png';
+
 const teams = [
-  { name: "Unicorno", imageSrc: "/images/Unicorno.png", icon: "🦄" },
-  { name: "Idra", imageSrc: "/images/Idra.png", icon: "🐉" },
-  { name: "Fenice", imageSrc: "/images/Fenice.png", icon: "🔥" },
-  { name: "Kraken", imageSrc: "/images/Kraken.png", icon: "🐙" },
-  { name: "Grifone", imageSrc: "/images/Grifone.png", icon: "🦅" },
-  { name: "Chimera", imageSrc: "/images/Chimera.png", icon: "🦁" },
-  { name: "Minotauro", imageSrc: "/images/Minotauro.png", icon: "🐂" }
+  { name: "Unicorno", imageSrc: unicornoImg, icon: "🦄" },
+  { name: "Idra", imageSrc: idraImg, icon: "🐉" },
+  { name: "Fenice", imageSrc: feniceImg, icon: "🔥" },
+  { name: "Kraken", imageSrc: krakenImg, icon: "🐙" },
+  { name: "Grifone", imageSrc: grifoneImg, icon: "🦅" },
+  { name: "Chimera", imageSrc: chimeraImg, icon: "🦁" },
+  { name: "Minotauro", imageSrc: minotauroImg, icon: "🐂" }
 ];
 ---
 
-<section id="teams" class="py-16 bg-gradient-to-b from-black via-gray-900 to-black relative">
-  <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 50% 0, #581c1c 0%, transparent 70%);"></div>
+<section 
+  id="teams" 
+  class="py-16 relative"
+  style={`background-image: url(${Sfondo2.src}); background-size: cover; background-position: center;`}
+>
+  <div class="absolute inset-0 bg-black/80"></div>
   <div class="container mx-auto px-4 relative">
     <div class="text-center mb-12">
       <h2 class="text-4xl md:text-5xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
@@ -29,7 +42,7 @@ const teams = [
           <div class="p-6 text-center">
             <div class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden bg-gray-800 border-2 border-red-800/50 group-hover:border-red-600">
               {team.imageSrc ? (
-                <img src={team.imageSrc} alt={`Logo ${team.name}`} class="w-full h-full object-cover" />
+                <Image src={team.imageSrc} alt={`Logo ${team.name}`} class="w-full h-full object-cover" width="128" height="128" />
               ) : (
                 <span>{team.icon}</span>
               )}

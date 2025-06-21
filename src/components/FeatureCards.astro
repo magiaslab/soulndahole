@@ -1,4 +1,6 @@
 ---
+import Sfondo1 from '../assets/images/Sfondo1.png';
+
 const features = [
   {
     title: "Date & Orari",
@@ -20,7 +22,7 @@ const features = [
 
 <section 
   class="feature-cards relative py-12 md:py-20 bg-black"
-  style="background-image: url(/images/Sfondo1.png); background-size: cover; background-position: center; background-attachment: fixed;"
+  style={`background-image: url(${Sfondo1.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
 >
   <div class="absolute inset-0 bg-black/70"></div>
   <div class="container relative mx-auto px-4">
