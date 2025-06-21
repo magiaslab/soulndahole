@@ -2,48 +2,33 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { Image } from "astro:assets";
 
-const mainSponsor = {
-    name: "Main Sponsor",
-    logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=main-sponsor",
-};
+// Import local logos
+import mainLogo from "../assets/images/logos/logoipsum-335.svg";
+import titleLogo1 from "../assets/images/logos/logoipsum-327.svg";
+import titleLogo2 from "../assets/images/logos/logoipsum-342.svg";
+import otherLogo1 from "../assets/images/logos/logoipsum-348.svg";
+import otherLogo2 from "../assets/images/logos/logoipsum-350.svg";
+import otherLogo3 from "../assets/images/logos/logoipsum-356.svg";
+import otherLogo4 from "../assets/images/logos/logoipsum-358.svg";
+import otherLogo5 from "../assets/images/logos/logoipsum-360.svg";
+import otherLogo6 from "../assets/images/logos/logoipsum-372.svg";
+
+const mainSponsor = { name: "Main Sponsor", logo: mainLogo };
 
 const titleSponsors = [
-    {
-        name: "Title Sponsor 1",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=title-sponsor-1",
-    },
-    {
-        name: "Title Sponsor 2",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=title-sponsor-2",
-    },
+    { name: "Title Sponsor 1", logo: titleLogo1 },
+    { name: "Title Sponsor 2", logo: titleLogo2 },
 ];
 
 const otherSponsors = [
-    {
-        name: "Sponsor 1",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-1",
-    },
-    {
-        name: "Sponsor 2",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-2",
-    },
-    {
-        name: "Sponsor 3",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-3",
-    },
-    {
-        name: "Sponsor 4",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-4",
-    },
-    {
-        name: "Sponsor 5",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-5",
-    },
-    {
-        name: "Sponsor 6",
-        logoUrl: "https://api.dicebear.com/8.x/identicon/svg?seed=sponsor-6",
-    },
+    { name: "Sponsor 1", logo: otherLogo1 },
+    { name: "Sponsor 2", logo: otherLogo2 },
+    { name: "Sponsor 3", logo: otherLogo3 },
+    { name: "Sponsor 4", logo: otherLogo4 },
+    { name: "Sponsor 5", logo: otherLogo5 },
+    { name: "Sponsor 6", logo: otherLogo6 },
 ];
 ---
 
@@ -54,7 +39,6 @@ const otherSponsors = [
             <h1
                 class="mb-12 text-5xl font-black uppercase text-white md:text-7xl"
                 style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
-                data-aos="fade-down"
             >
                 I Nostri Sponsor
             </h1>
@@ -63,23 +47,17 @@ const otherSponsors = [
             <section class="mb-20">
                 <h2
                     class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
-                    data-aos="fade-up"
                 >
                     Main Sponsor
                 </h2>
-                <div
-                    class="flex justify-center"
-                    data-aos="fade-up"
-                    data-aos-delay="100"
-                >
+                <div class="flex justify-center">
                     <div
-                        class="rounded-lg p-8 transition-transform hover:scale-105"
-                        style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
+                        class="rounded-lg bg-gray-100 p-8 transition-transform hover:scale-105"
                     >
-                        <img
-                            src={mainSponsor.logoUrl}
+                        <Image
+                            src={mainSponsor.logo}
                             alt={mainSponsor.name}
-                            class="h-32"
+                            class="h-32 w-auto"
                         />
                     </div>
                 </div>
@@ -89,8 +67,6 @@ const otherSponsors = [
             <section class="mb-20">
                 <h2
                     class="mb-8 text-4xl font-bold uppercase tracking-wider text-soul-red-500"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
                 >
                     Title Sponsor
                 </h2>
@@ -98,15 +74,12 @@ const otherSponsors = [
                     {
                         titleSponsors.map((sponsor, index) => (
                             <div
-                                class="rounded-lg p-6 transition-transform hover:scale-105"
-                                style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
-                                data-aos="fade-up"
-                                data-aos-delay={300 + index * 100}
+                                class="rounded-lg bg-gray-100 p-6 transition-transform hover:scale-105"
                             >
-                                <img
-                                    src={sponsor.logoUrl}
+                                <Image
+                                    src={sponsor.logo}
                                     alt={sponsor.name}
-                                    class="h-24"
+                                    class="h-24 w-auto"
                                 />
                             </div>
                         ))
@@ -118,8 +91,6 @@ const otherSponsors = [
             <section>
                 <h2
                     class="mb-8 text-3xl font-bold uppercase tracking-wider text-soul-red-500"
-                    data-aos="fade-up"
-                    data-aos-delay="400"
                 >
                     Tutti gli Sponsor
                 </h2>
@@ -129,15 +100,12 @@ const otherSponsors = [
                     {
                         otherSponsors.map((sponsor, index) => (
                             <div
-                                class="flex items-center justify-center rounded-lg p-4 transition-transform hover:scale-105"
-                                style="background-color: #f3f4f6; border: 1px solid #e5e7eb;"
-                                data-aos="fade-up"
-                                data-aos-delay={500 + index * 50}
+                                class="flex items-center justify-center rounded-lg bg-gray-100 p-4 transition-transform hover:scale-105"
                             >
-                                <img
-                                    src={sponsor.logoUrl}
+                                <Image
+                                    src={sponsor.logo}
                                     alt={sponsor.name}
-                                    class="h-16"
+                                    class="h-16 w-auto"
                                 />
                             </div>
                         ))
@@ -148,14 +116,3 @@ const otherSponsors = [
     </main>
     <Footer />
 </Layout>
-
-<script>
-    import AOS from "aos";
-    document.addEventListener("astro:page-load", () => {
-        AOS.init({ once: true, duration: 800 });
-    });
-</script>
-
-<style>
-    /* Filtro non più necessario */
-</style> 
