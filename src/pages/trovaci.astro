@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Trovaci - Soul In Da Hole">
+  <Header />
+  <main class="py-20 bg-soul-gray-950 text-white">
+    <section class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+          Dove Trovarci
+        </h1>
+        <p class="text-xl text-gray-300 mt-4 max-w-2xl mx-auto">
+          Il Soul si svolge presso il playground "Rodari" Via Aurelia Sud San Vincenzo....ecco dove trovarci!
+        </p>
+      </div>
+
+      <div class="relative rounded-lg overflow-hidden border border-soul-gray-700/50" style="height: 500px;">
+        <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-black/20"></div>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d780.2494389304899!2d10.542833795397835!3d43.09301796459247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d61d7de8b67c8d%3A0x28a52dfafb075221!2sSoul%20%E2%80%98N%20Da%20Hole!5e1!3m2!1sit!2sit!4v1750609192638!5m2!1sit!2sit" 
+          class="w-full h-full"
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout> 
