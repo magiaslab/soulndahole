@@ -2,11 +2,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import icons from 'astro-icons';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react(), icons()],
+  site: 'https://www.soulndahole.it', // IMPORTANTE: Sostituisci con il tuo dominio definitivo!
+  integrations: [tailwind(), react(), sitemap()],
   vite: {
     envPrefix: ['CLOUDINARY_']
   }
