@@ -10,6 +10,8 @@ const navLinks = [
     { name: "Sponsor", href: "/sponsor" },
     { name: "Trovaci", href: "/trovaci" }
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
     <div class="container mx-auto px-4 flex items-center justify-between h-16 md:h-20">
@@ -25,9 +27,21 @@ const navLinks = [
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-2">
-            {navLinks.map(link => (
-                <a href={link.href} class="px-4 py-2 text-sm font-medium text-white hover:text-soul-red-500 transition-colors duration-300 uppercase tracking-wider">{link.name}</a>
-            ))}
+            {navLinks.map(link => {
+                const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+                return (
+                    <a 
+                        href={link.href} 
+                        class="nav-link px-4 py-2 text-sm font-medium text-white transition-colors duration-300 uppercase tracking-wider"
+                        class:list={{
+                            'active text-soul-red-500': isActive,
+                            'hover:text-soul-red-500': !isActive
+                        }}
+                    >
+                        {link.name}
+                    </a>
+                )
+            })}
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -101,5 +115,32 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 #main-header.scrolled .logo-image {
     @apply h-8;
+}
+
+.nav-link {
+    position: relative;
+    padding-bottom: 8px; /* Spazio per la sottolineatura */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ef4444; /* soul-red-500 */
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: calc(100% - 2rem); /* Larghezza della sottolineatura (padding orizzontale di 1rem per lato) */
+}
+
+.nav-link.active {
+    /* Il colore è già applicato dalla classe active text-soul-red-500 */
+    font-weight: 600; /* Opzionale: rende il testo un po' più grassetto */
 }
 </style> 
