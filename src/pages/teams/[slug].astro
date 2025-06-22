@@ -1,7 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
 import chimera from '../../assets/images/Chimera.png';
 import fenice from '../../assets/images/Fenice.png';
@@ -11,6 +9,7 @@ import kraken from '../../assets/images/Kraken.png';
 import minotauro from '../../assets/images/Minotauro.png';
 import unicorno from '../../assets/images/Unicorno.png';
 import type { ImageMetadata } from "astro";
+import { createSlug } from '../../utils/slug';
 
 export async function getStaticPaths() {
     const teams = [
@@ -52,8 +51,7 @@ const coach = {
     name: 'Coach Rossi',
 };
 ---
-<Layout title={`${team.name} - Soul 'n Da Hole`}>
-  <Header />
+<Layout title={`${team.name} - Soul 'n Da Hole`} description={`Scopri la squadra ${team.name} del torneo Soul 'n Da Hole.`}>
   <main class="relative isolate min-h-screen">
     <div
       class="absolute inset-0 -z-10 h-full w-full bg-black bg-cover bg-center"
@@ -258,8 +256,6 @@ const coach = {
       </a>
     </div>
   </main>
-
-  <Footer />
 </Layout>
 
 <style>

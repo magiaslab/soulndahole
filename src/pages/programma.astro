@@ -1,8 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
+import { Image } from 'astro:assets';
+import Sfondo1 from '../assets/images/Sfondo1.png';
 
 const schedule = [
     {
@@ -48,9 +48,8 @@ const schedule = [
 ];
 ---
 
-<Layout title="Programma - Soul 'n Da Hole">
+<Layout title="Programma - Soul 'n Da Hole" description="Scopri il programma completo del torneo Soul 'n Da Hole 2024.">
     <ViewTransitions />
-    <Header />
     <main class="min-h-screen bg-black py-24 text-white">
         <div class="container mx-auto px-4">
             <h1
@@ -94,7 +93,6 @@ const schedule = [
             }
         </div>
     </main>
-    <Footer />
 </Layout>
 
 <style is:global>

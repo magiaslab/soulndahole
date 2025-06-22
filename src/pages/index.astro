@@ -1,11 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import FeatureCards from '../components/FeatureCards.astro';
-import Presentation from '../components/Presentation.astro';
 import Teams from '../components/Teams.astro';
-import Footer from '../components/Footer.astro';
+import Presentation from '../components/Presentation.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 // Dati per i componenti
@@ -19,14 +17,12 @@ const features = [
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout title="Soul 'n Da Hole - Home">
+<Layout title="Soul 'n Da Hole - Il risveglio della bestia" description="Il torneo di basket 3v3 più atteso. Scopri le squadre, il programma e le edizioni passate del Soul 'n Da Hole.">
 	<ViewTransitions />
-	<Header />
 	<Hero />
-	<Presentation />
 	<FeatureCards features={features} />
 	<Teams />
-	<Footer />
+	<Presentation />
 </Layout>
 
 <style>

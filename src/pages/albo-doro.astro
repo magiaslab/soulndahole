@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
 import type { ImageMetadata } from 'astro';
 import { getImage } from "astro:assets";
@@ -39,9 +37,8 @@ const editions = await Promise.all(
 ).then(editions => editions.sort((a, b) => b.year.localeCompare(a.year))); // Ordina per anno, dal più recente
 ---
 
-<Layout title="Albo d'oro - Soul In Da Hole">
+<Layout title="Albo d'oro - Soul 'n Da Hole" description="Rivivi le edizioni passate del torneo Soul 'n Da Hole attraverso le gallerie fotografiche.">
     <ViewTransitions />
-    <Header />
     <main class="py-20 bg-soul-gray-950 text-white">
         <section class="container mx-auto px-4">
             <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider text-center mb-12" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
@@ -69,5 +66,4 @@ const editions = await Promise.all(
             </div>
         </section>
     </main>
-    <Footer />
 </Layout> 
