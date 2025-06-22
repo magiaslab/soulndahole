@@ -1,12 +1,12 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from 'react';
 import Lightbox from "yet-another-react-lightbox";
+import Captions from "yet-another-react-lightbox/plugins/captions";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+
 import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 // Definiamo il tipo per le immagini che riceviamo come prop
 interface Image {
@@ -20,51 +20,49 @@ interface GalleryProps {
   images: Image[];
 }
 
-export default function Gallery({ images }: GalleryProps) {
+const Gallery: React.FC<GalleryProps> = ({ images }) => {
   const [index, setIndex] = useState(-1);
-
-  useEffect(() => {
-    AOS.init({
-      once: true,
-      duration: 800,
-    });
-  }, []);
 
   const slides = images.map(({ src, width, height, alt }) => ({
     src,
     width,
     height,
-    alt,
+    title: alt,
   }));
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {images.map((image, i) => (
-          <div
-            key={i}
-            className="group relative cursor-pointer"
-            data-aos="zoom-in"
-            onClick={() => setIndex(i)}
-          >
+          <div key={i} className="break-inside-avoid" onClick={() => setIndex(i)}>
             <img
               src={image.src}
               alt={image.alt}
-              className="rounded-lg w-full h-full object-cover border-2 border-gray-800 group-hover:border-red-600 transition-all duration-300"
+              width={image.width}
+              height={image.height}
+              className="rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out cursor-pointer"
             />
           </div>
         ))}
       </div>
 
       <Lightbox
-        styles={{ container: { backgroundColor: "rgba(0, 0, 0, 0.9)" } }}
-        open={index >= 0}
-        close={() => setIndex(-1)}
-        slides={slides}
-        index={index}
-        plugins={[Thumbnails, Zoom]}
-        controller={{ closeOnBackdropClick: true }}
-      />
+      open={index >= 0}
+      close={() => setIndex(-1)}
+      index={index}
+      slides={slides}
+      plugins={[Captions, Thumbnails, Zoom]}
+      controller={{ closeOnBackdropClick: true }} // <- RIGA DA AGGIUNGERE
+      captions={{
+          descriptionTextAlign: 'center',
+      }}
+      styles={{ 
+          container: { backgroundColor: "rgba(10, 10, 10, 0.85)" },
+          captionsDescription: { fontFamily: 'sans-serif' }
+      }}
+    />
     </>
   );
-} 
+};
+
+export default Gallery; 

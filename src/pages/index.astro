@@ -1,49 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import FeatureCards from '../components/FeatureCards.astro';
-import Teams from '../components/Teams.astro';
 import Presentation from '../components/Presentation.astro';
+import Teams from '../components/Teams.astro';
+import Footer from '../components/Footer.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+// Dati per i componenti
+const features = [
+	{ icon: '📅', title: 'Date Ufficiali', description: '3-4-5-6 Luglio 2024. Quattro giorni di puro basket e divertimento.' },
+	{ icon: '📍', title: 'Location Esclusiva', description: 'Campo da basket di Via Aurelia Sud, San Vincenzo (LI). Facile da raggiungere.' },
+	{ icon: '🏆', title: 'Montepremi', description: 'Competi per un ricco montepremi e per la gloria del torneo.' },
+];
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout title="Soul 'n Da Hole - Torneo Streetball San Vincenzo">
+<Layout title="Soul 'n Da Hole - Home">
+	<ViewTransitions />
 	<Header />
-	<div class="content-wrapper">
-		<Hero />
-		<FeatureCards />
-		<Teams />
-		<Presentation />
-		<Footer />
-	</div>
+	<Hero />
+	<Presentation />
+	<FeatureCards features={features} />
+	<Teams />
+	<Footer />
 </Layout>
-
-<script>
-  import AOS from 'aos';
-
-  // Estendi l'interfaccia Window per includere la nostra proprietà custom (opzionale se non più usata)
-  // declare global {
-  //   interface Window {
-  //     initHeaderDone?: boolean;
-  //   }
-  // }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-      duration: 800, 
-      once: false, 
-      offset: 50, 
-    });
-    console.log('AOS initialized.');
-
-    // initHeader.js è ora caricato globalmente da Layout.astro, non serve più qui.
-    // console.log('initHeader.js handling is now in Layout.astro');
-  });
-</script>
 
 <style>
 	/* Stile per main rimosso */

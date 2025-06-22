@@ -11,10 +11,10 @@
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@studio-freight/lenis": "^1.0.42",
-    "aos": "^2.3.4",
     "astro": "^5.10.0",
     "cloudinary": "^2.6.1",
     "lucide": "^0.507.0",
+    "motion": "^12.18.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "simple-lightbox": "^2.1.0",
@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",
-    "@types/aos": "^3.0.7",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.1"

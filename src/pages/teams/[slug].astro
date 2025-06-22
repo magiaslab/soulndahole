@@ -3,71 +3,61 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { Image } from 'astro:assets';
-import Chimera from "../../assets/images/Chimera.png";
-import Fenice from "../../assets/images/Fenice.png";
-import Grifone from "../../assets/images/Grifone.png";
-import Idra from "../../assets/images/Idra.png";
-import Kraken from "../../assets/images/Kraken.png";
-import Minotauro from "../../assets/images/Minotauro.png";
-import Unicorno from "../../assets/images/Unicorno.png";
+import chimera from '../../assets/images/Chimera.png';
+import fenice from '../../assets/images/Fenice.png';
+import grifone from '../../assets/images/Grifone.png';
+import idra from '../../assets/images/Idra.png';
+import kraken from '../../assets/images/Kraken.png';
+import minotauro from '../../assets/images/Minotauro.png';
+import unicorno from '../../assets/images/Unicorno.png';
 import type { ImageMetadata } from "astro";
 
 export async function getStaticPaths() {
-    const images = import.meta.glob<{ default: ImageMetadata }>(
-        "../../assets/images/*.png"
-    );
-
-    const teamsData = [
-        { name: "Chimera", slug: "chimera", imageName: "Chimera.png" },
-        { name: "Fenice", slug: "fenice", imageName: "Fenice.png" },
-        { name: "Grifone", slug: "grifone", imageName: "Grifone.png" },
-        { name: "Idra", slug: "idra", imageName: "Idra.png" },
-        { name: "Kraken", slug: "kraken", imageName: "Kraken.png" },
-        { name: "Minotauro", slug: "minotauro", imageName: "Minotauro.png" },
-        { name: "Unicorno", slug: "unicorno", imageName: "Unicorno.png" },
+    const teams = [
+        { name: 'Chimera', logo: chimera, slug: 'chimera' },
+        { name: 'Fenice', logo: fenice, slug: 'fenice' },
+        { name: 'Grifone', logo: grifone, slug: 'grifone' },
+        { name: 'Idra', logo: idra, slug: 'idra' },
+        { name: 'Kraken', logo: kraken, slug: 'kraken' },
+        { name: 'Minotauro', logo: minotauro, slug: 'minotauro' },
+        { name: 'Unicorno', logo: unicorno, slug: 'unicorno' },
     ];
 
-    const paths = await Promise.all(
-        teamsData.map(async (team) => {
-            const imagePath = `../../assets/images/${team.imageName}`;
-            const imageImport = await images[imagePath]();
-            return {
-                params: { slug: team.slug },
-                props: {
-                    team: {
-                        name: team.name,
-                        image: imageImport.default,
-                    },
-                },
-            };
-        })
-    );
-    return paths;
+    return teams.map(team => ({
+        params: { slug: team.slug },
+        props: { team },
+    }));
+}
+
+interface Team {
+    name: string;
+    logo: ImageMetadata;
+    slug: string;
+}
+
+interface Props {
+    team: Team
 }
 
 const { team } = Astro.props;
 
-// Placeholder per i giocatori
+// Dati fittizi per giocatori e coach
 const players = Array.from({ length: 8 }, (_, i) => ({
-  name: `Giocatore ${i + 1}`,
-  role: 'Ruolo',
-  club: 'Campionato di appartenenza',
+    name: `Giocatore ${i + 1}`,
+    number: Math.floor(Math.random() * 100),
+    role: i < 3 ? 'Guardia' : i < 6 ? 'Ala' : 'Centro',
 }));
 
 const coach = {
-  name: 'Nome Coach',
-  role: 'Allenatore',
-  club: 'Campionato di appartenenza',
+    name: 'Coach Rossi',
 };
-
-const teamImage = (await Astro.glob('../../assets/images/*.png')).find(img => img.default.src.endsWith(team.image))?.default;
 ---
 <Layout title={`${team.name} - Soul 'n Da Hole`}>
   <Header />
   <main class="relative isolate min-h-screen">
     <div
       class="absolute inset-0 -z-10 h-full w-full bg-black bg-cover bg-center"
-      style={`background-image: url(${team.image.src})`}
+      style={`background-image: url(${team.logo.src})`}
     >
       <div
         class="absolute inset-0 -z-10 h-full w-full bg-black/80 backdrop-blur-sm"
@@ -268,13 +258,9 @@ const teamImage = (await Astro.glob('../../assets/images/*.png')).find(img => im
       </a>
     </div>
   </main>
+
   <Footer />
 </Layout>
-
-<script>
-  import AOS from 'aos';
-  AOS.init({ once: true, duration: 800 });
-</script>
 
 <style>
   .font-display { font-family: 'Teko', sans-serif; }

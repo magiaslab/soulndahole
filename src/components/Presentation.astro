@@ -4,15 +4,10 @@ import presentationImg from '../assets/images/Presentazione.jpeg';
 import Sfondo1 from '../assets/images/Sfondo1.png';
 ---
 
-<section 
-  class="presentation-section relative py-16 md:py-24 bg-black text-white"
-  style={`background-image: url(${Sfondo1.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
->
-  <div class="absolute inset-0 bg-black/80"></div>
-  <div class="container relative mx-auto px-4">
-    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-      <!-- Image Column -->
-      <div class="w-full md:w-1/2" data-aos="fade-right">
+<section id="presentation" class="py-20 bg-black">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap items-center -mx-4">
+      <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
         <Image 
           src={presentationImg} 
           alt="Locandina Presentazione Soul 'N Da Hole"
@@ -20,10 +15,10 @@ import Sfondo1 from '../assets/images/Sfondo1.png';
           width={720}
         />
       </div>
-
-      <!-- Text Column -->
-      <div class="w-full md:w-1/2 text-center md:text-left" data-aos="fade-left">
-        <h2 class="text-sm uppercase text-red-500 font-semibold tracking-widest">L'EVENTO DI LANCIO</h2>
+      <div class="w-full md:w-1/2 px-4 text-center md:text-left">
+        <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-4" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+          Evento di Lancio
+        </h2>
         <h3 class="text-4xl md:text-5xl font-black text-white mt-2 mb-6 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
           PRESENTAZIONE UFFICIALE
         </h3>

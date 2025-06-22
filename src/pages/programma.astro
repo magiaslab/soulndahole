@@ -1,0 +1,118 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
+
+const schedule = [
+    {
+        day: "Mercoledì",
+        date: "3 Luglio 2024",
+        events: [
+            { time: "19:00", title: "Apertura Cancelli e DJ Set", description: "Inizia il torneo con la giusta carica musicale." },
+            { time: "20:00", title: "Gara di Tiro da 3 Punti - Qualifiche", description: "I migliori tiratori si sfidano per un posto in finale." },
+            { time: "21:30", title: "Partita Inaugurale: Team A vs Team B", description: "La prima partita del torneo." },
+            { time: "23:00", title: "Live Music Show", description: "Performance dal vivo per concludere la serata." },
+        ],
+    },
+    {
+        day: "Giovedì",
+        date: "4 Luglio 2024",
+        events: [
+            { time: "19:00", title: "Torneo di Basket 3x3 - Gironi", description: "Iniziano le sfide mozzafiato del 3 contro 3." },
+            { time: "20:30", title: "Slam Dunk Contest - Spettacolo e Acrobazie", description: "Le schiacciate più incredibili della serata." },
+            { time: "22:00", title: "Partita All-Star Game", description: "Le stelle del torneo si affrontano in una partita esibizione." },
+            { time: "23:30", title: "DJ Set & Food Village", description: "Musica e cibo per tutta la notte." },
+        ],
+    },
+    {
+        day: "Venerdì",
+        date: "5 Luglio 2024",
+        events: [
+            { time: "19:00", title: "Semifinali Torneo 3x3", description: "Chi si avvicinerà al titolo?" },
+            { time: "20:30", title: "Finale Gara di Tiro da 3 Punti", description: "La sfida finale tra i cecchini del canestro." },
+            { time: "22:00", title: "Semifinali Torneo Principale", description: "Le partite che decidono i finalisti." },
+            { time: "23:30", title: "Concerto Rap", description: "Artisti locali sul palco." },
+        ],
+    },
+    {
+        day: "Sabato",
+        date: "6 Luglio 2024",
+        events: [
+            { time: "19:00", title: "Finale 3°/4° Posto", description: "La sfida per il podio." },
+            { time: "20:30", title: "Finalissima del Torneo", description: "La partita che decreterà i campioni del Soul 'n Da Hole 2024." },
+            { time: "22:00", title: "Premiazioni e Saluti Finali", description: "Celebrazione dei vincitori e chiusura dell'evento." },
+            { time: "23:30", title: "Closing Party con DJ Set", description: "Festeggiamo insieme la fine del torneo." },
+        ],
+    },
+];
+---
+
+<Layout title="Programma - Soul 'n Da Hole">
+    <ViewTransitions />
+    <Header />
+    <main class="min-h-screen bg-black py-24 text-white">
+        <div class="container mx-auto px-4">
+            <h1
+                class="mb-12 text-center text-5xl font-black uppercase text-white md:text-7xl"
+                style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
+            >
+                Programma del Torneo
+            </h1>
+
+            {
+                schedule.map((day, dayIndex) => (
+                    <section class="mb-16">
+                        <div
+                            class="mb-8 text-center"
+                        >
+                            <h2 class="animate-on-scroll text-4xl font-bold uppercase tracking-wider text-soul-red-500">
+                                {day.day}
+                            </h2>
+                            <p class="animate-on-scroll text-xl text-gray-400">{day.date}</p>
+                        </div>
+                        <div class="relative border-l-2 border-soul-red-500/30 pl-8">
+                            {day.events.map((event, eventIndex) => (
+                                <div
+                                    class="timeline-item fade-in-up relative mb-8"
+                                >
+                                    <div class="dot absolute -left-[39px] top-1 h-6 w-6 rounded-full border-2 border-white bg-black"></div>
+                                    <p class="mb-1 text-2xl font-bold text-white">
+                                        {event.time}
+                                    </p>
+                                    <h3 class="mb-2 text-3xl font-semibold text-soul-red-400">
+                                        {event.title}
+                                    </h3>
+                                    <p class="text-gray-300">
+                                        {event.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                ))
+            }
+        </div>
+    </main>
+    <Footer />
+</Layout>
+
+<style is:global>
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in-up {
+        animation: fade-in-up 0.8s both ease-out;
+        animation-timeline: view();
+        animation-range-start: entry 10%;
+        animation-range-end: entry 40%;
+    }
+</style> 

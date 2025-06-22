@@ -26,15 +26,13 @@ const features = [
 >
   <div class="absolute inset-0 bg-black/70"></div>
   <div class="container relative mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {features.map((feature, index) => (
         <div 
-          class="feature-card bg-gray-900/60 backdrop-blur-lg rounded-xl p-8 transform hover:scale-105 transition-all duration-300 border border-red-800/50 hover:border-red-600"
-          data-aos="fade-up" 
-          data-aos-delay={index * 100}
+          class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10"
         >
-          <div class="icon-wrapper mb-6 text-red-500">
-            <span class="text-4xl">{feature.icon === 'calendar' ? '📅' : feature.icon === 'map-pin' ? '📍' : '🏆'}</span>
+          <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
+            <span class="text-3xl">{feature.icon === 'calendar' ? '📅' : feature.icon === 'map-pin' ? '📍' : '🏆'}</span>
           </div>
           <h3 class="text-2xl font-bold text-white mb-4">{feature.title}</h3>
           <p class="text-gray-300 whitespace-pre-line">{feature.description}</p>

@@ -2,78 +2,59 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Chimera from "../assets/images/Chimera.png";
-import Fenice from "../assets/images/Fenice.png";
-import Grifone from "../assets/images/Grifone.png";
-import Idra from "../assets/images/Idra.png";
-import Kraken from "../assets/images/Kraken.png";
-import Minotauro from "../assets/images/Minotauro.png";
-import Unicorno from "../assets/images/Unicorno.png";
+import { Image } from 'astro:assets';
+import { ViewTransitions } from 'astro:transitions';
+
+// Dati delle squadre
+import chimera from '../assets/images/Chimera.png';
+import fenice from '../assets/images/Fenice.png';
+import grifone from '../assets/images/Grifone.png';
+import idra from '../assets/images/Idra.png';
+import kraken from '../assets/images/Kraken.png';
+import minotauro from '../assets/images/Minotauro.png';
+import unicorno from '../assets/images/Unicorno.png';
 
 const teams = [
-  { name: "Chimera", slug: "chimera", image: Chimera },
-  { name: "Fenice", slug: "fenice", image: Fenice },
-  { name: "Grifone", slug: "grifone", image: Grifone },
-  { name: "Idra", slug: "idra", image: Idra },
-  { name: "Kraken", slug: "kraken", image: Kraken },
-  { name: "Minotauro", slug: "minotauro", image: Minotauro },
-  { name: "Unicorno", slug: "unicorno", image: Unicorno },
-];
+    { name: 'Chimera', logo: chimera, slug: 'chimera' },
+    { name: 'Fenice', logo: fenice, slug: 'fenice' },
+    { name: 'Grifone', logo: grifone, slug: 'grifone' },
+    { name: 'Idra', logo: idra, slug: 'idra' },
+    { name: 'Kraken', logo: kraken, slug: 'kraken' },
+    { name: 'Minotauro', logo: minotauro, slug: 'minotauro' },
+    { name: 'Unicorno', logo: unicorno, slug: 'unicorno' },
+].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <Layout title="Squadre - Soul 'n Da Hole">
-  <Header />
+    <ViewTransitions />
+    <Header />
+    <main class="min-h-screen bg-black py-24 text-white">
+        <div class="container mx-auto px-4">
+            <div class="mb-16 text-center">
+                <h1 class="text-5xl md:text-7xl font-black uppercase text-white" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+                    Le Squadre
+                </h1>
+                <p class="text-xl text-gray-400 mt-4">Sette squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
+            </div>
 
-  <main class="teams-page min-h-screen bg-black py-24 text-white">
-    <div class="container mx-auto px-4">
-      <div class="mb-16 text-center" data-aos="fade-up">
-        <h1
-          class="font-display mb-4 text-5xl font-black uppercase text-white md:text-7xl"
-          style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
-        >
-          Le Squadre
-        </h1>
-        <p class="mx-auto max-w-2xl text-xl text-gray-300">
-          Scopri le 7 squadre mitologiche che si daranno battaglia
-          sul campo.
-        </p>
-      </div>
-
-      <div
-        class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
-      >
-        {
-          teams.map((team, index) => (
-            <a
-              href={`/teams/${team.slug}`}
-              class="group relative block h-64 overflow-hidden rounded-lg border-2 border-transparent transition-all duration-300 ease-in-out hover:border-soul-red-500 hover:shadow-2xl hover:shadow-soul-red-500/20"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              <div
-                class="absolute inset-0 bg-cover bg-center transition-transform duration-300 ease-in-out group-hover:scale-110"
-                style={`background-image: url(${team.image.src})`}
-              />
-              <div class="absolute inset-0 bg-black/70 transition-colors duration-300 group-hover:bg-black/50" />
-              <div class="relative flex h-full items-center justify-center">
-                <h2 class="text-3xl font-bold uppercase tracking-widest text-white transition-all duration-300 group-hover:scale-110 group-hover:text-soul-red-400">
-                  {team.name}
-                </h2>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </main>
-
-  <Footer />
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+                {teams.map(team => (
+                    <a href={`/teams/${team.slug}`} class="team-card group block text-center" transition:name={`team-logo-${team.slug}`}>
+                        <div class="logo-container relative w-48 h-48 mx-auto rounded-2xl border-4 border-soul-gray-800 group-hover:border-soul-red-500 transition-all duration-300 transform group-hover:scale-105 flex items-center justify-center bg-soul-gray-900 overflow-hidden">
+                            <Image
+                                src={team.logo}
+                                alt={`Logo ${team.name}`}
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <h3 class="mt-4 text-2xl font-bold uppercase tracking-wider">{team.name}</h3>
+                    </a>
+                ))}
+            </div>
+        </div>
+    </main>
+    <Footer />
 </Layout>
-
-<script>
-  import AOS from 'aos';
-  AOS.init({ once: true, duration: 800 });
-</script>
 
 <style>
   .font-display { font-family: 'Teko', sans-serif; }

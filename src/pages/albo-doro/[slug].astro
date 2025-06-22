@@ -3,66 +3,77 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Gallery from '../../components/Gallery.tsx';
+import type { ImageMetadata } from 'astro';
+import { ViewTransitions } from 'astro:transitions';
+import { createSlug } from '../../utils/slug';
 
 export async function getStaticPaths() {
-  const editions = [
-    { name: "I EDIZIONE - 2018", slug: "i-edizione-2018", dir: "I EDIZIONE - 2018 " },
-    { name: "II EDIZIONE - 2019", slug: "ii-edizione-2019", dir: "II EDIZIONE- 2019" },
-    { name: "III EDIZIONE - 2021", slug: "iii-edizione-2021", dir: "III EDIZIONE - 2021 " },
-    { name: "IV EDIZIONE - 2022 - Welcome to Hell", slug: "iv-edizione-2022-welcome-to-hell", dir: "IV EDIZIONE - 2022 - Welcome to Hell" },
-    { name: "V EDIZIONE - 2023 - Olympus Has Fallen", slug: "v-edizione-2023-olympus-has-fallen", dir: "V Edizione - 2023 - Olympus Has Fallen" },
-    { name: "VI EDIZIONE - 2024 - Folklore giapponese", slug: "vi-edizione-2024-folklore-giapponese", dir: "VI edizione - 2024 - Folklore giapponese " },
-  ];
-  return editions.map(edition => ({
-    params: { slug: edition.slug },
-    props: { edition },
-  }));
+    // 1. Trova tutte le immagini per derivare i percorsi
+    const allImages = import.meta.glob('/src/assets/images/albo/*/*.{jpg,JPG,jpeg,png,webp}');
+    const editionDirNames = [...new Set(Object.keys(allImages).map(path => path.split('/').slice(-2, -1)[0]))];
+
+    // 2. Costruisce i percorsi per ogni edizione
+    const paths = editionDirNames.map(dirName => {
+        const yearMatch = dirName.match(/(\d{4})/);
+        const year = yearMatch ? yearMatch[1] : 'N/A';
+        
+        const name = dirName
+            .replace(/_/g, ' ')
+            .replace(/(\d+\s*edizione\s*\d*)/i, (match) => `${match.trim()} -`)
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+
+        const slug = createSlug(dirName);
+
+        return {
+            params: { slug },
+            props: {
+                edition: { name, year, dirName, slug }
+            }
+        };
+    });
+
+    return paths;
 }
 
 const { edition } = Astro.props;
-const folderName = edition.dir;
 
-const allImageModules = import.meta.glob('../../assets/images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG}');
-const galleryImages = [];
-for (const path in allImageModules) {
-  if (path.includes(`/${folderName}/`)) {
-    const module: any = await allImageModules[path]();
-    galleryImages.push({
-      src: module.default.src,
-      width: module.default.width,
-      height: module.default.height,
-      alt: `Foto dall'edizione ${edition.name}`
-    });
-  }
-}
+// Carica tutte le immagini per la galleria
+const allImagesGlob = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/albo/*/*.{jpg,JPG,jpeg,png,webp}');
+
+// Filtra le immagini per la directory dell'edizione corrente
+const imagePaths = Object.keys(allImagesGlob).filter(path => path.includes(`/${edition.dirName}/`));
+
+// Risolve le importazioni delle immagini
+const images = await Promise.all(
+    imagePaths.map(path => allImagesGlob[path]())
+);
+
+// Crea gli oggetti immagine con metadati per la galleria
+const imageObjects = images.map(img => ({
+    src: img.default.src,
+    width: img.default.width,
+    height: img.default.height,
+    alt: `Immagine dall'edizione ${edition.name}`
+}));
 ---
-<Layout title={`Albo d'oro: ${edition.name} - Soul 'n Da Hole`}>
-  <Header />
-
-  <main class="gallery-page py-24 bg-black text-white">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-5xl md:text-7xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">{edition.name}</h1>
-        <a href="/albo-doro" class="text-red-500 hover:text-red-400 transition-colors inline-flex items-center gap-2">
-          &larr; Torna all'Albo d'oro
-        </a>
-      </div>
-
-      <div class="text-center mb-12">
-        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-          Esplora i momenti più belli dell'edizione {edition.name}.
-        </p>
-      </div>
-
-      {galleryImages.length > 0 ? (
-        <Gallery client:load images={galleryImages} />
-      ) : (
-        <p class="text-center text-gray-500">Nessuna immagine trovata per questa edizione.</p>
-      )}
-    </div>
-  </main>
-
-  <Footer />
+<Layout title={`${edition.name} - Albo d'oro`}>
+    <ViewTransitions />
+    <Header />
+    <main class="py-20 bg-soul-gray-950 text-white">
+        <section class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider mb-4" transition:name={`edition-title-${edition.slug}`} style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
+                {edition.name}
+            </h1>
+            <p class="text-xl text-soul-gray-300 mb-12">{`Edizione ${edition.year}`}</p>
+            
+            <div class="gallery-container">
+                 <Gallery client:load images={imageObjects} />
+            </div>
+        </section>
+    </main>
+    <Footer />
 </Layout>
 
 <style>
