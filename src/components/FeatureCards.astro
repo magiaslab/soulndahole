@@ -1,23 +1,6 @@
 ---
 import Sfondo1 from '../assets/images/Sfondo1.png';
-
-const features = [
-  {
-    title: "Date & Orari",
-    description: "3-4-5-6 Luglio 2025\nDalle 19 alle 24",
-    icon: "calendar"
-  },
-  {
-    title: "Luogo",
-    description: "Via Aurelia Sud, San Vincenzo (LI)",
-    icon: "map-pin"
-  },
-  {
-    title: "Torneo Streetball 5x5",
-    description: "Il risveglio della bestia\nCategoria: Open, Under, Celebrity Game",
-    icon: "award"
-  }
-];
+import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
 ---
 
 <section 
@@ -27,17 +10,33 @@ const features = [
   <div class="absolute inset-0 bg-black/70"></div>
   <div class="container relative mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature, index) => (
-        <div 
-          class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10"
-        >
-          <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
-            <span class="text-3xl">{feature.icon === 'calendar' ? '📅' : feature.icon === 'map-pin' ? '📍' : '🏆'}</span>
-          </div>
-          <h3 class="text-2xl font-bold text-white mb-4">{feature.title}</h3>
-          <p class="text-gray-300 whitespace-pre-line">{feature.description}</p>
+      <!-- Card 1: Date & Orari -->
+      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
+          <FaCalendarAlt className="w-10 h-10 text-red-500" aria-hidden="true" />
         </div>
-      ))}
+        <h3 class="text-2xl font-bold text-white mb-4">Date & Orari</h3>
+        <p class="text-gray-300 mb-6 text-center">3-4-5-6 Luglio 2025<br>Dalle 19 alle 24</p>
+        <a href="/programma" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Programma</a>
+      </div>
+      <!-- Card 2: Trovaci -->
+      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
+          <FaMapMarkerAlt className="w-10 h-10 text-red-500" aria-hidden="true" />
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">Trovaci</h3>
+        <p class="text-gray-300 mb-6 text-center">Playground Rodari<br>Via Aurelia Sud<br>San Vincenzo</p>
+        <a href="/trovaci" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Come arrivare</a>
+      </div>
+      <!-- Card 3: Le 12 Bestie -->
+      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
+          <FaTrophy className="w-10 h-10 text-red-500" aria-hidden="true" />
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4">Le 12 Bestie</h3>
+        <p class="text-gray-300 text-center mb-6">12 squadre, 3 gironi, 1 vincitore</p>
+        <a href="/teams" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Scopri le squadre</a>
+      </div>
     </div>
   </div>
 </section>
