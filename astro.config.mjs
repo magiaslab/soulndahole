@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.soulndahole.it', // IMPORTANTE: Sostituisci con il tuo dominio definitivo!
+  site: 'https://soulndahole.com', // IMPORTANTE: Sostituisci con il tuo dominio definitivo!
   integrations: [tailwind(), react(), sitemap()],
   vite: {
     envPrefix: ['CLOUDINARY_']
