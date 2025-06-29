@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import FeatureCards from '../components/FeatureCards.astro';
 import Teams from '../components/Teams.astro';
+import SponsorSection from '../components/SponsorSection.astro';
 import Presentation from '../components/Presentation.astro';
 import { ViewTransitions } from 'astro:transitions';
 
@@ -22,6 +23,7 @@ const features = [
 	<Hero />
 	<FeatureCards features={features} />
 	<Teams />
+	<SponsorSection />
 	<Presentation />
 </Layout>
 

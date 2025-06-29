@@ -12,6 +12,11 @@ import idra from '../assets/images/Idra.png';
 import kraken from '../assets/images/Kraken.png';
 import minotauro from '../assets/images/Minotauro.png';
 import unicorno from '../assets/images/Unicorno.png';
+import drago from '../assets/images/Drago.jpeg';
+import ciclope from '../assets/images/Ciclope.jpeg';
+import licantro from '../assets/images/Licantro.jpeg';
+import centauro from '../assets/images/Centauro.jpeg';
+import cerbero from '../assets/images/Cerbero.jpeg';
 
 const teams = [
     { name: 'Chimera', logo: chimera, slug: 'chimera' },
@@ -21,10 +26,15 @@ const teams = [
     { name: 'Kraken', logo: kraken, slug: 'kraken' },
     { name: 'Minotauro', logo: minotauro, slug: 'minotauro' },
     { name: 'Unicorno', logo: unicorno, slug: 'unicorno' },
+    { name: 'Drago', logo: drago, slug: 'drago' },
+    { name: 'Ciclope', logo: ciclope, slug: 'ciclope' },
+    { name: 'Licantro', logo: licantro, slug: 'licantro' },
+    { name: 'Centauro', logo: centauro, slug: 'centauro' },
+    { name: 'Cerbero', logo: cerbero, slug: 'cerbero' },
 ].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<Layout title="Squadre - Soul 'n Da Hole" description="Conosci le 7 squadre del torneo Soul 'n Da Hole: Unicorno, Idra, Fenice, Kraken, Grifone, Chimera, Minotauro.">
+<Layout title="Squadre - Soul 'n Da Hole" description="Conosci le 12 squadre del torneo Soul 'n Da Hole: Unicorno, Idra, Fenice, Kraken, Grifone, Chimera, Minotauro, Drago, Ciclope, Licantro, Centauro, Cerbero.">
     <ViewTransitions />
     <main class="min-h-screen bg-black py-24 text-white">
         <div class="container mx-auto px-4">
@@ -32,7 +42,7 @@ const teams = [
                 <h1 class="text-5xl md:text-7xl font-black uppercase text-white" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
                     Le Squadre
                 </h1>
-                <p class="text-xl text-gray-400 mt-4">Sette squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
+                <p class="text-xl text-gray-400 mt-4">Dodici squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">

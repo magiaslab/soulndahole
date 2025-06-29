@@ -4,47 +4,76 @@ import { ViewTransitions } from "astro:transitions";
 import { Image } from 'astro:assets';
 import Sfondo1 from '../assets/images/Sfondo1.png';
 
+const groups = [
+    {
+        name: "DUAT",
+        subtitle: "Girone A",
+        teams: [
+            { name: "LICANTROPO", captain: "Ticá" },
+            { name: "CHIMERA", captain: "Bongini" },
+            { name: "CENTAURO", captain: "Parietti" },
+            { name: "KRAKEN", captain: "Pistillo" }
+        ]
+    },
+    {
+        name: "MIDGARD",
+        subtitle: "Girone B",
+        teams: [
+            { name: "UNICORNO", captain: "Redini" },
+            { name: "GRIFONE", captain: "Chiarini" },
+            { name: "IDRA", captain: "Fei" },
+            { name: "FENICE", captain: "Carlotti" }
+        ]
+    },
+    {
+        name: "ARCADIA",
+        subtitle: "Girone C",
+        teams: [
+            { name: "CERBERO", captain: "Mezzacapo" },
+            { name: "DRAGO", captain: "Ignarra" },
+            { name: "MINOTAURO", captain: "Catalano" },
+            { name: "CICLOPE", captain: "Macchia" }
+        ]
+    }
+];
+
 const schedule = [
     {
-        day: "Mercoledì",
-        date: "3 Luglio 2024",
+        day: "Giovedì 3 luglio",
         events: [
-            { time: "19:00", title: "Apertura Cancelli e DJ Set", description: "Inizia il torneo con la giusta carica musicale." },
-            { time: "20:00", title: "Gara di Tiro da 3 Punti - Qualifiche", description: "I migliori tiratori si sfidano per un posto in finale." },
-            { time: "21:30", title: "Partita Inaugurale: Team A vs Team B", description: "La prima partita del torneo." },
-            { time: "23:00", title: "Live Music Show", description: "Performance dal vivo per concludere la serata." },
-        ],
+            { time: "20.00", match: "CENTAURO VS KRAKEN" },
+            { time: "20.30", match: "LICANTROPO VS CHIMERA" },
+            { time: "21.15", match: "KRAKEN VS LICANTROPO", special: "Gara da tre" },
+            { time: "21.45", match: "CHIMERA VS CENTAURO" },
+            { time: "22.15", match: "Soul Games" },
+            { time: "22.45", match: "KRAKEN VS CHIMERA" },
+            { time: "23.15", match: "LICANTROPO VS CENTAURO" }
+        ]
     },
     {
-        day: "Giovedì",
-        date: "4 Luglio 2024",
+        day: "Venerdì 4 luglio",
         events: [
-            { time: "19:00", title: "Torneo di Basket 3x3 - Gironi", description: "Iniziano le sfide mozzafiato del 3 contro 3." },
-            { time: "20:30", title: "Slam Dunk Contest - Spettacolo e Acrobazie", description: "Le schiacciate più incredibili della serata." },
-            { time: "22:00", title: "Partita All-Star Game", description: "Le stelle del torneo si affrontano in una partita esibizione." },
-            { time: "23:30", title: "DJ Set & Food Village", description: "Musica e cibo per tutta la notte." },
-        ],
+            { time: "20.00", match: "UNICORNO VS GRIFONE" },
+            { time: "20.30", match: "IDRA VS FENICE" },
+            { time: "21.15", match: "UNICORNO VS IDRA", special: "Gara da tre" },
+            { time: "21.45", match: "GRIFONE VS FENICE" },
+            { time: "22.45", match: "UNICORNO VS FENICE", special: "Fonta" },
+            { time: "23.15", match: "IDRA VS GRIFONE" }
+        ]
     },
     {
-        day: "Venerdì",
-        date: "5 Luglio 2024",
+        day: "Sabato 5 luglio",
         events: [
-            { time: "19:00", title: "Semifinali Torneo 3x3", description: "Chi si avvicinerà al titolo?" },
-            { time: "20:30", title: "Finale Gara di Tiro da 3 Punti", description: "La sfida finale tra i cecchini del canestro." },
-            { time: "22:00", title: "Semifinali Torneo Principale", description: "Le partite che decidono i finalisti." },
-            { time: "23:30", title: "Concerto Rap", description: "Artisti locali sul palco." },
-        ],
-    },
-    {
-        day: "Sabato",
-        date: "6 Luglio 2024",
-        events: [
-            { time: "19:00", title: "Finale 3°/4° Posto", description: "La sfida per il podio." },
-            { time: "20:30", title: "Finalissima del Torneo", description: "La partita che decreterà i campioni del Soul 'n Da Hole 2024." },
-            { time: "22:00", title: "Premiazioni e Saluti Finali", description: "Celebrazione dei vincitori e chiusura dell'evento." },
-            { time: "23:30", title: "Closing Party con DJ Set", description: "Festeggiamo insieme la fine del torneo." },
-        ],
-    },
+            { time: "19.45", match: "CERBERO VS MINOTAURO" },
+            { time: "20.15", match: "CICLOPE VS DRAGO" },
+            { time: "20.45", match: "Gara da tre" },
+            { time: "21.00", match: "CERBERO VS CICLOPE" },
+            { time: "21.30", match: "DRAGO VS MINOTAURO" },
+            { time: "22.00", match: "Tiro della Fede" },
+            { time: "22.30", match: "DRAGO VS MINOTAURO" },
+            { time: "23.00", match: "CICLOPE VS CERBERO" }
+        ]
+    }
 ];
 ---
 
@@ -59,38 +88,82 @@ const schedule = [
                 Programma del Torneo
             </h1>
 
-            {
-                schedule.map((day, dayIndex) => (
-                    <section class="mb-16">
-                        <div
-                            class="mb-8 text-center"
-                        >
-                            <h2 class="animate-on-scroll text-4xl font-bold uppercase tracking-wider text-soul-red-500">
-                                {day.day}
-                            </h2>
-                            <p class="animate-on-scroll text-xl text-gray-400">{day.date}</p>
+            <!-- Gironi -->
+            <section class="mb-16">
+                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
+                    I Gironi
+                </h2>
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    {groups.map((group) => (
+                        <div class="rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 p-6 backdrop-blur-sm">
+                            <h3 class="mb-4 text-center text-2xl font-bold text-white">
+                                {group.name}
+                            </h3>
+                            <p class="mb-6 text-center text-lg text-soul-red-400">
+                                {group.subtitle}
+                            </p>
+                            <div class="space-y-3">
+                                {group.teams.map((team) => (
+                                    <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                        <span class="text-white font-semibold">{team.name}</span>
+                                        <span class="text-soul-red-300 text-sm">({team.captain})</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
+                    ))}
+                </div>
+            </section>
+
+            <!-- Calendario -->
+            <section class="mb-16">
+                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
+                    Calendario 🗓
+                </h2>
+                {schedule.map((day) => (
+                    <div class="mb-12">
+                        <h3 class="mb-6 text-center text-2xl font-bold text-white">
+                            {day.day}
+                        </h3>
                         <div class="relative border-l-2 border-soul-red-500/30 pl-8">
-                            {day.events.map((event, eventIndex) => (
-                                <div
-                                    class="timeline-item fade-in-up relative mb-8"
-                                >
+                            {day.events.map((event, index) => (
+                                <div class="timeline-item fade-in-up relative mb-6">
                                     <div class="dot absolute -left-[39px] top-1 h-6 w-6 rounded-full border-2 border-white bg-black"></div>
-                                    <p class="mb-1 text-2xl font-bold text-white">
+                                    <p class="mb-1 text-xl font-bold text-white">
                                         {event.time}
                                     </p>
-                                    <h3 class="mb-2 text-3xl font-semibold text-soul-red-400">
-                                        {event.title}
-                                    </h3>
-                                    <p class="text-gray-300">
-                                        {event.description}
-                                    </p>
+                                    <h4 class="text-2xl font-semibold text-soul-red-400">
+                                        {event.match}
+                                    </h4>
+                                    {event.special && (
+                                        <p class="text-sm text-soul-red-300 italic">
+                                            {event.special}
+                                        </p>
+                                    )}
                                 </div>
                             ))}
                         </div>
-                    </section>
-                ))
-            }
+                    </div>
+                ))}
+            </section>
+
+            <!-- Formula del torneo -->
+            <section class="mb-16">
+                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
+                    🤯📈 Formula del torneo
+                </h2>
+                <div class="max-w-4xl mx-auto text-center space-y-6">
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Accedono alla fase finale di domenica ben <strong class="text-soul-red-400">10 squadre</strong>: le prime 3 classificate di ogni Girone + la miglior quarta classificata tra tutti i gironi. Solo 2 squadre non accedono a domenica.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Il tabellone finale di ottavi, quarti, semifinale e finale lo manderò nei giorni più avanti. Data la particolare formula a 10 squadre, la griglia sarà abbastanza complessa.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Oltre al posizionamento nel girone, sarà importante classificarsi come miglior prima, miglior seconda.. e così via, tra tutti i gironi. Tenete quindi di conto che la <strong class="text-soul-red-400">differenza punti</strong> avrà un ruolo fondamentale nello stabilire il tabellone finale.
+                    </p>
+                </div>
+            </section>
         </div>
     </main>
 </Layout>

@@ -5,6 +5,64 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from "astro:assets";
 import { createSlug } from '../utils/slug';
 
+// Dati delle squadre vincitrici
+const winningTeams = [
+    {
+        year: "2018",
+        team: "Baby Eunes",
+        mvp: "Venucci M",
+        players: ["Elia Bini", "Marco Perin", "Camillo Bianchi"]
+    },
+    {
+        year: "2019",
+        team: "Gli Spappolati",
+        mvp: "Del Testa",
+        players: ["Bianchi", "Caroti", "Bazzano", "Pistolesi", "Fratto M", "Fratto F", "Pedroni"]
+    },
+    {
+        year: "2021",
+        team: "Dallas a Tutti",
+        mvp: "Bianchi",
+        players: ["Della Croce", "Turini", "Mezzacapo T", "Pistolesi", "Bertini", "Bongini P", "Bazzano"]
+    },
+    {
+        year: "2022",
+        team: "Aarok",
+        mvp: "Venucci",
+        players: ["Pagni", "Fratto M", "Pistillo", "Roberti", "Bazzano", "Carlotti", "Bertini"]
+    },
+    {
+        year: "2023",
+        team: "ADE",
+        mvp: "Caroti",
+        players: ["Puccioni", "Pistillo", "Bruni", "Michele Fratto", "Francesco Fratto", "Pistolesi"]
+    },
+    {
+        year: "2024",
+        team: "Teatro Kabuki",
+        mvp: "Pagni",
+        players: ["Zanasi", "Papi", "Giovani", "Govi", "Trassinelli", "Fvilla", "Benucci"]
+    }
+];
+
+// Dati delle gare individuali
+const individualEvents = {
+    slamDunk: [
+        { year: "2019", winner: "Trassinelli" },
+        { year: "2022", winner: "Turini" },
+        { year: "2023", winner: "Marrucci" },
+        { year: "2024", winner: "Uchenna Ani" }
+    ],
+    threePoint: [
+        { year: "2018", winner: "Venucci" },
+        { year: "2019", winner: "Corbinelli" },
+        { year: "2021", winner: "Guglielmi" },
+        { year: "2022", winner: "Giannetti" },
+        { year: "2023", winner: "Giovani" },
+        { year: "2024", winner: "Giannetti" }
+    ]
+};
+
 // 1. Trova tutte le immagini e da esse deriva le edizioni
 const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/albo/*/*.{jpg,JPG,jpeg,png,webp}');
 const editionDirNames = [...new Set(Object.keys(allImages).map(path => path.split('/').slice(-2, -1)[0]))];
@@ -47,23 +105,95 @@ const editions = await Promise.all(
             <p class="text-center text-lg text-soul-gray-300 mb-12 max-w-2xl mx-auto">
                 Rivivi le emozioni delle passate edizioni. Ogni anno, una nuova leggenda.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {editions.map(edition => (
-                    <a 
-                        href={`/albo-doro/${edition.slug}`} 
-                        class="group relative block rounded-lg shadow-lg hover:shadow-xl overflow-hidden aspect-[4/3] bg-soul-gray-900"
-                        style={edition.previewImage ? `background-image: url(${edition.previewImage.src}); background-size: cover; background-position: center;` : ''}
-                    >
-                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300"></div>
-                        <div class="relative h-full flex flex-col justify-end p-6">
-                            <h2 class="text-2xl font-display uppercase tracking-wider text-white mb-2 group-hover:text-soul-red-500 transition-colors duration-300" transition:name={`edition-title-${edition.slug}`}>
-                                {edition.name}
-                            </h2>
-                            <p class="text-soul-gray-300 font-medium">{`Edizione ${edition.year}`}</p>
+
+            <!-- Squadre Vincitrici -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
+                    Squadre Vincitrici & MVP
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {winningTeams.map((team) => (
+                        <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm hover:border-soul-red-500/40 transition-colors duration-300">
+                            <div class="text-center mb-4">
+                                <h3 class="text-2xl font-bold text-white mb-2">{team.year}</h3>
+                                <h4 class="text-xl font-semibold text-soul-red-400">{team.team}</h4>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="text-center">
+                                    <p class="text-sm text-soul-gray-400 uppercase tracking-wider">MVP</p>
+                                    <p class="text-lg font-semibold text-soul-red-300">{team.mvp}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-soul-gray-400 uppercase tracking-wider mb-2">Giocatori</p>
+                                    <p class="text-sm text-gray-300">{team.players.join(', ')}</p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </section>
+
+            <!-- Gare Individuali -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
+                    Gare Individuali
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Gara delle Schiacciate -->
+                    <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                            🏀 Gara delle Schiacciate
+                        </h3>
+                        <div class="space-y-4">
+                            {individualEvents.slamDunk.map((event) => (
+                                <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                    <span class="text-white font-semibold">{event.year}</span>
+                                    <span class="text-soul-red-300">{event.winner}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <!-- Gara da 3 Punti -->
+                    <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm">
+                        <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                            🎯 Gara da 3 Punti
+                        </h3>
+                        <div class="space-y-4">
+                            {individualEvents.threePoint.map((event) => (
+                                <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                    <span class="text-white font-semibold">{event.year}</span>
+                                    <span class="text-soul-red-300">{event.winner}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galleria Edizioni -->
+            <section>
+                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
+                    Galleria Edizioni
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {editions.map(edition => (
+                        <a 
+                            href={`/albo-doro/${edition.slug}`} 
+                            class="group relative block rounded-lg shadow-lg hover:shadow-xl overflow-hidden aspect-[4/3] bg-soul-gray-900"
+                            style={edition.previewImage ? `background-image: url(${edition.previewImage.src}); background-size: cover; background-position: center;` : ''}
+                        >
+                            <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300"></div>
+                            <div class="relative h-full flex flex-col justify-end p-6">
+                                <h2 class="text-2xl font-display uppercase tracking-wider text-white mb-2 group-hover:text-soul-red-500 transition-colors duration-300" transition:name={`edition-title-${edition.slug}`}>
+                                    {edition.name}
+                                </h2>
+                                <p class="text-soul-gray-300 font-medium">{`Edizione ${edition.year}`}</p>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
         </section>
     </main>
 </Layout> 

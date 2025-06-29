@@ -1,0 +1,212 @@
+{
+  "teams": [
+    {
+      "name": "Licantro",
+      "slug": "licantro",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "TICA'", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "DERI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "BRUCI T.", "number": 3, "role": "Ala", "league": "" },
+        { "name": "CALANDRINO", "number": 4, "role": "Ala", "league": "" },
+        { "name": "BOLDRINI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "CROCETTA", "number": 6, "role": "Centro", "league": "" },
+        { "name": "BANDINI", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Fenice",
+      "slug": "fenice",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "CARLOTTI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "LANDI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "BORSETTI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "FORZIERI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "ALBINI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "SANTIN", "number": 6, "role": "Centro", "league": "" },
+        { "name": "PACINI", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Drago",
+      "slug": "drago",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "IGNARRA", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "DEL CHIARO", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "UCHENNA ANI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "GANGALE", "number": 4, "role": "Ala", "league": "" },
+        { "name": "FEDERIGHI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "QUERCI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "CECCONI", "number": 7, "role": "Ala", "league": "" },
+        { "name": "SCURTI", "number": 8, "role": "Guardia", "league": "" }
+      ]
+    },
+    {
+      "name": "Centauro",
+      "slug": "centauro",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "PARIETTI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "LANCIONI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "SPAGNOLI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "BRESINSKI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "IACOPINI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "PISTOLESI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "PEPAJ", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Ciclope",
+      "slug": "ciclope",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "MACCHIA", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "CAMBI M.", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "CAMBI MAR.", "number": 3, "role": "Ala", "league": "" },
+        { "name": "DODARO", "number": 4, "role": "Ala", "league": "" },
+        { "name": "CAPPELLI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "BIONDI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "RISTORI", "number": 7, "role": "Ala", "league": "" },
+        { "name": "CARLI", "number": 8, "role": "Guardia", "league": "" }
+      ]
+    },
+    {
+      "name": "Idra",
+      "slug": "idra",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "FEI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "SPITI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "NISI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "DRAGHETTI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "CIACCI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "MALENTACCHI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "FIANCO", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Unicorno",
+      "slug": "unicorno",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "REDINI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "SPAGNOLLI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "MARINARI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "TONI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "COSCI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "DI SACCO", "number": 6, "role": "Centro", "league": "" },
+        { "name": "CARPITELLI", "number": 7, "role": "Ala", "league": "" },
+        { "name": "REGOLI T.", "number": 8, "role": "Guardia", "league": "" }
+      ]
+    },
+    {
+      "name": "Minotauro",
+      "slug": "minotauro",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "CATALANO", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "MATI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "BIAGI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "CALDERARO", "number": 4, "role": "Ala", "league": "" },
+        { "name": "CUCAJ", "number": 5, "role": "Centro", "league": "" },
+        { "name": "MILANI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "MAVILIA", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Grifone",
+      "slug": "grifone",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "CHIARINI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "SARTORIO", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "PAOLACCI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "SPLENDORINI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "SANI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "PESCINI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "BELLUCCI", "number": 7, "role": "Ala", "league": "" },
+        { "name": "FOGLI", "number": 8, "role": "Guardia", "league": "" }
+      ]
+    },
+    {
+      "name": "Chimera",
+      "slug": "chimera",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "BONGINI", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "BONGINI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "GIOVANI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "PAGNI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "BERTINI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "DELLA CROCE", "number": 6, "role": "Centro", "league": "" },
+        { "name": "CARDUCCI", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Kraken",
+      "slug": "kraken",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "PISTILLO", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "BRUNI", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "NANNIPIERI", "number": 3, "role": "Ala", "league": "" },
+        { "name": "GIANNETTI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "PEDRONI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "CORBINELLI", "number": 6, "role": "Centro", "league": "" },
+        { "name": "BECHI", "number": 7, "role": "Ala", "league": "" }
+      ]
+    },
+    {
+      "name": "Cerbero",
+      "slug": "cerbero",
+      "coach": {
+        "name": "",
+        "league": ""
+      },
+      "players": [
+        { "name": "PAOLI F.", "number": 1, "role": "Guardia", "league": "" },
+        { "name": "PAOLI M.", "number": 2, "role": "Guardia", "league": "" },
+        { "name": "MEZZCAPO", "number": 3, "role": "Ala", "league": "" },
+        { "name": "MARRUCCI", "number": 4, "role": "Ala", "league": "" },
+        { "name": "BAGGIANI", "number": 5, "role": "Centro", "league": "" },
+        { "name": "COSTAGLIONE", "number": 6, "role": "Centro", "league": "" },
+        { "name": "RAMACIOTTI", "number": 7, "role": "Ala", "league": "" }
+      ]
+    }
+  ]
+} 
