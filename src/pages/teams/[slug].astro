@@ -13,6 +13,18 @@ import ciclope from '../../assets/images/Ciclope.jpeg';
 import licantro from '../../assets/images/Licantro.jpeg';
 import centauro from '../../assets/images/Centauro.jpeg';
 import cerbero from '../../assets/images/Cerbero.jpeg';
+import chimeraall from '../../assets/images/Chimeraall.jpeg';
+import feniceall from '../../assets/images/Feniceall.jpeg';
+import grifoneall from '../../assets/images/Grifone.png';
+import idraall from '../../assets/images/idraall.jpeg';
+import krakenall from '../../assets/images/krakenall.jpeg';
+import minotauroall from '../../assets/images/minotauroall.jpeg';
+import unicornoall from '../../assets/images/unicornoall.jpeg';
+import dragoall from '../../assets/images/Dragoall.jpeg';
+import ciclopeall from '../../assets/images/ciclopeall.jpeg';
+import licantropoall from '../../assets/images/licantropoall.jpeg';
+import centauroall from '../../assets/images/Centauro.jpeg';
+import cerberoall from '../../assets/images/Cerbero.jpeg';
 import type { ImageMetadata } from "astro";
 import { createSlug } from '../../utils/slug';
 import { teams, type Team } from '../../data/teams';
@@ -34,18 +46,39 @@ export async function getStaticPaths() {
         'cerbero': cerbero
     };
 
+    // Mappa delle immagini "all" per slug
+    const imageAllMap = {
+        'chimera': chimeraall,
+        'fenice': feniceall,
+        'grifone': grifoneall,
+        'idra': idraall,
+        'kraken': krakenall,
+        'minotauro': minotauroall,
+        'unicorno': unicornoall,
+        'drago': dragoall,
+        'ciclope': ciclopeall,
+        'licantro': licantropoall,
+        'centauro': centauroall,
+        'cerbero': cerberoall
+    };
+
     return teams.map(team => ({
         params: { slug: team.slug },
-        props: { team, logo: imageMap[team.slug as keyof typeof imageMap] },
+        props: { 
+            team, 
+            logo: imageMap[team.slug as keyof typeof imageMap],
+            teamImage: imageAllMap[team.slug as keyof typeof imageAllMap]
+        },
     }));
 }
 
 interface Props {
     team: Team;
     logo: ImageMetadata;
+    teamImage: ImageMetadata;
 }
 
-const { team, logo } = Astro.props;
+const { team, logo, teamImage } = Astro.props;
 ---
 <Layout title={`${team.name} - Soul 'n Da Hole`} description={`Scopri la squadra ${team.name} del torneo Soul 'n Da Hole.`}>
   <main class="relative isolate min-h-screen">
@@ -62,6 +95,20 @@ const { team, logo } = Astro.props;
       <h1 class="mb-8 text-6xl font-bold uppercase tracking-widest text-white">
         {team.name}
       </h1>
+
+      {/* Immagine della squadra */}
+      <section class="mb-16">
+        <div class="flex justify-center">
+          <div class="max-w-2xl overflow-hidden rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 shadow-lg backdrop-blur-md">
+            <Image 
+              src={teamImage} 
+              alt={`Squadra ${team.name}`}
+              class="w-full h-auto object-cover"
+              width={800}
+            />
+          </div>
+        </div>
+      </section>
 
       {team.coach.name && (
         <section class="mb-16">
@@ -130,4 +177,4 @@ const { team, logo } = Astro.props;
 
 <style>
   .font-display { font-family: 'Teko', sans-serif; }
-</style> 
+</style>
