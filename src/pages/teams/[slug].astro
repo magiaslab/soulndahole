@@ -80,7 +80,10 @@ interface Props {
 
 const { team, logo, teamImage } = Astro.props;
 ---
-<Layout title={`${team.name} - Soul 'n Da Hole`} description={`Scopri la squadra ${team.name} del torneo Soul 'n Da Hole.`}>
+<Layout
+	title={`${team.name} — Soul 'n Da Hole 2026`}
+	description={`La squadra ${team.name} all'edizione Tarocchi del torneo streetball 5×5 Soul 'n Da Hole.`}
+>
   <main class="relative isolate min-h-screen">
     <div
       class="absolute inset-0 -z-10 h-full w-full bg-black bg-cover bg-center"

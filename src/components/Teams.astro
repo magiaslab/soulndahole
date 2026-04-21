@@ -38,56 +38,62 @@ const teams = [
 >
   <div class="absolute inset-0 bg-black/80"></div>
   <div class="container mx-auto px-4 relative">
-    <div class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-black text-white mb-4 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-        Le 12 Bestie
+    <div class="section-heading text-center mb-12">
+      <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Squadre</span>
+      <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+        <span class="reveal-line inline-block" style="transform: translateY(105%);">I 12 Arcani</span>
       </h2>
-      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-        Le leggendarie squadre che si sfideranno per il dominio del campo.
+      <p class="sh-desc text-xl text-gray-300 max-w-2xl mx-auto" style="opacity:0;">
+        Le squadre evocano gli archetipi del mazzo: scegli il tuo destino.
       </p>
+      <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+        <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+    <div class="teams-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
       {teams.map((team) => (
-        <a href={`/teams/${createSlug(team.name)}`} class="block group">
-          <div class="relative overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm border border-red-800/50 group-hover:border-red-600 transition-all duration-300 h-full group-hover:scale-105">
+        <a href={`/teams/${createSlug(team.name)}`} class="team-card block group">
+          <div class="relative overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm border border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 h-full group-hover:scale-105">
             <div class="p-6 text-center">
-              <div class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden bg-gray-800 border-2 border-red-800/50 group-hover:border-red-600">
+              <div class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden bg-gray-800 border-2 border-[color:var(--card-border)] group-hover:border-[color:var(--gold)]">
                 {team.imageSrc ? (
                   <Image src={team.imageSrc} alt={`Logo ${team.name}`} class="w-full h-full object-cover" width="128" height="128" />
                 ) : (
                   <span>{team.icon}</span>
                 )}
               </div>
-              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors duration-300">
+              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[color:var(--gold)] transition-colors duration-300" style="font-family: var(--font-label); letter-spacing: .14em; text-transform: uppercase;">
                 {team.name}
               </h3>
-              <div class="w-12 h-1 bg-gradient-to-r from-red-600 to-orange-500 mx-auto rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="w-12 h-1 bg-gradient-to-r from-[color:var(--gold)] to-[color:var(--gold-light)] mx-auto rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-red-900/10 to-transparent -translate-y-full group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-[color:var(--purple)]/15 to-transparent -translate-y-full group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100"></div>
           </div>
         </a>
       ))}
     </div>
 
     <div class="flex justify-center mt-10">
-      <a href="/programma" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">
+      <a href="/programma" class="magnetic inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">
         Scopri il Programma
       </a>
     </div>
 
     <!-- Statistiche del torneo -->
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="text-center">
-        <div class="text-4xl font-bold text-red-500 mb-2">12</div>
+    <div id="stats" class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="stat-item text-center">
+        <div class="stat-num text-4xl font-bold text-[color:var(--gold)] mb-2" data-target="12">0</div>
         <div class="text-gray-300">Squadre</div>
       </div>
-      <div class="text-center">
-        <div class="text-4xl font-bold text-red-500 mb-2">18</div>
+      <div class="stat-item text-center">
+        <div class="stat-num text-4xl font-bold text-[color:var(--gold)] mb-2" data-target="18">0</div>
         <div class="text-gray-300">Partite</div>
       </div>
-      <div class="text-center">
-        <div class="text-4xl font-bold text-red-500 mb-2">1</div>
+      <div class="stat-item text-center">
+        <div class="stat-num text-4xl font-bold text-[color:var(--gold)] mb-2" data-target="1">0</div>
         <div class="text-gray-300">Campione</div>
       </div>
     </div>
@@ -95,13 +101,10 @@ const teams = [
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
-  .font-display {
-    font-family: 'Teko', sans-serif;
-  }
-
   /* Animazioni aggiuntive per le card */
   .group:hover {
-    box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 0 30px rgba(201, 162, 39, 0.18);
   }
+
+  .team-card { transform-style: preserve-3d; }
 </style> 

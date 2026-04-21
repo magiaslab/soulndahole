@@ -2,39 +2,104 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Seo from '../components/Seo.astro';
+import JsonLd from '../components/JsonLd.astro';
 import '../styles/global.css';
+import Preloader from '../components/Preloader.astro';
+import StarsCanvas from '../components/StarsCanvas.astro';
+import CursorCustom from '../components/CursorCustom.astro';
+import { DEFAULT_SEO_DESCRIPTION, DEFAULT_SEO_TITLE } from '../data/seo';
 
-const { 
-	title,
-	description
+const {
+	title = DEFAULT_SEO_TITLE,
+	description = DEFAULT_SEO_DESCRIPTION,
 } = Astro.props;
+
+const canonicalHref = new URL(Astro.url.pathname, Astro.site).href;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
 <!DOCTYPE html>
 <html lang="it" class="lenis lenis-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="theme-color" content="#0a090e" />
+		<meta name="color-scheme" content="dark" />
 		<meta name="generator" content={Astro.generator} />
 		<Seo title={title} description={description} />
+		<JsonLd
+			variant={isHome ? 'home' : 'page'}
+			title={title}
+			description={description}
+			canonicalUrl={canonicalHref}
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-		<script src="../scripts/lenis-init.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-gray-900 text-white">
+	<body>
+		<Preloader />
+		<StarsCanvas />
 		<Header />
 		<main>
 			<slot />
 		</main>
 		<Footer />
+		<CursorCustom />
+
+		<script>
+		import {
+			initLenis,
+			initNav,
+			initPreloader,
+			initGlobals,
+			initPageAnimations,
+			cleanupPageAnimations,
+			resetLenisScroll,
+		} from '../scripts/animations.js';
+
+		const lenis = initLenis();
+		initNav(lenis);
+
+		/** Prima dello swap DOM (View Transitions / navigazione client): pulisci GSAP. */
+		document.addEventListener('astro:before-preparation', () => {
+			cleanupPageAnimations();
+			resetLenisScroll();
+		});
+
+		window.addEventListener('load', () => {
+			initGlobals();
+			initPreloader(() => {
+				initPageAnimations();
+			});
+		});
+
+		/** Navigazione soft: stesso documento, nuovo contenuto in <main>. */
+		document.addEventListener('astro:page-load', () => {
+			initGlobals();
+			initPageAnimations();
+		});
+		</script>
 	</body>
 </html>
 
 <style is:global>
 	:root {
-		--font-sans: 'Open Sans', sans-serif;
-		--font-display: 'Teko', sans-serif;
+		--gold:        #c9a227;
+		--gold-light:  #e8c84a;
+		--gold-dim:    #7a6118;
+		--ink:         #0a090e;
+		--deep:        #100e1a;
+		--card-bg:     #13111f;
+		--card-border: rgba(201, 162, 39, 0.3);
+		--cream:       #f0e6c8;
+		--cream-dim:   #a89a7a;
+		--purple:      #2a1f45;
+		--purple-mid:  #3d2f64;
+
+		--font-sans: 'EB Garamond', serif;
+		--font-display: 'Cinzel Decorative', serif;
+		--font-label: 'Cinzel', serif;
 	}
 
 	html {
@@ -45,8 +110,18 @@ const {
 	body {
 		margin: 0;
 		padding: 0;
-		background-color: #000;
+		background: var(--ink);
+		color: var(--cream);
+		font-family: var(--font-sans);
+		font-size: 18px;
+		line-height: 1.7;
+		overflow-x: hidden;
+		cursor: none;
 		position: relative;
+	}
+
+	@media (max-width: 768px) {
+		body { cursor: auto; }
 	}
 
 	footer {
@@ -55,6 +130,7 @@ const {
 
 	main {
 		position: relative;
+		z-index: 1;
 	}
 
 	/* Stile per la scrollbar */

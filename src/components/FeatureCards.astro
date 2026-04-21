@@ -4,38 +4,54 @@ import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
 ---
 
 <section 
+  id="info"
   class="feature-cards relative py-12 md:py-20 bg-black"
   style={`background-image: url(${Sfondo1.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
 >
   <div class="absolute inset-0 bg-black/70"></div>
   <div class="container relative mx-auto px-4">
+    <div class="section-heading text-center mb-12">
+      <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Info</span>
+      <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+        <span class="reveal-line inline-block" style="transform: translateY(105%);">Segni del Destino</span>
+      </h2>
+      <p class="sh-desc text-xl text-gray-300 max-w-2xl mx-auto" style="opacity:0;">
+        Date, luogo e posta in palio: tutto quello che serve prima di entrare nel cerchio.
+      </p>
+      <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+        <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+      </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Card 1: Date & Orari -->
-      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
-          <FaCalendarAlt className="w-10 h-10 text-red-500" aria-hidden="true" />
+      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
+          <FaCalendarAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Date & Orari</h3>
         <p class="text-gray-300 mb-6 text-center">3-4-5-6 Luglio 2025<br>Dalle 19 alle 24</p>
-        <a href="/programma" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Programma</a>
+        <a href="/programma" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Programma</a>
       </div>
       <!-- Card 2: Trovaci -->
-      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
-          <FaMapMarkerAlt className="w-10 h-10 text-red-500" aria-hidden="true" />
+      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
+          <FaMapMarkerAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Trovaci</h3>
         <p class="text-gray-300 mb-6 text-center">Playground Rodari<br>Via Aurelia Sud<br>San Vincenzo</p>
-        <a href="/trovaci" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Come arrivare</a>
+        <a href="/trovaci" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Come arrivare</a>
       </div>
       <!-- Card 3: Le 12 Bestie -->
-      <div class="feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-soul-gray-900 border border-soul-gray-800 shadow-lg shadow-soul-red-900/10 flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-soul-red-500/10 border-2 border-soul-red-500 mb-6">
-          <FaTrophy className="w-10 h-10 text-red-500" aria-hidden="true" />
+      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
+        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
+          <FaTrophy className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
         </div>
-        <h3 class="text-2xl font-bold text-white mb-4">Le 12 Bestie</h3>
+        <h3 class="text-2xl font-bold text-white mb-4">I 12 Arcani</h3>
         <p class="text-gray-300 text-center mb-6">12 squadre, 3 gironi, 1 vincitore</p>
-        <a href="/teams" class="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);">Scopri le squadre</a>
+        <a href="/teams" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Scopri le squadre</a>
       </div>
     </div>
   </div>
@@ -48,7 +64,7 @@ import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
   }
   
   .feature-card:hover {
-    box-shadow: 0 8px 32px -4px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 8px 32px -4px rgba(201, 162, 39, 0.18);
   }
 </style>
 

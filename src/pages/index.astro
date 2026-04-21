@@ -6,7 +6,6 @@ import Teams from '../components/Teams.astro';
 import SponsorSection from '../components/SponsorSection.astro';
 import Presentation from '../components/Presentation.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
-import { ViewTransitions } from 'astro:transitions';
 import { Image } from 'astro:assets';
 import topscorer from '../assets/images/topscorerduat1.jpeg';
 import classifica from '../assets/images/classificaduat1.jpeg';
@@ -28,8 +27,10 @@ const features = [
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout title="Soul 'n Da Hole - Il risveglio della bestia" description="Il torneo di basket 5x5 più atteso. Scopri le squadre, il programma e le edizioni passate del Soul 'n Da Hole.">
-	<ViewTransitions />
+<Layout
+	title="Soul 'n Da Hole 2026 — Tarocchi | Il richiamo degli arcani"
+	description="VIII edizione del torneo streetball 5×5. Tema Tarocchi: squadre archetipiche, programma a San Vincenzo e albo d'oro delle edizioni passate."
+>
 	<Hero />
 	<FeatureCards features={features} />
 	<Teams />

@@ -2,19 +2,28 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Trovaci - Soul 'n Da Hole" description="Vieni a trovarci al torneo Soul 'n Da Hole. Scopri dove si svolge l'evento.">
-  <main class="py-20 bg-soul-gray-950 text-white">
+<Layout
+	title="Trovaci — Soul 'n Da Hole"
+	description="Playground Rodari, San Vincenzo (LI): come raggiungerci per l'VIII edizione 2026 del torneo streetball 5×5."
+>
+  <main class="py-20 text-white">
     <section class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-          Dove Trovarci
+      <div class="section-heading text-center mb-12">
+        <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Location</span>
+        <h1 class="text-5xl font-black text-white uppercase tracking-wider mb-3" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+          <span class="reveal-line inline-block" style="transform: translateY(105%);">Dove Trovarci</span>
         </h1>
-        <p class="text-xl text-gray-300 mt-4 max-w-2xl mx-auto">
-          Il Soul si svolge presso il playground "Rodari" Via Aurelia Sud San Vincenzo....ecco dove trovarci!
+        <p class="sh-desc text-xl text-[color:var(--cream-dim)] mt-4 max-w-2xl mx-auto" style="opacity:0;">
+          Il Soul si svolge presso il playground \"Rodari\" in Via Aurelia Sud, San Vincenzo. Ecco dove trovarci.
         </p>
+        <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+          <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+          <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+          <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+        </div>
       </div>
 
-      <div class="relative rounded-lg overflow-hidden border border-soul-gray-700/50" style="height: 500px;">
+      <div class="relative rounded-lg overflow-hidden border border-[color:var(--card-border)]" style="height: 500px;">
         <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-black/20"></div>
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d780.2494389304899!2d10.542833795397835!3d43.09301796459247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d61d7de8b67c8d%3A0x28a52dfafb075221!2sSoul%20%E2%80%98N%20Da%20Hole!5e1!3m2!1sit!2sit!4v1750609192638!5m2!1sit!2sit" 

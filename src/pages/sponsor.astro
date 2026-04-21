@@ -25,21 +25,28 @@ const sponsors = [
 ];
 ---
 
-<Layout title="Sponsor - Soul 'n Da Hole" description="Scopri gli sponsor che supportano il torneo Soul 'n Da Hole.">
-    <main class="min-h-screen bg-black py-24 text-white">
+<Layout
+	title="Sponsor — Soul 'n Da Hole 2026"
+	description="Partner e sponsor che sostengono il torneo streetball 5×5 Soul 'n Da Hole in Toscana."
+>
+    <main class="min-h-screen py-24 text-white">
         <div class="container mx-auto px-4 text-center">
-            <h1
-                class="mb-12 text-5xl font-black uppercase text-white md:text-7xl"
-                style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
-            >
-                I Nostri Sponsor
-            </h1>
-            
-            <p class="text-lg text-gray-300 mb-16 max-w-2xl mx-auto">
-                Grazie ai nostri sponsor che rendono possibile questo evento straordinario.
-            </p>
+            <div class="section-heading mb-12">
+                <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Sponsor</span>
+                <h1 class="mb-3 text-5xl font-black uppercase text-white md:text-7xl" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">I Nostri Sponsor</span>
+                </h1>
+                <p class="sh-desc text-lg text-[color:var(--cream-dim)] mb-12 max-w-2xl mx-auto" style="opacity:0;">
+                    Grazie ai nostri sponsor che rendono possibile questo evento straordinario.
+                </p>
+                <div class="gold-rule flex items-center gap-3 justify-center">
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                    <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                </div>
+            </div>
 
-            <img src={allsponsor.src} alt="Tutti gli sponsor" class="w-full max-w-5xl mx-auto mb-12 rounded-lg shadow-lg border-2 border-white" style="object-fit:contain;" loading="lazy" />
+            <img src={allsponsor.src} alt="Tutti gli sponsor" class="w-full max-w-5xl mx-auto mb-12 rounded-lg shadow-lg border-2 border-[color:var(--card-border)]" style="object-fit:contain;" loading="lazy" />
             <SponsorGallery client:load images={sponsors} />
         </div>
     </main>

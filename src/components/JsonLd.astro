@@ -1,0 +1,26 @@
+---
+import { organization, mainEvent, buildWebPageJsonLd } from '../data/seo';
+
+export interface Props {
+  /** Home: Organization + SportsEvent. Altre pagine: Organization + WebPage. */
+  variant: 'home' | 'page';
+  title: string;
+  description: string;
+  canonicalUrl: string;
+}
+
+const { variant, title, description, canonicalUrl } = Astro.props;
+
+const orgJson = JSON.stringify(organization);
+const eventJson = JSON.stringify(mainEvent);
+const webPageJson = JSON.stringify(
+  buildWebPageJsonLd({ name: title, description, url: canonicalUrl })
+);
+---
+
+<!-- Organization: sempre -->
+<script type="application/ld+json" set:html={orgJson} />
+
+{variant === 'home' && <script type="application/ld+json" set:html={eventJson} />}
+
+{variant === 'page' && <script type="application/ld+json" set:html={webPageJson} />}

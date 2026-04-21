@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ViewTransitions } from "astro:transitions";
-import { Image } from 'astro:assets';
 import Sfondo1 from '../assets/images/Sfondo1.png';
 
 const groups = [
@@ -77,36 +75,49 @@ const schedule = [
 ];
 ---
 
-<Layout title="Programma - Soul 'n Da Hole" description="Scopri il programma completo del torneo Soul 'n Da Hole 2024.">
-    <ViewTransitions />
-    <main class="min-h-screen bg-black py-24 text-white">
+<Layout
+	title="Programma 2026 — Soul 'n Da Hole"
+	description="Orari, gironi e formula del torneo streetball 5×5. VIII edizione, tema Tarocchi — San Vincenzo, playground Rodari."
+>
+    <main class="min-h-screen py-24 text-white">
         <div class="container mx-auto px-4">
-            <h1
-                class="mb-12 text-center text-5xl font-black uppercase text-white md:text-7xl"
-                style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);"
-            >
-                Programma del Torneo
-            </h1>
+            <div class="section-heading text-center mb-12">
+                <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Programma</span>
+                <h1 class="mb-3 text-center text-5xl font-black uppercase text-white md:text-7xl" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">Programma del Torneo</span>
+                </h1>
+                <p class="sh-desc text-lg text-[color:var(--cream-dim)] max-w-2xl mx-auto" style="opacity:0;">
+                    Orari, gironi e formula: il percorso verso la finale.
+                </p>
+                <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                    <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                </div>
+            </div>
 
             <!-- Gironi -->
             <section class="mb-16">
-                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
-                    I Gironi
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Struttura</span>
+                    <h2 class="text-4xl font-bold uppercase tracking-wider text-white" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">I Gironi</span>
+                    </h2>
+                </div>
                 <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
                     {groups.map((group) => (
-                        <div class="rounded-lg border border-soul-red-500/20 bg-soul-gray-900/50 p-6 backdrop-blur-sm">
+                        <div class="rounded-lg border border-[color:var(--card-border)] bg-[color:var(--card-bg)]/80 p-6 backdrop-blur-sm">
                             <h3 class="mb-4 text-center text-2xl font-bold text-white">
                                 {group.name}
                             </h3>
-                            <p class="mb-6 text-center text-lg text-soul-red-400">
+                            <p class="mb-6 text-center text-lg text-[color:var(--gold-dim)]" style="font-family: var(--font-label); letter-spacing: .18em; text-transform: uppercase;">
                                 {group.subtitle}
                             </p>
                             <div class="space-y-3">
                                 {group.teams.map((team) => (
-                                    <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                    <div class="flex justify-between items-center border-b border-[color:var(--card-border)]/50 pb-2">
                                         <span class="text-white font-semibold">{team.name}</span>
-                                        <span class="text-soul-red-300 text-sm">({team.captain})</span>
+                                        <span class="text-[color:var(--cream-dim)] text-sm">({team.captain})</span>
                                     </div>
                                 ))}
                             </div>
@@ -117,26 +128,29 @@ const schedule = [
 
             <!-- Calendario -->
             <section class="mb-16">
-                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
-                    Calendario 🗓
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Calendario</span>
+                    <h2 class="text-4xl font-bold uppercase tracking-wider text-white" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Calendario</span>
+                    </h2>
+                </div>
                 {schedule.map((day) => (
                     <div class="mb-12">
                         <h3 class="mb-6 text-center text-2xl font-bold text-white">
                             {day.day}
                         </h3>
-                        <div class="relative border-l-2 border-soul-red-500/30 pl-8">
+                        <div class="relative border-l-2 border-[color:var(--gold-dim)]/50 pl-8">
                             {day.events.map((event, index) => (
                                 <div class="timeline-item fade-in-up relative mb-6">
-                                    <div class="dot absolute -left-[39px] top-1 h-6 w-6 rounded-full border-2 border-white bg-black"></div>
+                                    <div class="dot absolute -left-[39px] top-1 h-6 w-6 rounded-full border-2 border-[color:var(--gold-dim)] bg-[color:var(--ink)]"></div>
                                     <p class="mb-1 text-xl font-bold text-white">
                                         {event.time}
                                     </p>
-                                    <h4 class="text-2xl font-semibold text-soul-red-400">
+                                    <h4 class="text-2xl font-semibold text-[color:var(--gold)]">
                                         {event.match}
                                     </h4>
                                     {event.special && (
-                                        <p class="text-sm text-soul-red-300 italic">
+                                        <p class="text-sm text-[color:var(--cream-dim)] italic">
                                             {event.special}
                                         </p>
                                     )}
@@ -149,18 +163,21 @@ const schedule = [
 
             <!-- Formula del torneo -->
             <section class="mb-16">
-                <h2 class="mb-8 text-center text-4xl font-bold uppercase tracking-wider text-soul-red-500">
-                    🤯📈 Formula del torneo
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Regole</span>
+                    <h2 class="text-4xl font-bold uppercase tracking-wider text-white" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Formula del torneo</span>
+                    </h2>
+                </div>
                 <div class="max-w-4xl mx-auto text-center space-y-6">
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Accedono alla fase finale di domenica ben <strong class="text-soul-red-400">10 squadre</strong>: le prime 3 classificate di ogni Girone + la miglior quarta classificata tra tutti i gironi. Solo 2 squadre non accedono a domenica.
+                        Accedono alla fase finale di domenica ben <strong class="text-[color:var(--gold)]">10 squadre</strong>: le prime 3 classificate di ogni Girone + la miglior quarta classificata tra tutti i gironi. Solo 2 squadre non accedono a domenica.
                     </p>
                     <p class="text-lg text-gray-300 leading-relaxed">
                         Il tabellone finale di ottavi, quarti, semifinale e finale lo manderò nei giorni più avanti. Data la particolare formula a 10 squadre, la griglia sarà abbastanza complessa.
                     </p>
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Oltre al posizionamento nel girone, sarà importante classificarsi come miglior prima, miglior seconda.. e così via, tra tutti i gironi. Tenete quindi di conto che la <strong class="text-soul-red-400">differenza punti</strong> avrà un ruolo fondamentale nello stabilire il tabellone finale.
+                        Oltre al posizionamento nel girone, sarà importante classificarsi come miglior prima, miglior seconda.. e così via, tra tutti i gironi. Tenete quindi di conto che la <strong class="text-[color:var(--gold)]">differenza punti</strong> avrà un ruolo fondamentale nello stabilire il tabellone finale.
                     </p>
                 </div>
             </section>

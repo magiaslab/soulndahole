@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { ViewTransitions } from 'astro:transitions';
 import { createSlug } from '../utils/slug';
 
 // Dati delle squadre
@@ -34,35 +33,39 @@ const teams = [
 ].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<Layout title="Squadre - Soul 'n Da Hole" description="Conosci le 12 squadre del torneo Soul 'n Da Hole: Unicorno, Idra, Fenice, Kraken, Grifone, Chimera, Minotauro, Drago, Ciclope, Licantro, Centauro, Cerbero.">
-    <ViewTransitions />
-    <main class="min-h-screen bg-black py-24 text-white">
+<Layout
+	title="Le squadre — Soul 'n Da Hole 2026"
+	description="Le 12 squadre archetipiche dell'edizione Tarocchi: Unicorno, Idra, Fenice, Kraken, Grifone, Chimera, Minotauro, Drago, Ciclope, Licantro, Centauro, Cerbero."
+>
+    <main class="min-h-screen py-24 text-white">
         <div class="container mx-auto px-4">
-            <div class="mb-16 text-center">
-                <h1 class="text-5xl md:text-7xl font-black uppercase text-white" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-                    Le Squadre
+            <div class="section-heading text-center mb-16">
+                <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Squadre</span>
+                <h1 class="text-5xl md:text-7xl font-black uppercase text-white mb-3" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">Le Squadre</span>
                 </h1>
-                <p class="text-xl text-gray-400 mt-4">Dodici squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
+                <p class="sh-desc text-xl text-[color:var(--cream-dim)] mt-4" style="opacity:0;">Dodici squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
+                <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                    <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
                 {teams.map(team => (
                     <a href={`/teams/${team.slug}`} class="team-card group block text-center" transition:name={`team-logo-${team.slug}`}>
-                        <div class="logo-container relative w-48 h-48 mx-auto rounded-2xl border-4 border-soul-gray-800 group-hover:border-soul-red-500 transition-all duration-300 transform group-hover:scale-105 flex items-center justify-center bg-soul-gray-900 overflow-hidden">
+                        <div class="logo-container relative w-48 h-48 mx-auto rounded-2xl border-4 border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 transform group-hover:scale-105 flex items-center justify-center bg-[color:var(--card-bg)] overflow-hidden">
                             <Image
                                 src={team.logo}
                                 alt={`Logo ${team.name}`}
                                 class="w-full h-full object-cover"
                             />
                         </div>
-                        <h3 class="mt-4 text-2xl font-bold uppercase tracking-wider">{team.name}</h3>
+                        <h3 class="mt-4 text-2xl font-bold uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: .18em;">{team.name}</h3>
                     </a>
                 ))}
             </div>
         </div>
     </main>
 </Layout>
-
-<style>
-  .font-display { font-family: 'Teko', sans-serif; }
-</style> 

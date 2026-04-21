@@ -4,46 +4,46 @@ import logo from '../assets/images/logo.svg';
 import SocialIcons from './SocialIcons.tsx';
 ---
 
-<footer class="bg-gray-900 text-soul-gray-300 py-12">
+<footer class="site-footer border-t border-[color:var(--card-border)] py-12 text-[color:var(--cream-dim)]">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
             <div class="md:col-span-1 flex flex-col items-center md:items-start">
-                <a href="/" class="mb-4">
+                <a href="/" class="mb-4 opacity-90 hover:opacity-100 transition-opacity">
                     <Image src={logo} alt="Soul In Da Hole Logo" width="120" class="h-auto" />
                 </a>
-                <p class="font-bold text-white text-lg uppercase font-display tracking-wider">Soul 'n Da Hole</p>
-                <p class="text-sm text-soul-gray-400">Il risveglio della bestia</p>
+                <p class="font-bold text-[color:var(--cream)] text-lg uppercase tracking-wider" style="font-family: var(--font-display);">Soul 'n Da Hole</p>
+                <p class="text-sm text-[color:var(--cream-dim)]" style="font-family: var(--font-label); letter-spacing: 0.12em;">Il richiamo degli arcani</p>
             </div>
             
             <div class="w-full">
-                <h3 class="text-white font-bold text-lg mb-4 uppercase font-display tracking-wider">Menù</h3>
+                <h3 class="text-[color:var(--cream)] font-bold text-lg mb-4 uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: 0.14em;">Menù</h3>
                 <ul>
-                    <li class="mb-2"><a href="/" class="text-soul-gray-300 hover:text-white transition-colors">Home</a></li>
-                    <li class="mb-2"><a href="/programma" class="text-soul-gray-300 hover:text-white transition-colors">Programma</a></li>
-                    <li class="mb-2"><a href="/teams" class="text-soul-gray-300 hover:text-white transition-colors">Squadre</a></li>
-                    <li class="mb-2"><a href="/albo-doro" class="text-soul-gray-300 hover:text-white transition-colors">Albo d'oro</a></li>
-                    <li class="mb-2"><a href="/sponsor" class="text-soul-gray-300 hover:text-white transition-colors">Sponsor</a></li>
-                    <li class="mb-2"><a href="/trovaci" class="text-soul-gray-300 hover:text-white transition-colors">Trovaci</a></li>
+                    <li class="mb-2"><a href="/" class="footer-link">Home</a></li>
+                    <li class="mb-2"><a href="/programma" class="footer-link">Programma</a></li>
+                    <li class="mb-2"><a href="/teams" class="footer-link">Squadre</a></li>
+                    <li class="mb-2"><a href="/albo-doro" class="footer-link">Albo d'oro</a></li>
+                    <li class="mb-2"><a href="/sponsor" class="footer-link">Sponsor</a></li>
+                    <li class="mb-2"><a href="/trovaci" class="footer-link">Trovaci</a></li>
                 </ul>
             </div>
             
             <div class="w-full">
-                <h3 class="text-white font-bold text-lg mb-4 uppercase font-display tracking-wider">Contatti</h3>
-                <p class="mb-2">Email: <a href="mailto:soul.n.da.hole07@gmail.com" class="hover:text-white">soul.n.da.hole07@gmail.com</a></p>
+                <h3 class="text-[color:var(--cream)] font-bold text-lg mb-4 uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: 0.14em;">Contatti</h3>
+                <p class="mb-2">Email: <a href="mailto:soul.n.da.hole07@gmail.com" class="footer-link font-medium">soul.n.da.hole07@gmail.com</a></p>
                 <p class="mb-4">Seguici sui social:</p>
                 <SocialIcons client:load />
             </div>
         </div>
         
-        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm">
+        <div class="border-t border-[color:var(--card-border)]/60 mt-12 pt-8 text-center text-sm text-[color:var(--cream-dim)]">
             <p>&copy; {new Date().getFullYear()} Soul In Da Hole. Tutti i diritti riservati.</p>
-            <p class="mt-4 text-soul-gray-400">
-                Realizzato with love <span class="text-red-500">&hearts;</span> by 
+            <p class="mt-4">
+                Realizzato with love <span class="text-[color:var(--gold)]">&hearts;</span> by 
                 <a 
                     href="https://www.magiaslab.com" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    class="font-bold text-soul-gray-300 hover:text-white transition-colors"
+                    class="font-bold text-[color:var(--cream)] hover:text-[color:var(--gold-light)] transition-colors"
                 >
                     CIP
                 </a>
@@ -53,12 +53,18 @@ import SocialIcons from './SocialIcons.tsx';
 </footer>
 
 <style>
-  .social-link {
-    @apply text-gray-400 hover:text-red-500 transition-colors;
+  .site-footer {
+    background: linear-gradient(180deg, var(--ink) 0%, var(--deep) 55%, #0a0812 100%);
+    position: relative;
+    z-index: 1;
   }
 
-  .social-link:hover {
-    transform: translateY(-3px);
-    transition: transform 0.3s ease;
+  .footer-link {
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-link:hover {
+    color: var(--gold-light);
   }
 </style> 

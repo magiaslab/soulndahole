@@ -28,7 +28,7 @@ const SocialIcons = () => {
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-soul-gray-300 hover:text-white transition-colors"
+          className="text-[color:var(--cream-dim)] hover:text-[color:var(--gold-light)] transition-colors"
         >
           <span className="sr-only">{social.name}</span>
           <social.icon className="h-6 w-6" aria-hidden="true" />

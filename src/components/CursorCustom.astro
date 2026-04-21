@@ -1,0 +1,24 @@
+---
+---
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<style>
+#cursor-dot {
+  position: fixed; top:0; left:0; z-index:9999;
+  width:8px; height:8px; border-radius:50%;
+  background:var(--gold); pointer-events:none;
+  transform:translate(-50%,-50%); mix-blend-mode:screen;
+  transition: width .2s, height .2s;
+}
+#cursor-ring {
+  position:fixed; top:0; left:0; z-index:9998;
+  width:32px; height:32px; border-radius:50%;
+  border:1px solid rgba(201,162,39,.55); pointer-events:none;
+  transform:translate(-50%,-50%);
+  transition: width .2s, height .2s, border-color .2s;
+}
+body.hovering #cursor-dot  { width:14px; height:14px; }
+body.hovering #cursor-ring { width:52px; height:52px; border-color:var(--gold); }
+@media (max-width:768px) { #cursor-dot, #cursor-ring { display:none; } }
+</style>

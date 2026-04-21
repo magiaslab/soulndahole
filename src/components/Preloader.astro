@@ -1,0 +1,54 @@
+---
+---
+<div id="preloader">
+  <div class="pl-card">
+    <div class="pl-face pl-back"></div>
+    <div class="pl-face pl-front">
+      <div class="pl-logo">
+        <img src="/logo.svg" alt="Soul 'n Da Hole">
+      </div>
+      <div class="pl-roman">VIII · MMXXVI</div>
+    </div>
+    <div class="pl-bar" id="pl-bar"></div>
+  </div>
+</div>
+
+<style>
+#preloader {
+  position: fixed; inset: 0; z-index: 9000;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#preloader::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(201,162,39,.025) 0, rgba(201,162,39,.025) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(201,162,39,.025) 0, rgba(201,162,39,.025) 1px, transparent 1px, transparent 40px);
+}
+.pl-card {
+  width: 180px; height: 290px; position: relative;
+  transform-style: preserve-3d; perspective: 900px;
+}
+.pl-face {
+  position: absolute; inset: 0; border: 1px solid var(--gold-dim);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .9rem;
+  backface-visibility: hidden;
+}
+.pl-back {
+  background: var(--purple);
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201,162,39,.07) 0, rgba(201,162,39,.07) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(-45deg, rgba(201,162,39,.07) 0, rgba(201,162,39,.07) 1px, transparent 1px, transparent 12px);
+}
+.pl-back::before { content:''; position:absolute; inset:8px; border:1px solid rgba(201,162,39,.28); }
+.pl-back::after  { content:''; position:absolute; inset:16px; border:1px solid rgba(201,162,39,.28); }
+.pl-front { background: var(--card-bg); }
+.pl-logo img {
+  height: 56px;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(95%);
+}
+.pl-roman { font-family: var(--font-label); font-size:.58rem; letter-spacing:.4em; color:var(--gold-dim); }
+.pl-bar { position:absolute; bottom:0; left:0; height:2px; background:var(--gold); width:0; }
+</style>

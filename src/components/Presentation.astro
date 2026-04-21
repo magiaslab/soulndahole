@@ -11,32 +11,40 @@ import Sfondo1 from '../assets/images/Sfondo1.png';
         <Image 
           src={presentationImg} 
           alt="Locandina Presentazione Soul 'N Da Hole"
-          class="rounded-lg shadow-2xl border-2 border-gray-700 hover:border-red-600 transition-all duration-300"
+          class="rounded-lg shadow-2xl border-2 border-[color:var(--card-border)] hover:border-[color:var(--gold)] transition-all duration-300"
           width={720}
         />
       </div>
       <div class="w-full md:w-1/2 px-4 text-center md:text-left">
-        <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-4" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-          Evento di Lancio
-        </h2>
-        <h3 class="text-4xl md:text-5xl font-black text-white mt-2 mb-6 font-display uppercase" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-          PRESENTAZIONE UFFICIALE
-        </h3>
+        <div class="section-heading mb-8">
+          <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Evento</span>
+          <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-2" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+            <span class="reveal-line inline-block" style="transform: translateY(105%);">Evento di Lancio</span>
+          </h2>
+          <p class="sh-desc text-lg text-gray-300" style="opacity:0;">
+            Unisciti a noi per la presentazione ufficiale del torneo e scopri in anteprima squadre, programma e sorprese.
+          </p>
+          <div class="gold-rule mt-6 flex items-center gap-3 justify-center md:justify-start">
+            <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+            <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+            <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+          </div>
+        </div>
         <p class="text-lg text-gray-300 mb-8">
           Unisciti a noi per la presentazione ufficiale del torneo Soul 'N Da Hole.
           Scopri in anteprima le squadre, il programma e tutte le sorprese che abbiamo in serbo.
         </p>
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
             <h4 class="font-bold text-xl text-white">29.06.2025</h4>
             <p class="text-gray-400">Data</p>
           </div>
-          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
             <h4 class="font-bold text-xl text-white">19:00</h4>
             <p class="text-gray-400">Ora</p>
           </div>
-          <div class="info-box bg-gray-900/50 border border-gray-800 rounded-lg p-4">
+          <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
             <h4 class="font-bold text-xl text-white">'La Torre'</h4>
             <p class="text-gray-400">San Vincenzo (LI)</p>
           </div>
@@ -47,15 +55,11 @@ import Sfondo1 from '../assets/images/Sfondo1.png';
 </section>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
-  .font-display {
-    font-family: 'Teko', sans-serif;
-  }
   .info-box {
     transition: all 0.3s ease;
   }
   .info-box:hover {
-    border-color: #dc2626; /* red-600 */
+    border-color: var(--gold);
     transform: translateY(-5px);
   }
 </style>

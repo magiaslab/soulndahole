@@ -4,19 +4,26 @@ import allsponsor from "../assets/images/logos/allsponsor.jpeg";
 
 <section class="py-16 bg-gradient-to-b from-black to-gray-900">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-8" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-            I Nostri Sponsor
-        </h2>
-        
-        <p class="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
-            Grazie ai nostri sponsor che rendono possibile questo evento straordinario.
-        </p>
+        <div class="section-heading mb-12">
+            <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Sponsor</span>
+            <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-4" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                <span class="reveal-line inline-block" style="transform: translateY(105%);">I Nostri Sponsor</span>
+            </h2>
+            <p class="sh-desc text-lg text-gray-300 max-w-2xl mx-auto" style="opacity:0;">
+                Grazie ai nostri sponsor che rendono possibile questo evento straordinario.
+            </p>
+            <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+                <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+            </div>
+        </div>
 
         <div class="max-w-4xl mx-auto mb-12">
             <img 
                 src={allsponsor.src} 
                 alt="Tutti gli sponsor" 
-                class="w-full rounded-lg shadow-2xl border-2 border-white hover:border-red-500 transition-all duration-300" 
+                class="w-full rounded-lg shadow-2xl border-2 border-[color:var(--card-border)] hover:border-[color:var(--gold)] transition-all duration-300" 
                 style="object-fit:contain;" 
                 loading="lazy" 
             />
@@ -24,8 +31,8 @@ import allsponsor from "../assets/images/logos/allsponsor.jpeg";
 
         <a 
             href="/sponsor" 
-            class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            style="text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);"
+            class="magnetic inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            style="font-family: var(--font-label); letter-spacing: .22em;"
         >
             Scopri Tutti gli Sponsor
         </a>

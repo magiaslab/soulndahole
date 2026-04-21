@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { ViewTransitions } from 'astro:transitions';
 import type { ImageMetadata } from 'astro';
 import { getImage } from "astro:assets";
 import { createSlug } from '../utils/slug';
@@ -95,36 +94,49 @@ const editions = await Promise.all(
 ).then(editions => editions.sort((a, b) => b.year.localeCompare(a.year))); // Ordina per anno, dal più recente
 ---
 
-<Layout title="Albo d'oro - Soul 'n Da Hole" description="Rivivi le edizioni passate del torneo Soul 'n Da Hole attraverso le gallerie fotografiche.">
-    <ViewTransitions />
-    <main class="py-20 bg-soul-gray-950 text-white">
+<Layout
+	title="Albo d'oro — Soul 'n Da Hole"
+	description="Le edizioni passate del torneo Soul 'n Da Hole: gallerie fotografiche dall'arena streetball 5×5."
+>
+    <main class="py-20 text-white">
         <section class="container mx-auto px-4">
-            <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider text-center mb-12" style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-                Albo d'oro
-            </h1>
-            <p class="text-center text-lg text-soul-gray-300 mb-12 max-w-2xl mx-auto">
-                Rivivi le emozioni delle passate edizioni. Ogni anno, una nuova leggenda.
-            </p>
+            <div class="section-heading text-center mb-12">
+                <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Albo d'oro</span>
+                <h1 class="text-5xl font-black text-white uppercase tracking-wider text-center mb-3" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">Albo d'oro</span>
+                </h1>
+                <p class="sh-desc text-center text-lg text-[color:var(--cream-dim)] mb-12 max-w-2xl mx-auto" style="opacity:0;">
+                    Rivivi le emozioni delle passate edizioni. Ogni anno, una nuova leggenda.
+                </p>
+                <div class="gold-rule flex items-center gap-3 justify-center">
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                    <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                </div>
+            </div>
 
             <!-- Squadre Vincitrici -->
             <section class="mb-16">
-                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
-                    Squadre Vincitrici & MVP
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Onori</span>
+                    <h2 class="text-3xl font-bold text-white text-center uppercase tracking-wider" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Squadre Vincitrici & MVP</span>
+                    </h2>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {winningTeams.map((team) => (
-                        <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm hover:border-soul-red-500/40 transition-colors duration-300">
+                        <div class="bg-[color:var(--card-bg)]/80 border border-[color:var(--card-border)] rounded-lg p-6 backdrop-blur-sm hover:border-[color:var(--gold)] transition-colors duration-300">
                             <div class="text-center mb-4">
                                 <h3 class="text-2xl font-bold text-white mb-2">{team.year}</h3>
-                                <h4 class="text-xl font-semibold text-soul-red-400">{team.team}</h4>
+                                <h4 class="text-xl font-semibold text-[color:var(--gold)]" style="font-family: var(--font-label); letter-spacing: .14em; text-transform: uppercase;">{team.team}</h4>
                             </div>
                             <div class="space-y-3">
                                 <div class="text-center">
-                                    <p class="text-sm text-soul-gray-400 uppercase tracking-wider">MVP</p>
-                                    <p class="text-lg font-semibold text-soul-red-300">{team.mvp}</p>
+                                    <p class="text-sm text-[color:var(--cream-dim)] uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: .22em;">MVP</p>
+                                    <p class="text-lg font-semibold text-[color:var(--gold-dim)]">{team.mvp}</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-soul-gray-400 uppercase tracking-wider mb-2">Giocatori</p>
+                                    <p class="text-sm text-[color:var(--cream-dim)] uppercase tracking-wider mb-2" style="font-family: var(--font-label); letter-spacing: .22em;">Giocatori</p>
                                     <p class="text-sm text-gray-300">{team.players.join(', ')}</p>
                                 </div>
                             </div>
@@ -135,35 +147,38 @@ const editions = await Promise.all(
 
             <!-- Gare Individuali -->
             <section class="mb-16">
-                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
-                    Gare Individuali
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Gare</span>
+                    <h2 class="text-3xl font-bold text-white text-center uppercase tracking-wider" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Gare Individuali</span>
+                    </h2>
+                </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <!-- Gara delle Schiacciate -->
-                    <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm">
+                    <div class="bg-[color:var(--card-bg)]/80 border border-[color:var(--card-border)] rounded-lg p-6 backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">
                             🏀 Gara delle Schiacciate
                         </h3>
                         <div class="space-y-4">
                             {individualEvents.slamDunk.map((event) => (
-                                <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                <div class="flex justify-between items-center border-b border-[color:var(--card-border)]/60 pb-2">
                                     <span class="text-white font-semibold">{event.year}</span>
-                                    <span class="text-soul-red-300">{event.winner}</span>
+                                    <span class="text-[color:var(--gold-dim)]">{event.winner}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     <!-- Gara da 3 Punti -->
-                    <div class="bg-soul-gray-900/50 border border-soul-red-500/20 rounded-lg p-6 backdrop-blur-sm">
+                    <div class="bg-[color:var(--card-bg)]/80 border border-[color:var(--card-border)] rounded-lg p-6 backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-white mb-6 text-center">
                             🎯 Gara da 3 Punti
                         </h3>
                         <div class="space-y-4">
                             {individualEvents.threePoint.map((event) => (
-                                <div class="flex justify-between items-center border-b border-soul-red-500/10 pb-2">
+                                <div class="flex justify-between items-center border-b border-[color:var(--card-border)]/60 pb-2">
                                     <span class="text-white font-semibold">{event.year}</span>
-                                    <span class="text-soul-red-300">{event.winner}</span>
+                                    <span class="text-[color:var(--gold-dim)]">{event.winner}</span>
                                 </div>
                             ))}
                         </div>
@@ -173,22 +188,25 @@ const editions = await Promise.all(
 
             <!-- Galleria Edizioni -->
             <section>
-                <h2 class="text-3xl font-bold text-soul-red-500 text-center mb-8 uppercase tracking-wider">
-                    Galleria Edizioni
-                </h2>
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Ricordi</span>
+                    <h2 class="text-3xl font-bold text-white text-center uppercase tracking-wider" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Galleria Edizioni</span>
+                    </h2>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {editions.map(edition => (
                         <a 
                             href={`/albo-doro/${edition.slug}`} 
-                            class="group relative block rounded-lg shadow-lg hover:shadow-xl overflow-hidden aspect-[4/3] bg-soul-gray-900"
+                            class="team-card group relative block rounded-lg shadow-lg hover:shadow-xl overflow-hidden aspect-[4/3] bg-[color:var(--card-bg)] border border-[color:var(--card-border)] hover:border-[color:var(--gold)] transition-colors duration-300"
                             style={edition.previewImage ? `background-image: url(${edition.previewImage.src}); background-size: cover; background-position: center;` : ''}
                         >
                             <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300"></div>
                             <div class="relative h-full flex flex-col justify-end p-6">
-                                <h2 class="text-2xl font-display uppercase tracking-wider text-white mb-2 group-hover:text-soul-red-500 transition-colors duration-300" transition:name={`edition-title-${edition.slug}`}>
+                                <h2 class="text-2xl uppercase tracking-wider text-white mb-2 group-hover:text-[color:var(--gold)] transition-colors duration-300" style="font-family: var(--font-display);" transition:name={`edition-title-${edition.slug}`}>
                                     {edition.name}
                                 </h2>
-                                <p class="text-soul-gray-300 font-medium">{`Edizione ${edition.year}`}</p>
+                                <p class="text-[color:var(--cream-dim)] font-medium">{`Edizione ${edition.year}`}</p>
                             </div>
                         </a>
                     ))}

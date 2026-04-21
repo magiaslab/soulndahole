@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import Gallery from '../../components/Gallery.tsx';
 import type { ImageMetadata } from 'astro';
-import { ViewTransitions } from 'astro:transitions';
 import { createSlug } from '../../utils/slug';
 
 export async function getStaticPaths() {
@@ -56,14 +55,24 @@ const imageObjects = images.map(img => ({
     alt: `Immagine dall'edizione ${edition.name}`
 }));
 ---
-<Layout title={`${edition.name} - Albo d'oro Soul 'n Da Hole`} description={`Rivivi l'edizione ${edition.name} del torneo Soul 'n Da Hole attraverso le foto dell'evento.`}>
-    <ViewTransitions />
-    <main class="py-20 bg-soul-gray-950 text-white">
+<Layout
+	title={`${edition.name} — Albo d'oro Soul 'n Da Hole`}
+	description={`Galleria fotografica dell'edizione ${edition.name} del torneo Soul 'n Da Hole.`}
+>
+    <main class="py-20 text-white">
         <section class="container mx-auto px-4 text-center">
-            <h1 class="text-5xl font-black text-white font-display uppercase tracking-wider mb-4" transition:name={`edition-title-${edition.slug}`} style="text-shadow: 0 0 15px rgba(220, 38, 38, 0.5);">
-                {edition.name}
-            </h1>
-            <p class="text-xl text-soul-gray-300 mb-12">{`Edizione ${edition.year}`}</p>
+            <div class="section-heading mb-12">
+                <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Edizione</span>
+                <h1 class="text-5xl font-black text-white uppercase tracking-wider mb-3" transition:name={`edition-title-${edition.slug}`} style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">{edition.name}</span>
+                </h1>
+                <p class="sh-desc text-xl text-[color:var(--cream-dim)] mb-12" style="opacity:0;">{`Edizione ${edition.year}`}</p>
+                <div class="gold-rule flex items-center gap-3 justify-center">
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                    <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+                    <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+                </div>
+            </div>
             
             <div class="gallery-container">
                  <Gallery client:load images={imageObjects} />
@@ -71,9 +80,3 @@ const imageObjects = images.map(img => ({
         </section>
     </main>
 </Layout>
-
-<style>
-  .font-display {
-    font-family: 'Teko', sans-serif;
-  }
-</style> 
