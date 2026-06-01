@@ -19,27 +19,18 @@ const SponsorGallery: React.FC<SponsorGalleryProps> = ({ images }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {images.map((img, i) => (
           <div
             key={i}
-            className={
-              `group relative cursor-pointer ` +
-              (i === 0
-                ? 'col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4'
-                : '')
-            }
-            style={i === 0 ? { gridColumn: 'span 1 / span 1', gridColumnEnd: 'span 4' } : {}}
+            className="group relative cursor-pointer"
             onClick={() => setIndex(i)}
           >
-            <div className={
-              `bg-white rounded-lg ${i === 0 ? 'p-2 md:p-4 border-2 md:border-4' : 'p-2 border-2'} border-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center`}
-            >
+            <div className="rounded-lg border-2 border-[rgba(201,162,39,0.25)] bg-black shadow-lg hover:shadow-xl hover:border-[#c9a227] transition-all duration-300 transform hover:scale-[1.02] overflow-hidden">
               <img
                 src={img.src}
                 alt={img.alt}
-                className={i === 0 ? "w-full h-auto object-contain" : "w-full h-auto object-contain"}
-                style={i === 0 ? { maxHeight: 320 } : { maxHeight: 200 }}
+                className="w-full h-auto object-contain"
               />
             </div>
           </div>

@@ -41,8 +41,14 @@ const winningTeams = [
         team: "Teatro Kabuki",
         mvp: "Pagni",
         players: ["Zanasi", "Papi", "Giovani", "Govi", "Trassinelli", "Fvilla", "Benucci"]
+    },
+    {
+        year: "2025",
+        team: "Kraken",
+        mvp: "Pistillo",
+        players: ["Pistillo", "Bruni", "Nannipieri", "Giannetti", "Pedroni", "Corbinelli", "Bechi"]
     }
-];
+].sort((a, b) => Number(b.year) - Number(a.year));
 
 // Dati delle gare individuali
 const individualEvents = {
@@ -58,7 +64,8 @@ const individualEvents = {
         { year: "2021", winner: "Guglielmi" },
         { year: "2022", winner: "Giannetti" },
         { year: "2023", winner: "Giovani" },
-        { year: "2024", winner: "Giannetti" }
+        { year: "2024", winner: "Giannetti" },
+        { year: "2025", winner: "Giannetti" }
     ]
 };
 

@@ -1,4 +1,5 @@
 ---
+import { SITE_EDITION } from '../config/site';
 ---
 <div id="preloader">
   <div class="pl-card">
@@ -7,7 +8,8 @@
       <div class="pl-logo">
         <img src="/logo.svg" alt="Soul 'n Da Hole">
       </div>
-      <div class="pl-roman">VIII · MMXXVI</div>
+      <div class="pl-roman">{SITE_EDITION.roman} · MMXXVI</div>
+      <div class="pl-tagline">{SITE_EDITION.tagline}</div>
     </div>
     <div class="pl-bar" id="pl-bar"></div>
   </div>
@@ -50,5 +52,15 @@
   filter: brightness(0) saturate(100%) invert(72%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(95%);
 }
 .pl-roman { font-family: var(--font-label); font-size:.58rem; letter-spacing:.4em; color:var(--gold-dim); }
+.pl-tagline {
+  font-family: var(--font-label);
+  font-size: .5rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-align: center;
+  padding: 0 .75rem;
+  line-height: 1.35;
+}
 .pl-bar { position:absolute; bottom:0; left:0; height:2px; background:var(--gold); width:0; }
 </style>

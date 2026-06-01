@@ -1,28 +1,29 @@
 ---
 import { Image } from 'astro:assets';
-import presentationImg from '../assets/images/Presentazione.jpeg';
-import Sfondo1 from '../assets/images/Sfondo1.png';
+import locandina2026 from '../assets/images/locandina2026.png';
+import { EVENT_OFFICIAL, SITE_EDITION } from '../config/site';
 ---
 
-<section id="presentation" class="py-20 bg-black">
+<section id="locandina" class="py-20 bg-black">
   <div class="container mx-auto px-4">
     <div class="flex flex-wrap items-center -mx-4">
       <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
         <Image 
-          src={presentationImg} 
-          alt="Locandina Presentazione Soul 'N Da Hole"
-          class="rounded-lg shadow-2xl border-2 border-[color:var(--card-border)] hover:border-[color:var(--gold)] transition-all duration-300"
-          width={720}
+          src={locandina2026} 
+          alt={`Locandina ufficiale Soul 'n Da Hole ${SITE_EDITION.year} — ${SITE_EDITION.tagline}`}
+          class="rounded-lg shadow-2xl border-2 border-[color:var(--card-border)] hover:border-[color:var(--gold)] transition-all duration-300 w-full h-auto"
+          width={819}
+          height={1024}
         />
       </div>
       <div class="w-full md:w-1/2 px-4 text-center md:text-left">
         <div class="section-heading mb-8">
-          <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Evento</span>
+          <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">VIII Edizione</span>
           <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-2" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
-            <span class="reveal-line inline-block" style="transform: translateY(105%);">Evento di Lancio</span>
+            <span class="reveal-line inline-block" style="transform: translateY(105%);">Locandina Ufficiale</span>
           </h2>
           <p class="sh-desc text-lg text-gray-300" style="opacity:0;">
-            Unisciti a noi per la presentazione ufficiale del torneo e scopri in anteprima squadre, programma e sorprese.
+            {SITE_EDITION.tagline}: il torneo torna a San Vincenzo con dodici archetipi e quattro giorni di streetball.
           </p>
           <div class="gold-rule mt-6 flex items-center gap-3 justify-center md:justify-start">
             <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
@@ -31,21 +32,21 @@ import Sfondo1 from '../assets/images/Sfondo1.png';
           </div>
         </div>
         <p class="text-lg text-gray-300 mb-8">
-          Unisciti a noi per la presentazione ufficiale del torneo Soul 'N Da Hole.
-          Scopri in anteprima le squadre, il programma e tutte le sorprese che abbiamo in serbo.
+          Quattro serate consecutive sul playground Rodari: gironi, gare speciali e il cammino verso la finale.
+          I nomi delle squadre e le rose saranno svelati a breve — segui gli aggiornamenti sui social.
         </p>
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
-            <h4 class="font-bold text-xl text-white">29.06.2025</h4>
-            <p class="text-gray-400">Data</p>
+            <h4 class="font-bold text-xl text-white">{EVENT_OFFICIAL.datesShort}</h4>
+            <p class="text-gray-400">Date</p>
           </div>
           <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
-            <h4 class="font-bold text-xl text-white">19:00</h4>
-            <p class="text-gray-400">Ora</p>
+            <h4 class="font-bold text-xl text-white">{EVENT_OFFICIAL.timeShort}</h4>
+            <p class="text-gray-400">Orario</p>
           </div>
           <div class="info-box bg-[color:var(--card-bg)] border border-[color:var(--card-border)] rounded-lg p-4">
-            <h4 class="font-bold text-xl text-white">'La Torre'</h4>
+            <h4 class="font-bold text-xl text-white">{EVENT_OFFICIAL.venueName}</h4>
             <p class="text-gray-400">San Vincenzo (LI)</p>
           </div>
         </div>

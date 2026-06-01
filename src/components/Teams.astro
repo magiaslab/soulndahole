@@ -1,34 +1,12 @@
 ---
 import { Image } from 'astro:assets';
-import unicornoImg from '../assets/images/Unicorno.png';
-import idraImg from '../assets/images/Idra.png';
-import feniceImg from '../assets/images/Fenice.png';
-import krakenImg from '../assets/images/Kraken.png';
-import grifoneImg from '../assets/images/Grifone.png';
-import chimeraImg from '../assets/images/Chimera.png';
-import minotauroImg from '../assets/images/Minotauro.png';
-import dragoImg from '../assets/images/Drago.jpeg';
-import ciclopeImg from '../assets/images/Ciclope.jpeg';
-import licantroImg from '../assets/images/Licantro.jpeg';
-import centauroImg from '../assets/images/Centauro.jpeg';
-import cerberoImg from '../assets/images/Cerbero.jpeg';
 import Sfondo2 from '../assets/images/Sfondo2.png';
+import { arcani, arcanoLabel } from '../data/arcani';
+import { TEAMS_ROSTER_PUBLIC } from '../config/site';
 import { createSlug } from '../utils/slug';
 
-const teams = [
-  { name: "Unicorno", imageSrc: unicornoImg, icon: "🦄" },
-  { name: "Idra", imageSrc: idraImg, icon: "🐉" },
-  { name: "Fenice", imageSrc: feniceImg, icon: "🔥" },
-  { name: "Kraken", imageSrc: krakenImg, icon: "🐙" },
-  { name: "Grifone", imageSrc: grifoneImg, icon: "🦅" },
-  { name: "Chimera", imageSrc: chimeraImg, icon: "🦁" },
-  { name: "Minotauro", imageSrc: minotauroImg, icon: "🐂" },
-  { name: "Drago", imageSrc: dragoImg, icon: "🐲" },
-  { name: "Ciclope", imageSrc: ciclopeImg, icon: "👁️" },
-  { name: "Licantro", imageSrc: licantroImg, icon: "🐺" },
-  { name: "Centauro", imageSrc: centauroImg, icon: "🐎" },
-  { name: "Cerbero", imageSrc: cerberoImg, icon: "🐕" }
-];
+// Nomi visibili solo quando la rosa è pubblicata (teams.ts)
+import { teams as teamsData } from '../data/teams';
 ---
 
 <section 
@@ -44,7 +22,9 @@ const teams = [
         <span class="reveal-line inline-block" style="transform: translateY(105%);">I 12 Arcani</span>
       </h2>
       <p class="sh-desc text-xl text-gray-300 max-w-2xl mx-auto" style="opacity:0;">
-        Le squadre evocano gli archetipi del mazzo: scegli il tuo destino.
+        {TEAMS_ROSTER_PUBLIC
+          ? 'Le squadre evocano gli archetipi del mazzo: scegli il tuo destino.'
+          : 'Anteprima degli archetipi del mazzo. I nomi delle squadre e le rose saranno rivelati a breve.'}
       </p>
       <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
         <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
@@ -54,26 +34,46 @@ const teams = [
     </div>
 
     <div class="teams-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-      {teams.map((team) => (
-        <a href={`/teams/${createSlug(team.name)}`} class="team-card block group">
-          <div class="relative overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm border border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 h-full group-hover:scale-105">
-            <div class="p-6 text-center">
-              <div class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300 overflow-hidden bg-gray-800 border-2 border-[color:var(--card-border)] group-hover:border-[color:var(--gold)]">
-                {team.imageSrc ? (
-                  <Image src={team.imageSrc} alt={`Logo ${team.name}`} class="w-full h-full object-cover" width="128" height="128" />
-                ) : (
-                  <span>{team.icon}</span>
+      {arcani.map((arcano) => {
+        const teamMeta = arcano.teamSlug
+          ? teamsData.find((t) => t.slug === arcano.teamSlug)
+          : undefined;
+        const displayName = TEAMS_ROSTER_PUBLIC && teamMeta ? teamMeta.name : arcano.tarotName;
+        const subtitle = TEAMS_ROSTER_PUBLIC && teamMeta
+          ? arcanoLabel(arcano)
+          : 'Squadra in arrivo';
+        const CardTag = TEAMS_ROSTER_PUBLIC && teamMeta ? 'a' : 'div';
+        const cardProps = TEAMS_ROSTER_PUBLIC && teamMeta
+          ? { href: `/teams/${createSlug(teamMeta.name)}`, class: 'team-card block group' }
+          : { class: 'team-card block group cursor-default' };
+
+        return (
+          <CardTag {...cardProps}>
+            <div class="relative overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm border border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 h-full group-hover:scale-105">
+              <div class="p-4 text-center">
+                <div class="aspect-[2/3] max-w-[140px] mx-auto mb-3 rounded-lg overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300 border border-[color:var(--card-border)] group-hover:border-[color:var(--gold)]">
+                  <Image
+                    src={arcano.image}
+                    alt={`${arcanoLabel(arcano)} — carta dei tarocchi`}
+                    class="w-full h-full object-cover"
+                    width={280}
+                    height={420}
+                  />
+                </div>
+                <p class="text-xs text-[color:var(--gold-dim)] mb-1" style="font-family: var(--font-label); letter-spacing: .18em;">{arcano.tarotNumber}</p>
+                <h3 class="text-lg font-bold text-white mb-1 group-hover:text-[color:var(--gold)] transition-colors duration-300" style="font-family: var(--font-label); letter-spacing: .12em; text-transform: uppercase;">
+                  {displayName}
+                </h3>
+                {!TEAMS_ROSTER_PUBLIC && (
+                  <p class="text-sm text-[color:var(--cream-dim)]">{subtitle}</p>
                 )}
+                <div class="w-12 h-1 bg-gradient-to-r from-[color:var(--gold)] to-[color:var(--gold-light)] mx-auto rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-2"></div>
               </div>
-              <h3 class="text-xl font-bold text-white mb-2 group-hover:text-[color:var(--gold)] transition-colors duration-300" style="font-family: var(--font-label); letter-spacing: .14em; text-transform: uppercase;">
-                {team.name}
-              </h3>
-              <div class="w-12 h-1 bg-gradient-to-r from-[color:var(--gold)] to-[color:var(--gold-light)] mx-auto rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-transparent via-[color:var(--purple)]/15 to-transparent -translate-y-full group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100"></div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-[color:var(--purple)]/15 to-transparent -translate-y-full group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100"></div>
-          </div>
-        </a>
-      ))}
+          </CardTag>
+        );
+      })}
     </div>
 
     <div class="flex justify-center mt-10">
@@ -82,7 +82,6 @@ const teams = [
       </a>
     </div>
 
-    <!-- Statistiche del torneo -->
     <div id="stats" class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="stat-item text-center">
         <div class="stat-num text-4xl font-bold text-[color:var(--gold)] mb-2" data-target="12">0</div>
@@ -101,10 +100,9 @@ const teams = [
 </section>
 
 <style>
-  /* Animazioni aggiuntive per le card */
   .group:hover {
     box-shadow: 0 0 30px rgba(201, 162, 39, 0.18);
   }
 
   .team-card { transform-style: preserve-3d; }
-</style> 
+</style>

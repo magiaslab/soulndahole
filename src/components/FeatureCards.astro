@@ -1,6 +1,7 @@
 ---
 import Sfondo1 from '../assets/images/Sfondo1.png';
 import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
+import { EVENT_OFFICIAL } from '../config/site';
 ---
 
 <section 
@@ -32,7 +33,7 @@ import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
           <FaCalendarAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Date & Orari</h3>
-        <p class="text-gray-300 mb-6 text-center">3-4-5-6 Luglio 2025<br>Dalle 19 alle 24</p>
+        <p class="text-gray-300 mb-6 text-center">{EVENT_OFFICIAL.datesShort}<br>{EVENT_OFFICIAL.timeLabel}</p>
         <a href="/programma" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Programma</a>
       </div>
       <!-- Card 2: Trovaci -->
@@ -41,7 +42,7 @@ import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
           <FaMapMarkerAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Trovaci</h3>
-        <p class="text-gray-300 mb-6 text-center">Playground Rodari<br>Via Aurelia Sud<br>San Vincenzo</p>
+        <p class="text-gray-300 mb-6 text-center">{EVENT_OFFICIAL.venueName}<br>{EVENT_OFFICIAL.locationLabel}</p>
         <a href="/trovaci" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Come arrivare</a>
       </div>
       <!-- Card 3: Le 12 Bestie -->
@@ -51,7 +52,7 @@ import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">I 12 Arcani</h3>
         <p class="text-gray-300 text-center mb-6">12 squadre, 3 gironi, 1 vincitore</p>
-        <a href="/teams" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Scopri le squadre</a>
+        <a href="#teams" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Scopri gli arcani</a>
       </div>
     </div>
   </div>

@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EVENT_OFFICIAL, EVENT_SUMMARY, REGISTRATION_FORM_URL, SITE_EDITION } from '../config/site';
+---
+
+<Layout
+	title={`Iscrizione squadre ${SITE_EDITION.year} — Soul 'n Da Hole`}
+	description={`Iscrivi la tua squadra all'VIII edizione Soul 'n Da Hole ${SITE_EDITION.year}. ${EVENT_SUMMARY}.`}
+>
+  <main class="py-24 text-white">
+    <div class="container mx-auto px-4">
+      <div class="section-heading text-center mb-12">
+        <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Iscrizioni</span>
+        <h1 class="text-5xl font-black text-white uppercase tracking-wider mb-3 md:text-7xl" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+          <span class="reveal-line inline-block" style="transform: translateY(105%);">Iscrizione Squadre</span>
+        </h1>
+        <p class="sh-desc text-lg text-[color:var(--cream-dim)] max-w-2xl mx-auto" style="opacity:0;">
+          VIII edizione · {EVENT_OFFICIAL.datesShort} · {EVENT_OFFICIAL.timeLabel}
+        </p>
+        <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+          <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+          <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+          <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+        </div>
+      </div>
+
+      <div class="max-w-3xl mx-auto mb-10 space-y-6 text-center">
+        <p class="text-lg text-[color:var(--cream-dim)] leading-relaxed">
+          Compila il modulo con i dati del referente, fino a 8 giocatori e lo staff tecnico (head coach e assistente).
+          La conferma dell'iscrizione avverrà via email all'indirizzo indicato nel form.
+        </p>
+        <div class="rounded-lg border border-[color:var(--gold-dim)]/40 bg-[color:var(--card-bg)]/80 p-6 text-left text-sm text-[color:var(--cream-dim)] space-y-3 backdrop-blur-sm">
+          <p class="font-semibold text-[color:var(--gold)] uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: .14em;">
+            Importante
+          </p>
+          <p>
+            L'invio del modulo conferma solo la ricezione dei dati e dei documenti, non la partecipazione al torneo.
+          </p>
+          <p>
+            L'accettazione segue criteri interni: partecipazione negli anni passati, categorie d'appartenenza, tempistiche di iscrizione e pagamento.
+          </p>
+          <p>
+            I certificati medici devono essere validi per le giornate del torneo ({EVENT_OFFICIAL.datesLabel}).
+          </p>
+        </div>
+        <a
+          href={REGISTRATION_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="magnetic inline-flex items-center justify-center bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-4 px-10 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg"
+          style="font-family: var(--font-label); letter-spacing: .22em;"
+        >
+          Apri il modulo di iscrizione
+        </a>
+      </div>
+
+      <div class="max-w-4xl mx-auto rounded-xl overflow-hidden border border-[color:var(--card-border)] bg-[color:var(--card-bg)]/50 shadow-2xl">
+        <iframe
+          id="jotform-iscrizione"
+          title="Iscrizione squadre Soul 'n Da Hole 2026"
+          src={REGISTRATION_FORM_URL}
+          class="w-full border-0 bg-white"
+          style="min-height: 1200px; height: 80vh;"
+          allow="geolocation; microphone; camera; fullscreen"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </main>
+</Layout>

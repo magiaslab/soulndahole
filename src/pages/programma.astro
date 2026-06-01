@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Sfondo1 from '../assets/images/Sfondo1.png';
+import { EVENT_FINALS_DAY, EVENT_OFFICIAL, EVENT_SUMMARY, SITE_EDITION, TEAMS_ROSTER_PUBLIC } from '../config/site';
 
 const groups = [
     {
@@ -35,49 +35,46 @@ const groups = [
     }
 ];
 
-const schedule = [
-    {
-        day: "Giovedì 3 luglio",
-        events: [
-            { time: "20.00", match: "CENTAURO VS KRAKEN" },
-            { time: "20.30", match: "LICANTROPO VS CHIMERA" },
-            { time: "21.15", match: "KRAKEN VS LICANTROPO", special: "Gara da tre" },
-            { time: "21.45", match: "CHIMERA VS CENTAURO" },
-            { time: "22.15", match: "Soul Games" },
-            { time: "22.45", match: "KRAKEN VS CHIMERA" },
-            { time: "23.15", match: "LICANTROPO VS CENTAURO" }
-        ]
-    },
-    {
-        day: "Venerdì 4 luglio",
-        events: [
-            { time: "20.00", match: "UNICORNO VS GRIFONE" },
-            { time: "20.30", match: "IDRA VS FENICE" },
-            { time: "21.15", match: "UNICORNO VS IDRA", special: "Gara da tre" },
-            { time: "21.45", match: "GRIFONE VS FENICE" },
-            { time: "22.45", match: "UNICORNO VS FENICE", special: "Fonta" },
-            { time: "23.15", match: "IDRA VS GRIFONE" }
-        ]
-    },
-    {
-        day: "Sabato 5 luglio",
-        events: [
-            { time: "19.45", match: "CERBERO VS MINOTAURO" },
-            { time: "20.15", match: "CICLOPE VS DRAGO" },
-            { time: "20.45", match: "Gara da tre" },
-            { time: "21.00", match: "CERBERO VS CICLOPE" },
-            { time: "21.30", match: "DRAGO VS MINOTAURO" },
-            { time: "22.00", match: "Tiro della Fede" },
-            { time: "22.30", match: "DRAGO VS MINOTAURO" },
-            { time: "23.00", match: "CICLOPE VS CERBERO" }
-        ]
-    }
+const scheduleEvents = [
+    [
+        { time: "20.00", match: "CENTAURO VS KRAKEN" },
+        { time: "20.30", match: "LICANTROPO VS CHIMERA" },
+        { time: "21.15", match: "KRAKEN VS LICANTROPO", special: "Gara da tre" },
+        { time: "21.45", match: "CHIMERA VS CENTAURO" },
+        { time: "22.15", match: "Soul Games" },
+        { time: "22.45", match: "KRAKEN VS CHIMERA" },
+        { time: "23.15", match: "LICANTROPO VS CENTAURO" }
+    ],
+    [
+        { time: "20.00", match: "UNICORNO VS GRIFONE" },
+        { time: "20.30", match: "IDRA VS FENICE" },
+        { time: "21.15", match: "UNICORNO VS IDRA", special: "Gara da tre" },
+        { time: "21.45", match: "GRIFONE VS FENICE" },
+        { time: "22.45", match: "UNICORNO VS FENICE", special: "Fonta" },
+        { time: "23.15", match: "IDRA VS GRIFONE" }
+    ],
+    [
+        { time: "19.45", match: "CERBERO VS MINOTAURO" },
+        { time: "20.15", match: "CICLOPE VS DRAGO" },
+        { time: "20.45", match: "Gara da tre" },
+        { time: "21.00", match: "CERBERO VS CICLOPE" },
+        { time: "21.30", match: "DRAGO VS MINOTAURO" },
+        { time: "22.00", match: "Tiro della Fede" },
+        { time: "22.30", match: "DRAGO VS MINOTAURO" },
+        { time: "23.00", match: "CICLOPE VS CERBERO" }
+    ]
 ];
+
+const gironiDays = EVENT_OFFICIAL.days.filter((d) => !d.finals);
+const schedule = gironiDays.map((day, index) => ({
+    day: day.label,
+    events: scheduleEvents[index] ?? [],
+}));
 ---
 
 <Layout
-	title="Programma 2026 — Soul 'n Da Hole"
-	description="Orari, gironi e formula del torneo streetball 5×5. VIII edizione, tema Tarocchi — San Vincenzo, playground Rodari."
+	title={`Programma ${SITE_EDITION.year} — Soul 'n Da Hole`}
+	description={`Programma torneo streetball 5×5, VIII edizione ${SITE_EDITION.year}. ${EVENT_SUMMARY}.`}
 >
     <main class="min-h-screen py-24 text-white">
         <div class="container mx-auto px-4">
@@ -87,7 +84,7 @@ const schedule = [
                     <span class="reveal-line inline-block" style="transform: translateY(105%);">Programma del Torneo</span>
                 </h1>
                 <p class="sh-desc text-lg text-[color:var(--cream-dim)] max-w-2xl mx-auto" style="opacity:0;">
-                    Orari, gironi e formula: il percorso verso la finale.
+                    {EVENT_OFFICIAL.datesShort} · {EVENT_OFFICIAL.timeLabel} · {EVENT_OFFICIAL.venueName}
                 </p>
                 <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
                     <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
@@ -96,7 +93,39 @@ const schedule = [
                 </div>
             </div>
 
-            <!-- Gironi -->
+            <section class="mb-16">
+                <div class="section-heading text-center mb-8">
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Calendario</span>
+                    <h2 class="text-4xl font-bold uppercase tracking-wider text-white" style="font-family: var(--font-display); overflow:hidden;">
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Date ufficiali</span>
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                    {EVENT_OFFICIAL.days.map((day) => (
+                        <div class="rounded-lg border border-[color:var(--card-border)] bg-[color:var(--card-bg)]/80 p-6 text-center backdrop-blur-sm">
+                            <p class="text-sm text-[color:var(--gold-dim)] uppercase tracking-wider mb-2" style="font-family: var(--font-label); letter-spacing: .18em;">
+                                {day.weekday}
+                            </p>
+                            <p class="text-2xl font-bold text-white mb-1">{day.dayMonth}</p>
+                            <p class="text-sm text-[color:var(--cream-dim)]">{EVENT_OFFICIAL.timeShort}</p>
+                            {day.finals && (
+                                <p class="mt-3 text-sm font-semibold text-[color:var(--gold)] uppercase tracking-wider">Finali</p>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {!TEAMS_ROSTER_PUBLIC && (
+                <section class="mb-16 max-w-2xl mx-auto text-center">
+                    <p class="text-lg text-[color:var(--cream-dim)] leading-relaxed">
+                        Stiamo finalizzando la ripartizione dei <strong class="text-[color:var(--gold)]">12 archetipi</strong> nei tre gironi e il calendario dettagliato delle partite.
+                        Le serate di gioco sono confermate: {EVENT_OFFICIAL.datesLabel}, sempre {EVENT_OFFICIAL.timeLabel.toLowerCase()}.
+                    </p>
+                </section>
+            )}
+
+            {TEAMS_ROSTER_PUBLIC && (
             <section class="mb-16">
                 <div class="section-heading text-center mb-8">
                     <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Struttura</span>
@@ -126,12 +155,11 @@ const schedule = [
                 </div>
             </section>
 
-            <!-- Calendario -->
             <section class="mb-16">
                 <div class="section-heading text-center mb-8">
-                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Calendario</span>
+                    <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Partite</span>
                     <h2 class="text-4xl font-bold uppercase tracking-wider text-white" style="font-family: var(--font-display); overflow:hidden;">
-                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Calendario</span>
+                        <span class="reveal-line inline-block" style="transform: translateY(105%);">Calendario partite</span>
                     </h2>
                 </div>
                 {schedule.map((day) => (
@@ -140,7 +168,7 @@ const schedule = [
                             {day.day}
                         </h3>
                         <div class="relative border-l-2 border-[color:var(--gold-dim)]/50 pl-8">
-                            {day.events.map((event, index) => (
+                            {day.events.map((event) => (
                                 <div class="timeline-item fade-in-up relative mb-6">
                                     <div class="dot absolute -left-[39px] top-1 h-6 w-6 rounded-full border-2 border-[color:var(--gold-dim)] bg-[color:var(--ink)]"></div>
                                     <p class="mb-1 text-xl font-bold text-white">
@@ -160,8 +188,8 @@ const schedule = [
                     </div>
                 ))}
             </section>
+            )}
 
-            <!-- Formula del torneo -->
             <section class="mb-16">
                 <div class="section-heading text-center mb-8">
                     <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Regole</span>
@@ -171,13 +199,17 @@ const schedule = [
                 </div>
                 <div class="max-w-4xl mx-auto text-center space-y-6">
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Accedono alla fase finale di domenica ben <strong class="text-[color:var(--gold)]">10 squadre</strong>: le prime 3 classificate di ogni Girone + la miglior quarta classificata tra tutti i gironi. Solo 2 squadre non accedono a domenica.
+                        Tre serate di gironi ({gironiDays.map((d) => d.dayMonth).join(', ')}) e le <strong class="text-[color:var(--gold)]">finali</strong> nella serata di {EVENT_FINALS_DAY.label}.
+                        Orario: {EVENT_OFFICIAL.timeLabel.toLowerCase()}.
                     </p>
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Il tabellone finale di ottavi, quarti, semifinale e finale lo manderò nei giorni più avanti. Data la particolare formula a 10 squadre, la griglia sarà abbastanza complessa.
+                        Accedono alla fase finale del {EVENT_FINALS_DAY.dayMonth} ben <strong class="text-[color:var(--gold)]">10 squadre</strong>: le prime 3 classificate di ogni girone + la miglior quarta classificata tra tutti i gironi. Solo 2 squadre non accedono alla domenica.
                     </p>
                     <p class="text-lg text-gray-300 leading-relaxed">
-                        Oltre al posizionamento nel girone, sarà importante classificarsi come miglior prima, miglior seconda.. e così via, tra tutti i gironi. Tenete quindi di conto che la <strong class="text-[color:var(--gold)]">differenza punti</strong> avrà un ruolo fondamentale nello stabilire il tabellone finale.
+                        Il tabellone finale di ottavi, quarti, semifinale e finale sarà pubblicato nei giorni precedenti {EVENT_FINALS_DAY.dayMonth}. Data la particolare formula a 10 squadre, la griglia sarà abbastanza complessa.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Oltre al posizionamento nel girone, sarà importante classificarsi come miglior prima, miglior seconda e così via tra tutti i gironi. La <strong class="text-[color:var(--gold)]">differenza punti</strong> avrà un ruolo fondamentale nello stabilire il tabellone finale.
                     </p>
                 </div>
             </section>
@@ -203,4 +235,4 @@ const schedule = [
         animation-range-start: entry 10%;
         animation-range-end: entry 40%;
     }
-</style> 
+</style>

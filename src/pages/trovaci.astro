@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { EVENT_OFFICIAL, EVENT_SUMMARY, SITE_EDITION } from '../config/site';
 ---
 
 <Layout
-	title="Trovaci — Soul 'n Da Hole"
-	description="Playground Rodari, San Vincenzo (LI): come raggiungerci per l'VIII edizione 2026 del torneo streetball 5×5."
+	title={`Trovaci — Soul 'n Da Hole ${SITE_EDITION.year}`}
+	description={`${EVENT_OFFICIAL.venueName}, ${EVENT_OFFICIAL.locationLabel}. VIII edizione ${SITE_EDITION.year}: ${EVENT_SUMMARY}.`}
 >
   <main class="py-20 text-white">
     <section class="container mx-auto px-4">
@@ -14,7 +15,8 @@ import Layout from '../layouts/Layout.astro';
           <span class="reveal-line inline-block" style="transform: translateY(105%);">Dove Trovarci</span>
         </h1>
         <p class="sh-desc text-xl text-[color:var(--cream-dim)] mt-4 max-w-2xl mx-auto" style="opacity:0;">
-          Il Soul si svolge presso il playground \"Rodari\" in Via Aurelia Sud, San Vincenzo. Ecco dove trovarci.
+          {EVENT_OFFICIAL.datesShort} · {EVENT_OFFICIAL.timeLabel}<br />
+          {EVENT_OFFICIAL.venueName}, {EVENT_OFFICIAL.locationLabel}
         </p>
         <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
           <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>

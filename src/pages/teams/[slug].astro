@@ -26,8 +26,8 @@ import licantropoall from '../../assets/images/licantropoall.jpeg';
 import centauroall from '../../assets/images/Centauro.jpeg';
 import cerberoall from '../../assets/images/Cerbero.jpeg';
 import type { ImageMetadata } from "astro";
-import { createSlug } from '../../utils/slug';
 import { teams, type Team } from '../../data/teams';
+import { EVENT_SUMMARY, TEAMS_ROSTER_PUBLIC } from '../../config/site';
 
 export async function getStaticPaths() {
     // Mappa delle immagini per slug
@@ -79,10 +79,14 @@ interface Props {
 }
 
 const { team, logo, teamImage } = Astro.props;
+
+if (!TEAMS_ROSTER_PUBLIC) {
+  return Astro.redirect('/teams');
+}
 ---
 <Layout
 	title={`${team.name} — Soul 'n Da Hole 2026`}
-	description={`La squadra ${team.name} all'edizione Tarocchi del torneo streetball 5×5 Soul 'n Da Hole.`}
+	description={`La squadra ${team.name} all'VIII edizione Tarocchi del torneo streetball 5×5 Soul 'n Da Hole. ${EVENT_SUMMARY}.`}
 >
   <main class="relative isolate min-h-screen">
     <div

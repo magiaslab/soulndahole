@@ -1,0 +1,46 @@
+---
+import { EVENT_OFFICIAL, REGISTRATION_FORM_URL, SITE_EDITION } from '../config/site';
+---
+
+<section id="iscrizione" class="py-16 relative bg-black">
+  <div class="absolute inset-0 bg-gradient-to-b from-[color:var(--purple)]/10 via-transparent to-transparent pointer-events-none"></div>
+  <div class="container relative mx-auto px-4 text-center">
+    <div class="section-heading mb-8">
+      <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Iscrizioni aperte</span>
+      <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
+        <span class="reveal-line inline-block" style="transform: translateY(105%);">Porta la tua squadra</span>
+      </h2>
+      <p class="sh-desc text-xl text-gray-300 max-w-2xl mx-auto" style="opacity:0;">
+        VIII edizione {SITE_EDITION.year} — {EVENT_OFFICIAL.datesShort}, {EVENT_OFFICIAL.timeLabel.toLowerCase()}
+      </p>
+      <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+        <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
+        <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
+      </div>
+    </div>
+
+    <p class="text-lg text-[color:var(--cream-dim)] max-w-xl mx-auto mb-8">
+      Compila il modulo online con referente, giocatori e coach. Riceverai conferma via email dopo le verifiche degli organizzatori.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={REGISTRATION_FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="magnetic inline-flex items-center justify-center bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg"
+        style="font-family: var(--font-label); letter-spacing: .22em;"
+      >
+        Iscrivi la squadra
+      </a>
+      <a
+        href="/iscrizione"
+        class="magnetic inline-flex items-center justify-center border-2 border-[color:var(--gold)] text-[color:var(--gold)] hover:bg-[color:var(--gold)] hover:text-[color:var(--ink)] font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300"
+        style="font-family: var(--font-label); letter-spacing: .22em;"
+      >
+        Dettagli iscrizione
+      </a>
+    </div>
+  </div>
+</section>

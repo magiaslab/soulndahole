@@ -1,50 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { createSlug } from '../utils/slug';
-
-// Dati delle squadre
-import chimera from '../assets/images/Chimera.png';
-import fenice from '../assets/images/Fenice.png';
-import grifone from '../assets/images/Grifone.png';
-import idra from '../assets/images/Idra.png';
-import kraken from '../assets/images/Kraken.png';
-import minotauro from '../assets/images/Minotauro.png';
-import unicorno from '../assets/images/Unicorno.png';
-import drago from '../assets/images/Drago.jpeg';
-import ciclope from '../assets/images/Ciclope.jpeg';
-import licantro from '../assets/images/Licantro.jpeg';
-import centauro from '../assets/images/Centauro.jpeg';
-import cerbero from '../assets/images/Cerbero.jpeg';
-
-const teams = [
-    { name: 'Chimera', logo: chimera, slug: 'chimera' },
-    { name: 'Fenice', logo: fenice, slug: 'fenice' },
-    { name: 'Grifone', logo: grifone, slug: 'grifone' },
-    { name: 'Idra', logo: idra, slug: 'idra' },
-    { name: 'Kraken', logo: kraken, slug: 'kraken' },
-    { name: 'Minotauro', logo: minotauro, slug: 'minotauro' },
-    { name: 'Unicorno', logo: unicorno, slug: 'unicorno' },
-    { name: 'Drago', logo: drago, slug: 'drago' },
-    { name: 'Ciclope', logo: ciclope, slug: 'ciclope' },
-    { name: 'Licantro', logo: licantro, slug: 'licantro' },
-    { name: 'Centauro', logo: centauro, slug: 'centauro' },
-    { name: 'Cerbero', logo: cerbero, slug: 'cerbero' },
-].sort((a, b) => a.name.localeCompare(b.name));
+import { arcani, arcanoLabel } from '../data/arcani';
+import { EVENT_SUMMARY, SITE_EDITION, TEAMS_ROSTER_PUBLIC } from '../config/site';
+import { teams as teamsData } from '../data/teams';
 ---
 
 <Layout
-	title="Le squadre — Soul 'n Da Hole 2026"
-	description="Le 12 squadre archetipiche dell'edizione Tarocchi: Unicorno, Idra, Fenice, Kraken, Grifone, Chimera, Minotauro, Drago, Ciclope, Licantro, Centauro, Cerbero."
+	title={`Le squadre — Soul 'n Da Hole ${SITE_EDITION.year}`}
+	description={TEAMS_ROSTER_PUBLIC
+		? `Le 12 squadre archetipiche dell'edizione Tarocchi. ${EVENT_SUMMARY}.`
+		: `Anteprima dei 12 archetipi Tarocchi. ${EVENT_SUMMARY}. Nomi delle squadre e composizioni in arrivo.`}
 >
     <main class="min-h-screen py-24 text-white">
         <div class="container mx-auto px-4">
             <div class="section-heading text-center mb-16">
                 <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Squadre</span>
                 <h1 class="text-5xl md:text-7xl font-black uppercase text-white mb-3" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
-                    <span class="reveal-line inline-block" style="transform: translateY(105%);">Le Squadre</span>
+                    <span class="reveal-line inline-block" style="transform: translateY(105%);">
+                        {TEAMS_ROSTER_PUBLIC ? 'Le Squadre' : 'I 12 Arcani'}
+                    </span>
                 </h1>
-                <p class="sh-desc text-xl text-[color:var(--cream-dim)] mt-4" style="opacity:0;">Dodici squadre, un solo vincitore. Scopri i protagonisti del torneo.</p>
+                <p class="sh-desc text-xl text-[color:var(--cream-dim)] mt-4 max-w-2xl mx-auto" style="opacity:0;">
+                    {TEAMS_ROSTER_PUBLIC
+                        ? 'Dodici squadre, un solo vincitore. Scopri i protagonisti del torneo.'
+                        : 'Le illustrazioni degli archetipi sono pronte. I nomi ufficiali delle squadre e le rose verranno comunicati prossimamente.'}
+                </p>
                 <div class="gold-rule mt-6 flex items-center gap-3 justify-center">
                     <div class="gr-line" style="flex:1; height:1px; background:var(--gold-dim); transform:scaleX(0); transform-origin:center;"></div>
                     <span class="gr-star" style="color:var(--gold); font-size:.7rem; opacity:0;">✦</span>
@@ -53,19 +34,44 @@ const teams = [
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-                {teams.map(team => (
-                    <a href={`/teams/${team.slug}`} class="team-card group block text-center" transition:name={`team-logo-${team.slug}`}>
-                        <div class="logo-container relative w-48 h-48 mx-auto rounded-2xl border-4 border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 transform group-hover:scale-105 flex items-center justify-center bg-[color:var(--card-bg)] overflow-hidden">
-                            <Image
-                                src={team.logo}
-                                alt={`Logo ${team.name}`}
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
-                        <h3 class="mt-4 text-2xl font-bold uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: .18em;">{team.name}</h3>
-                    </a>
-                ))}
+                {arcani.map((arcano) => {
+                    const teamMeta = arcano.teamSlug
+                        ? teamsData.find((t) => t.slug === arcano.teamSlug)
+                        : undefined;
+                    const displayName = TEAMS_ROSTER_PUBLIC && teamMeta ? teamMeta.name : arcano.tarotName;
+                    const CardTag = TEAMS_ROSTER_PUBLIC && teamMeta ? 'a' : 'div';
+                    const cardProps = TEAMS_ROSTER_PUBLIC && teamMeta
+                        ? { href: `/teams/${teamMeta.slug}`, class: 'team-card group block text-center' }
+                        : { class: 'team-card group block text-center cursor-default' };
+
+                    return (
+                        <CardTag {...cardProps}>
+                            <div class="logo-container relative aspect-[2/3] w-full max-w-[220px] mx-auto rounded-xl border-4 border-[color:var(--card-border)] group-hover:border-[color:var(--gold)] transition-all duration-300 transform group-hover:scale-105 overflow-hidden bg-[color:var(--card-bg)] shadow-lg">
+                                <Image
+                                    src={arcano.image}
+                                    alt={`${arcanoLabel(arcano)} — carta dei tarocchi`}
+                                    class="w-full h-full object-cover"
+                                    width={440}
+                                    height={660}
+                                />
+                            </div>
+                            <p class="mt-3 text-sm text-[color:var(--gold-dim)]" style="font-family: var(--font-label); letter-spacing: .18em;">{arcano.tarotNumber}</p>
+                            <h3 class="mt-1 text-2xl font-bold uppercase tracking-wider" style="font-family: var(--font-label); letter-spacing: .18em;">
+                                {displayName}
+                            </h3>
+                            {!TEAMS_ROSTER_PUBLIC && (
+                                <p class="mt-2 text-sm text-[color:var(--cream-dim)]">Squadra in arrivo</p>
+                            )}
+                        </CardTag>
+                    );
+                })}
             </div>
+
+            {!TEAMS_ROSTER_PUBLIC && (
+                <p class="mt-16 text-center text-lg text-[color:var(--cream-dim)] max-w-xl mx-auto">
+                    Vuoi restare aggiornato? Seguici su Instagram — annunceremo lì nomi, gironi e rose.
+                </p>
+            )}
         </div>
     </main>
 </Layout>
