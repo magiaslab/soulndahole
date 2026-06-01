@@ -1,6 +1,5 @@
 ---
 import Sfondo1 from '../assets/images/Sfondo1.png';
-import { FaCalendarAlt, FaMapMarkerAlt, FaTrophy } from 'react-icons/fa';
 import { EVENT_OFFICIAL } from '../config/site';
 ---
 
@@ -10,7 +9,7 @@ import { EVENT_OFFICIAL } from '../config/site';
   style={`background-image: url(${Sfondo1.src}); background-size: cover; background-position: center; background-attachment: fixed;`}
 >
   <div class="absolute inset-0 bg-black/70"></div>
-  <div class="container relative mx-auto px-4">
+  <div class="container relative z-10 mx-auto px-4">
     <div class="section-heading text-center mb-12">
       <span class="sh-label inline-block text-[0.75rem] uppercase tracking-[0.35em] text-[color:var(--gold-dim)]" style="opacity:0; font-family: var(--font-label);">Info</span>
       <h2 class="text-4xl md:text-5xl font-black text-white mb-4 uppercase" style="font-family: var(--font-display); text-shadow: 0 0 15px rgba(201, 162, 39, 0.18); overflow:hidden;">
@@ -27,46 +26,71 @@ import { EVENT_OFFICIAL } from '../config/site';
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Card 1: Date & Orari -->
-      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
-          <FaCalendarAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
+      <article class="info-card feature-card p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center text-center">
+        <div class="icon-ring mb-6" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-[color:var(--gold)]">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+          </svg>
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Date & Orari</h3>
-        <p class="text-gray-300 mb-6 text-center">{EVENT_OFFICIAL.datesShort}<br>{EVENT_OFFICIAL.timeLabel}</p>
-        <a href="/programma" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Programma</a>
-      </div>
-      <!-- Card 2: Trovaci -->
-      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
-          <FaMapMarkerAlt className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
+        <p class="text-gray-300 mb-6">{EVENT_OFFICIAL.datesShort}<br />{EVENT_OFFICIAL.timeLabel}</p>
+        <a href="/programma" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300" style="font-family: var(--font-label); letter-spacing: .22em;">Programma</a>
+      </article>
+
+      <article class="info-card feature-card p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center text-center">
+        <div class="icon-ring mb-6" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-[color:var(--gold)]">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">Trovaci</h3>
-        <p class="text-gray-300 mb-6 text-center">{EVENT_OFFICIAL.venueName}<br>{EVENT_OFFICIAL.locationLabel}</p>
-        <a href="/trovaci" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Come arrivare</a>
-      </div>
-      <!-- Card 3: Le 12 Bestie -->
-      <div class="info-card feature-card transform hover:scale-105 transition-transform duration-300 ease-in-out p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center">
-        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[color:var(--gold)]/10 border-2 border-[color:var(--gold-dim)] mb-6">
-          <FaTrophy className="w-10 h-10" style={{ color: 'var(--gold)' }} aria-hidden="true" />
+        <p class="text-gray-300 mb-6">{EVENT_OFFICIAL.venueName}<br />{EVENT_OFFICIAL.locationLabel}</p>
+        <a href="/trovaci" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300" style="font-family: var(--font-label); letter-spacing: .22em;">Come arrivare</a>
+      </article>
+
+      <article class="info-card feature-card p-8 rounded-xl bg-[color:var(--card-bg)] border border-[color:var(--card-border)] shadow-lg flex flex-col items-center text-center">
+        <div class="icon-ring mb-6" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-[color:var(--gold)]">
+            <path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.3L12 14.8 8.2 16.8l.9-5.3-3.9-3.8 5.4-.8L12 2zm-7 18h14v2H5v-2z"/>
+          </svg>
         </div>
         <h3 class="text-2xl font-bold text-white mb-4">I 12 Arcani</h3>
-        <p class="text-gray-300 text-center mb-6">12 squadre, 3 gironi, 1 vincitore</p>
-        <a href="#teams" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: var(--font-label); letter-spacing: .22em;">Scopri gli arcani</a>
-      </div>
+        <p class="text-gray-300 mb-6">12 squadre · 3 gironi · 1 campione</p>
+        <a href="#teams" class="magnetic mt-auto inline-block bg-[color:var(--gold)] hover:bg-[color:var(--gold-light)] text-[color:var(--ink)] font-bold py-2 px-6 rounded-lg text-sm uppercase tracking-wider transition-all duration-300" style="font-family: var(--font-label); letter-spacing: .22em;">Scopri gli arcani</a>
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-  .feature-card {
-    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
+  .info-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
-  
-  .feature-card:hover {
-    box-shadow: 0 8px 32px -4px rgba(201, 162, 39, 0.18);
+
+  .info-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 32px -4px rgba(201, 162, 39, 0.22);
+    border-color: var(--gold-dim);
+  }
+
+  .icon-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    background: rgba(201, 162, 39, 0.1);
+    border: 2px solid var(--gold-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .info-card {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 </style>
-
-<!-- Rimosso script GSAP, AOS sarà inizializzato globalmente --> 

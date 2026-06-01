@@ -337,8 +337,28 @@ export function initSectionHeadings() {
 
 // ── INFO CARDS ─────────────────────────────
 export function initInfoCards() {
-  if (!document.getElementById('info')) return;
-  gsap.from('.info-card', { y: 50, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '#info', start: 'top 75%' } });
+  const section = document.getElementById('info');
+  if (!section) return;
+  const cards = gsap.utils.toArray('.info-card');
+  if (!cards.length) return;
+
+  gsap.fromTo(
+    cards,
+    { y: 48, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 82%',
+        toggleActions: 'play none none none',
+        once: true,
+      },
+    },
+  );
 }
 
 // ── TEAM CARDS ─────────────────────────────
